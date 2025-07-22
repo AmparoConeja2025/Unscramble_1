@@ -493,10 +493,6 @@ function addTouchSupport() {
 }
 
 // Call this after DOM loads
-document.addEventListener("DOMContentLoaded", () => {
-    // Your existing code...
-    
-  
 
 document.addEventListener("DOMContentLoaded", () => {
   const words = ["I", "am", "always", "ready", "to", "help"];
@@ -518,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wordBank.appendChild(span);
   });
-
+});
     // Add touch support
     addTouchSupport();
 });
@@ -533,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const draggedEl = document.getElementById(id);
     dropZone.appendChild(draggedEl);
   });
-});
+
 
 // RESET BUTTON
 document.getElementById('resetButton').addEventListener('click', () => {
