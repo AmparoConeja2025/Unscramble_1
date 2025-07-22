@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPT Scramble - FLATTENED!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-600 min-h-screen relative">
+
+<style>
+
+/* FLAT STRUCTURE CSS - NO NESTING! */
+.drop-shadow-custom {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* RESET BUTTON - Top Left */
+.reset-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #fbdada;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* CHECK BUTTON - Top Right */
+.check-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #d4ffe4;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* adam CHARACTER */
+.adam-image {
+    position: absolute;
+    top: 96px;
+    right: 64px;
+    width: 256px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+.adam-btn {
+    position: absolute;
+    top: 376px;
+    right: 120px;
+    background: #93c5fd;
+    color: black;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+.adam-btn:hover {
+    background: #60a5fa;
+}
+
+/* jessica CHARACTER */
+.jessica-image {
+    position: absolute;
+    top: 96px;
+    left: 64px;
+    width: 256px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+.jessica-btn {
+    position: absolute;
+    top: 376px;
+    left: 120px;
+    background: #f9a8d4;
+    color: black;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+.jessica-btn:hover {
+    background: #f472b6;
+}
+
+/* DROP ZONE */
+.drop-zone {
+    position: absolute;
+    top: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 300px;
+    min-height: 64px;
+    background: #ffe4ec;
+    border-radius: 8px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* WORD BANK */
+.word-bank {
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+/* WORD TILES */
+.word-tile {
+    background: white;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: move;
+    user-select: none;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* CONFETTI CELEBRATION STYLES */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.success-text {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00c851;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+    z-index: 1001;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.success-text.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-50%, -50%) scale(1.15); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    75% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+}
+
+.confetti.active {
+    opacity: 1;
+    animation: confetti-explosion 2.5s ease-out forwards;
+}
+
+@keyframes confetti-explosion {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    25% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(1440deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+/* TRY AGAIN ANIMATION STYLES */
+.try-again-text {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 2em;
+    font-weight: bold;
+    color: #ff9500;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 1001;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.try-again-text.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: gentle-shake 0.8s ease;
+}
+
+@keyframes gentle-shake {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    10% { transform: translate(-50%, -50%) scale(1.05) rotate(-2deg); }
+    20% { transform: translate(-50%, -50%) scale(1) rotate(2deg); }
+    30% { transform: translate(-50%, -50%) scale(1.02) rotate(-1deg); }
+    40% { transform: translate(-50%, -50%) scale(1) rotate(1deg); }
+    50% { transform: translate(-50%, -50%) scale(1.02) rotate(0deg); }
+    60% { transform: translate(-50%, -50%) scale(1) rotate(-1deg); }
+    70% { transform: translate(-50%, -50%) scale(1.01) rotate(1deg); }
+    80% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+</style>
+
+<!-- RESET BUTTON -->
+<button class="reset-btn" id="resetButton">Reset</button>
+
+<!-- CHECK ANSWER BUTTON -->ef
+<button class="check-btn" id="checkButton">Check Answer</button>
+
+<!-- adam CHARACTER -->
+<img src="Image/adam.png" alt="adam" class="adam-image" />
+<button class="adam-btn" onclick="document.getElementById('adamAudio').play()">Listen to adam</button>
+<audio id="adamAudio" src="Audio/ready-to-help-adam"></audio>
+
+<!-- jessica CHARACTER -->
+<img src="Image/jessica.png" alt="jessica" class="jessica-image" />
+<button class="jessica-btn" onclick="document.getElementById('jessicaAudio').play()">Listen to jessica</button>
+<audio id="jessicaAudio" src="Audio/ready-to-help-jessica.mp3"></audio>
+
+<!-- DROP ZONE -->
+<div id="dropZone" class="drop-zone">
+  <!-- words will drop here -->
+</div>
+
+<!-- WORD BANK -->
+<div id="wordBank" class="word-bank">
+  <!-- Words will be inserted here dynamically -->
+</div>
+
+<!-- CONFETTI CELEBRATION ELEMENTS -->
+<div class="confetti-container" id="confettiContainer"></div>
+<div class="success-text" id="successText">👏 🎉 🎉 👏</div>
+
+<!-- TRY AGAIN ANIMATION ELEMENT -->
+<div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
+
+<script>
+// CONFETTI CELEBRATION FUNCTIONS
+const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
+
+const congratsMessages = [
+    "👏 🎉 🎉 👏",
+    "🙌 😊 😊 🙌", 
+    "✨ 🎊 🎊 ✨",
+    "🎆 ⭐ ⭐ 🎆",
+    "👍 🚀 🚀 👍"
+];
+
+function createConfetti(x, y) {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    if (Math.random() > 0.5) {
+        confetti.style.borderRadius = '50%';
+    }
+    
+    const size = Math.random() * 8 + 6;
+    confetti.style.width = size + 'px';
+    confetti.style.height = size + 'px';
+    
+    confetti.style.left = x + 'px';
+    confetti.style.top = y + 'px';
+    
+    return confetti;
+}
+
+function explodeConfetti() {
+    const container = document.getElementById('confettiContainer');
+    const successText = document.getElementById('successText');
+    
+    const randomMessage = congratsMessages[Math.floor(Math.random() * congratsMessages.length)];
+    successText.textContent = randomMessage;
+    
+    successText.classList.add('show');
+    
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+            const angle = (i / 100) * Math.PI * 2;
+            const radius = Math.random() * 100;
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
+            
+            const confetti = createConfetti(x, y);
+            container.appendChild(confetti);
+            
+            requestAnimationFrame(() => {
+                confetti.classList.add('active');
+            });
+            
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.parentNode.removeChild(confetti);
+                }
+            }, 2500);
+        }, i * 10);
+    }
+    
+    setTimeout(() => {
+        successText.classList.remove('show');
+    }, 2500);
+}
+
+function showTryAgain() {
+    const tryAgainText = document.getElementById('tryAgainText');
+    
+    tryAgainText.classList.add('show');
+    
+    setTimeout(() => {
+        tryAgainText.classList.remove('show');
+    }, 1500);
+}
+
+// WORD SCRAMBLE GAME LOGIC
+document.addEventListener("DOMContentLoaded", () => {
+  const words = ["I", "am", "always", "ready", "to", "help"];
+  const scrambled = [...words].sort(() => Math.random() - 0.5);
+
+  const wordBank = document.getElementById("wordBank");
+  const dropZone = document.getElementById("dropZone");
+
+  scrambled.forEach((word, index) => {
+    const span = document.createElement("span");
+    span.textContent = word;
+    span.className = "word-tile";
+    span.setAttribute("draggable", "true");
+    span.setAttribute("id", `word-${index}`);
+
+    span.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", span.id);
+    });
+
+    wordBank.appendChild(span);
+  });
+
+  dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData("text/plain");
+    const draggedEl = document.getElementById(id);
+    dropZone.appendChild(draggedEl);
+  });
+});
+
+// RESET BUTTON
+document.getElementById('resetButton').addEventListener('click', () => {
+  const wordBank = document.getElementById('wordBank');
+  const dropZone = document.getElementById('dropZone');
+  const droppedWords = Array.from(dropZone.children);
+
+  droppedWords.forEach(word => {
+    wordBank.appendChild(word);
+  });
+});
+
+// CHECK ANSWER BUTTON
+document.getElementById('checkButton').addEventListener('click', () => {
+  const dropZone = document.getElementById('dropZone');
+  const droppedWords = Array.from(dropZone.children);
+  const correctOrder = ["I", "am", "always", "ready", "to", "help"];
+  
+  if (droppedWords.length !== correctOrder.length) {
+    alert("Please arrange all the words first!");
+    return;
+  }
+  
+  const userOrder = droppedWords.map(word => word.textContent);
+  const isCorrect = userOrder.every((word, index) => word === correctOrder[index]);
+  
+  if (isCorrect) {
+    explodeConfetti();
+  } else {
+    showTryAgain();
+  }
+});
+
+</script>
+
+</body>
+</html>
