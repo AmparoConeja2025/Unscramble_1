@@ -529,13 +529,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// RESET BUTTON
+// RESET BUTTON - NOW WITH RE-SCRAMBLING!
 document.getElementById('resetButton').addEventListener('click', () => {
   const wordBank = document.getElementById('wordBank');
   const dropZone = document.getElementById('dropZone');
   const droppedWords = Array.from(dropZone.children);
 
+  // Move words back to word bank
   droppedWords.forEach(word => {
+    wordBank.appendChild(word);
+  });
+  
+  // RE-SCRAMBLE the word order!
+  const allWords = Array.from(wordBank.children);
+  const scrambledWords = [...allWords].sort(() => Math.random() - 0.5);
+  
+  // Clear word bank and add words in new scrambled order
+  wordBank.innerHTML = '';
+  scrambledWords.forEach(word => {
     wordBank.appendChild(word);
   });
   
