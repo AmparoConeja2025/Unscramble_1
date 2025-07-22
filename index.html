@@ -330,7 +330,6 @@
 <!-- adam CHARACTER -->
 <img src="Image/adam.png" alt="Adam" class="adam-image" onclick="document.getElementById('adamAudio').play()" style="cursor: pointer;" />
 
-
 <audio id="adamAudio" src="Audio/ready-to-help-adam.mp3"></audio>
 
 <!-- jessica CHARACTER -->
@@ -492,8 +491,7 @@ function addTouchSupport() {
     });
 }
 
-// Call this after DOM loads
-
+// SINGLE DOMContentLoaded LISTENER - FIXED!
 document.addEventListener("DOMContentLoaded", () => {
   const words = ["I", "am", "always", "ready", "to", "help"];
   const scrambled = [...words].sort(() => Math.random() - 0.5);
@@ -514,11 +512,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wordBank.appendChild(span);
   });
-});
-    // Add touch support
-    addTouchSupport();
-});
 
+  // Add touch support AFTER words are created
+  addTouchSupport();
+
+  // Desktop drag and drop events
   dropZone.addEventListener("dragover", (e) => {
     e.preventDefault();
   });
@@ -529,7 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const draggedEl = document.getElementById(id);
     dropZone.appendChild(draggedEl);
   });
-
+});
 
 // RESET BUTTON
 document.getElementById('resetButton').addEventListener('click', () => {
@@ -540,6 +538,9 @@ document.getElementById('resetButton').addEventListener('click', () => {
   droppedWords.forEach(word => {
     wordBank.appendChild(word);
   });
+  
+  // Re-add touch support after reset
+  addTouchSupport();
 });
 
 // CHECK ANSWER BUTTON
