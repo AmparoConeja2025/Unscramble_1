@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChatGPT Unscramble_1</title>
+    <title>Unscramble Learning Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
@@ -47,6 +47,54 @@
     cursor: pointer;
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
+
+/* LESSON NAVIGATION */
+.lesson-nav {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-btn {
+    background: #93c5fd;
+    color: #1f2937;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background: #60a5fa;
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.lesson-indicator {
+    background: #f3f4f6;
+    color: #1f2937;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* LESSON DIFFICULTY BADGES */
+.difficulty-easy { background: #d1fae5; color: #065f46; }
+.difficulty-medium { background: #fef3c7; color: #92400e; }
+.difficulty-hard { background: #fecaca; color: #991b1b; }
 
 /* adam CHARACTER */
 .adam-image {
@@ -125,12 +173,12 @@
 /* WORD BANK */
 .word-bank {
     position: absolute;
-    top: 420px; /* Moved down 20px from 400px for better spacing */
+    top: 420px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-wrap: wrap;
-    gap: 18px; /* Increased gap for better spacing */
+    gap: 18px;
     justify-content: center;
 }
 
@@ -138,13 +186,13 @@
 .word-tile {
     background: white;
     color: black;
-    padding: 10px 18px; /* 15% bigger buttons on desktop too */
+    padding: 10px 18px;
     border-radius: 4px;
     cursor: move;
     user-select: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transition: all 0.2s ease;
-    font-size: 16px; /* Slightly bigger text */
+    font-size: 16px;
 }
 
 /* MOBILE TAP FEEDBACK */
@@ -266,15 +314,15 @@
     
     /* Smaller character images */
     .adam-image {
-        width: 100px !important;
+        width: 112px !important;
         top: 58% !important;
-        right: 20px !important;
+        right: 40px !important;
     }
     
     .jessica-image {
-        width: 100px !important;
+        width: 112px !important;
         top: 56% !important;
-        left: 20px !important;
+        left: 40px !important;
     }
 
     .success-text {
@@ -298,7 +346,7 @@
     
     /* Compact drop zone */
     .drop-zone {
-        top: 80px !important; /* Move to top area */
+        top: 80px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         min-width: 250px !important;
@@ -308,22 +356,33 @@
     
     /* Fixed word bank position - stays put regardless of content */
     .word-bank {
-        top: 145px !important; /* Fixed position - never moves */
-        gap: 8px !important; /* Tighter gap for horizontal layout */
-        max-width: 95% !important; /* Use most of screen width */
-        flex-wrap: nowrap !important; /* Force single row */
-        overflow-x: auto !important; /* Scroll if too many words */
-        min-height: 60px !important; /* Reserve space even when empty */
-        display: flex !important; /* Ensure flex layout always */
-        align-items: center !important; /* Center remaining words */
+        top: 145px !important;
+        gap: 8px !important;
+        max-width: 95% !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        min-height: 60px !important;
+        display: flex !important;
+        align-items: center !important;
     }
     
     /* Bigger word tiles on mobile */
     .word-tile {
-        padding: 8px 16px !important; /* 15% bigger padding */
-        font-size: 16px !important; /* 15% bigger text */
-        cursor: pointer !important; /* Change to pointer for mobile */
-        box-shadow: none !important; /* Remove shadows on mobile */
+        padding: 8px 16px !important;
+        font-size: 16px !important;
+        cursor: pointer !important;
+        box-shadow: none !important;
+    }
+    
+    /* Mobile lesson navigation */
+    .lesson-nav {
+        top: 20px !important;
+        gap: 8px !important;
+    }
+    
+    .nav-btn, .lesson-indicator {
+        padding: 6px 12px !important;
+        font-size: 14px !important;
     }
 }
 
@@ -335,15 +394,20 @@
 <!-- CHECK ANSWER BUTTON -->
 <button class="check-btn" id="checkButton">Check Answer</button>
 
-<!-- adam CHARACTER -->
-<img src="Image/adam.png" alt="Adam" class="adam-image" onclick="document.getElementById('adamAudio').play()" style="cursor: pointer;" />
+<!-- LESSON NAVIGATION -->
+<div class="lesson-nav">
+    <button class="nav-btn" id="prevBtn">← Previous</button>
+    <div class="lesson-indicator" id="lessonIndicator">Lesson 1/3 - Easy</div>
+    <button class="nav-btn" id="nextBtn">Next →</button>
+</div>
 
-<audio id="adamAudio" src="Audio/ready-to-help-adam.mp3"></audio>
+<!-- adam CHARACTER -->
+<img src="Image/adam.png" alt="Adam" class="adam-image" id="adamImage" style="cursor: pointer;" />
+<audio id="adamAudio"></audio>
 
 <!-- jessica CHARACTER -->
-<img src="Image/jessica.png" alt="Jessica" class="jessica-image" onclick="document.getElementById('jessicaAudio').play()" style="cursor: pointer;" />
-
-<audio id="jessicaAudio" src="Audio/ready-to-help-jessica.mp3"></audio>
+<img src="Image/jessica.png" alt="Jessica" class="jessica-image" id="jessicaImage" style="cursor: pointer;" />
+<audio id="jessicaAudio"></audio>
 
 <!-- DROP ZONE -->
 <div id="dropZone" class="drop-zone">
@@ -363,6 +427,36 @@
 <div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
 
 <script>
+// LESSON DATA STRUCTURE
+const lessons = [
+    {
+        id: 1,
+        sentence: ["I'm", "learning", "to", "speak", "English"],
+        correctOrder: ["I'm", "learning", "to", "speak", "English"],
+        difficulty: "easy",
+        adamAudio: "Audio/learning-english-liam.mp3",
+        jessicaAudio: "Audio/learning-english-jes.mp3"
+    },
+    {
+        id: 2, 
+        sentence: ["I", "hope", "you", "have", "a", "nice", "day"],
+        correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
+        difficulty: "medium",
+        adamAudio: "Audio/hope-nice-day-liam.mp3",
+        jessicaAudio: "Audio/hope-nice-day-jes.mp3"
+    },
+    {
+        id: 3,
+        sentence: ["Nice", "to", "meet", "you"],
+        correctOrder: ["Nice", "to", "meet", "you"], 
+        difficulty: "easy",
+        adamAudio: "Audio/nice-to-meet-liam.mp3",
+        jessicaAudio: "Audio/nice-to-meet-jes.mp3"
+    }
+];
+
+let currentLessonIndex = 0;
+
 // CONFETTI CELEBRATION FUNCTIONS
 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
 
@@ -451,17 +545,14 @@ function isMobileDevice() {
 
 // SMOOTH GLIDING ANIMATION FUNCTION
 function animateWordToDropZone(wordTile, dropZone) {
-    // Get current positions
     const startRect = wordTile.getBoundingClientRect();
     const dropRect = dropZone.getBoundingClientRect();
     
-    // Calculate destination (end of drop zone)
     const startX = startRect.left;
     const startY = startRect.top;
-    const endX = dropRect.right - startRect.width - 20; // 20px padding from edge
+    const endX = dropRect.right - startRect.width - 20;
     const endY = dropRect.top + (dropRect.height - startRect.height) / 2;
     
-    // Create animated clone
     const clone = wordTile.cloneNode(true);
     clone.style.position = 'fixed';
     clone.style.left = startX + 'px';
@@ -470,26 +561,21 @@ function animateWordToDropZone(wordTile, dropZone) {
     clone.style.pointerEvents = 'none';
     clone.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     
-    // Hide original and add clone
     wordTile.style.opacity = '0';
     document.body.appendChild(clone);
     
-    // Start animation on next frame
     requestAnimationFrame(() => {
         clone.style.left = endX + 'px';
         clone.style.top = endY + 'px';
         clone.style.transform = 'scale(1.05)';
     });
     
-    // After animation completes
     setTimeout(() => {
-        // Remove clone and move original word
         document.body.removeChild(clone);
         dropZone.appendChild(wordTile);
         wordTile.style.opacity = '1';
         wordTile.style.transform = '';
         
-        // Brief highlight effect
         wordTile.style.background = '#10b981';
         wordTile.style.color = 'white';
         setTimeout(() => {
@@ -508,7 +594,6 @@ function addTapToAdd() {
         tile.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Only in word bank, not if already in drop zone
             if (tile.parentElement.id === 'wordBank') {
                 animateWordToDropZone(tile, dropZone);
             }
@@ -546,78 +631,115 @@ function addDragAndDrop() {
 // HYBRID INTERACTION SYSTEM
 function setupInteraction() {
     if (isMobileDevice()) {
-        console.log('Mobile detected - using tap-to-add');
         addTapToAdd();
     } else {
-        console.log('Desktop detected - using drag-and-drop');
         addDragAndDrop();
     }
 }
 
-// MAIN INITIALIZATION
-document.addEventListener("DOMContentLoaded", () => {
-    const words = ["I", "am", "always", "ready", "to", "help"];
-    const scrambled = [...words].sort(() => Math.random() - 0.5);
+// LESSON MANAGEMENT
+function updateLessonIndicator() {
+    const indicator = document.getElementById('lessonIndicator');
+    const lesson = lessons[currentLessonIndex];
+    const difficultyClass = `difficulty-${lesson.difficulty}`;
+    
+    indicator.textContent = `Lesson ${lesson.id}/3 - ${lesson.difficulty.charAt(0).toUpperCase() + lesson.difficulty.slice(1)}`;
+    indicator.className = `lesson-indicator ${difficultyClass}`;
+}
 
-    const wordBank = document.getElementById("wordBank");
-    const dropZone = document.getElementById("dropZone");
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    prevBtn.disabled = currentLessonIndex === 0;
+    nextBtn.disabled = currentLessonIndex === lessons.length - 1;
+}
 
-    scrambled.forEach((word, index) => {
-        const span = document.createElement("span");
-        span.textContent = word;
-        span.className = "word-tile";
-        span.setAttribute("id", `word-${index}`);
-        wordBank.appendChild(span);
-    });
-
-    // Setup interaction based on device type
-    setupInteraction();
-});
-
-// RESET BUTTON - NOW WITH RE-SCRAMBLING!
-document.getElementById('resetButton').addEventListener('click', () => {
+function loadLesson(index) {
+    const lesson = lessons[index];
     const wordBank = document.getElementById('wordBank');
     const dropZone = document.getElementById('dropZone');
-    const droppedWords = Array.from(dropZone.children);
-
-    // Move words back to word bank
-    droppedWords.forEach(word => {
-        wordBank.appendChild(word);
-    });
     
-    // RE-SCRAMBLE the word order!
-    const allWords = Array.from(wordBank.children);
-    const scrambledWords = [...allWords].sort(() => Math.random() - 0.5);
-    
-    // Clear word bank and add words in new scrambled order
+    // Clear existing content
     wordBank.innerHTML = '';
-    scrambledWords.forEach(word => {
-        wordBank.appendChild(word);
+    dropZone.innerHTML = '';
+    
+    // Create scrambled words
+    const scrambled = [...lesson.sentence].sort(() => Math.random() - 0.5);
+    
+    scrambled.forEach((word, wordIndex) => {
+        const span = document.createElement('span');
+        span.textContent = word;
+        span.className = 'word-tile';
+        span.setAttribute('id', `word-${wordIndex}`);
+        wordBank.appendChild(span);
     });
     
-    // Re-setup interaction after reset
+    // Update audio sources
+    document.getElementById('adamAudio').src = lesson.adamAudio;
+    document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
+    
+    // Update UI
+    updateLessonIndicator();
+    updateNavigationButtons();
+    
+    // Setup interactions
     setupInteraction();
+}
+
+// NAVIGATION HANDLERS
+document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentLessonIndex > 0) {
+        currentLessonIndex--;
+        loadLesson(currentLessonIndex);
+    }
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+    if (currentLessonIndex < lessons.length - 1) {
+        currentLessonIndex++;
+        loadLesson(currentLessonIndex);
+    }
+});
+
+// CHARACTER AUDIO HANDLERS
+document.getElementById('adamImage').addEventListener('click', () => {
+    document.getElementById('adamAudio').play();
+});
+
+document.getElementById('jessicaImage').addEventListener('click', () => {
+    document.getElementById('jessicaAudio').play();
+});
+
+// RESET BUTTON
+document.getElementById('resetButton').addEventListener('click', () => {
+    loadLesson(currentLessonIndex); // Reload current lesson
 });
 
 // CHECK ANSWER BUTTON
 document.getElementById('checkButton').addEventListener('click', () => {
     const dropZone = document.getElementById('dropZone');
     const droppedWords = Array.from(dropZone.children);
-    const correctOrder = ["I", "am", "always", "ready", "to", "help"];
+    const lesson = lessons[currentLessonIndex];
     
-    if (droppedWords.length !== correctOrder.length) {
+    if (droppedWords.length !== lesson.correctOrder.length) {
         alert("Please arrange all the words first!");
         return;
     }
     
     const userOrder = droppedWords.map(word => word.textContent);
-    const isCorrect = userOrder.every((word, index) => word === correctOrder[index]);
+    const isCorrect = userOrder.every((word, index) => word === lesson.correctOrder[index]);
     
     if (isCorrect) {
         explodeConfetti();
     } else {
         showTryAgain();
     }
+});
+
+// INITIALIZE APP
+document.addEventListener("DOMContentLoaded", () => {
+    loadLesson(0); // Start with first lesson
 });
 
 </script>
