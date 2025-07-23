@@ -142,7 +142,21 @@
     border-radius: 4px;
     cursor: move;
     user-select: none;
-    filter: box-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+/* MOBILE TAP FEEDBACK */
+.word-tile:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+/* TAP TO ADD ANIMATION */
+.word-moving {
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+    z-index: 100;
 }
 
 /* CONFETTI CELEBRATION STYLES */
@@ -263,8 +277,8 @@
     }
 
     .success-text {
-    top: 10% !important;
-}
+        top: 10% !important;
+    }
     
     /* Smaller, repositioned buttons */
     .adam-btn {
@@ -301,25 +315,8 @@
     .word-tile {
         padding: 6px 12px !important;
         font-size: 14px !important;
-    }
-}
-
-@media screen and (max-width: 1200px) and (orientation: landscape) {
-
-    
-    /* MOBILE TOUCH DRAG-AND-DROP FIX */
-    .word-tile {
-        padding: 6px 12px !important;
-        font-size: 14px !important;
-        touch-action: none !important;
-        -webkit-user-select: none !important;
-        user-select: none !important;
-        -webkit-touch-callout: none !important;
-        -webkit-tap-highlight-color: transparent !important;
-    }
-    
-    .drop-zone {
-        touch-action: none !important;
+        cursor: pointer !important; /* Change to pointer for mobile */
+        box-shadow: none !important; /* Remove shadows on mobile */
     }
 }
 
@@ -439,147 +436,141 @@ function showTryAgain() {
     }, 1500);
 }
 
-// WORD SCRAMBLE GAME LOGIC
+// DEVICE DETECTION
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (window.innerWidth <= 1200 && window.matchMedia("(orientation: landscape)").matches);
+}
 
-// MOBILE TOUCH DRAG-AND-DROP SUPPORT
-let draggedElement = null;
-let touchOffset = { x: 0, y: 0 };
-
-function addTouchSupport() {
+// TAP-TO-ADD FUNCTIONALITY FOR MOBILE
+function addTapToAdd() {
     const wordTiles = document.querySelectorAll('.word-tile');
     const dropZone = document.getElementById('dropZone');
     
     wordTiles.forEach(tile => {
-        // Touch start
-        tile.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            draggedElement = tile;
-            const touch = e.touches[0];
-            const rect = tile.getBoundingClientRect();
-            touchOffset.x = touch.clientX - rect.left;
-            touchOffset.y = touch.clientY - rect.top;
-            tile.style.opacity = '0.7';
-        });
-        
-        // Touch move
-        tile.addEventListener('touchmove', (e) => {
-            if (!draggedElement) return;
-            e.preventDefault();
-            const touch = e.touches[0];
-            draggedElement.style.position = 'fixed';
-            draggedElement.style.left = (touch.clientX - touchOffset.x) + 'px';
-            draggedElement.style.top = (touch.clientY - touchOffset.y) + 'px';
-            draggedElement.style.zIndex = '1000';
-        });
-        
-        // Touch end
-        tile.addEventListener('touchend', (e) => {
-            if (!draggedElement) return;
+        tile.addEventListener('click', (e) => {
             e.preventDefault();
             
-            const touch = e.changedTouches[0];
-            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-            
-            if (elementBelow && (elementBelow === dropZone || dropZone.contains(elementBelow))) {
-                dropZone.appendChild(draggedElement);
+            // Only in word bank, not if already in drop zone
+            if (tile.parentElement.id === 'wordBank') {
+                // Add visual feedback
+                tile.classList.add('word-moving');
+                
+                // Move to drop zone after short delay for animation
+                setTimeout(() => {
+                    dropZone.appendChild(tile);
+                    tile.classList.remove('word-moving');
+                }, 150);
             }
-            
-            // Reset styles
-            draggedElement.style.position = '';
-            draggedElement.style.left = '';
-            draggedElement.style.top = '';
-            draggedElement.style.zIndex = '';
-            draggedElement.style.opacity = '1';
-            draggedElement = null;
         });
     });
 }
 
-// SINGLE DOMContentLoaded LISTENER - FIXED!
+// DRAG-AND-DROP FUNCTIONALITY FOR DESKTOP
+function addDragAndDrop() {
+    const wordTiles = document.querySelectorAll('.word-tile');
+    const dropZone = document.getElementById('dropZone');
+    
+    wordTiles.forEach(tile => {
+        tile.setAttribute('draggable', 'true');
+        
+        tile.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', tile.id);
+        });
+    });
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text/plain');
+        const draggedEl = document.getElementById(id);
+        if (draggedEl) {
+            dropZone.appendChild(draggedEl);
+        }
+    });
+}
+
+// HYBRID INTERACTION SYSTEM
+function setupInteraction() {
+    if (isMobileDevice()) {
+        console.log('Mobile detected - using tap-to-add');
+        addTapToAdd();
+    } else {
+        console.log('Desktop detected - using drag-and-drop');
+        addDragAndDrop();
+    }
+}
+
+// MAIN INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
-  const words = ["I", "am", "always", "ready", "to", "help"];
-  const scrambled = [...words].sort(() => Math.random() - 0.5);
+    const words = ["I", "am", "always", "ready", "to", "help"];
+    const scrambled = [...words].sort(() => Math.random() - 0.5);
 
-  const wordBank = document.getElementById("wordBank");
-  const dropZone = document.getElementById("dropZone");
+    const wordBank = document.getElementById("wordBank");
+    const dropZone = document.getElementById("dropZone");
 
-  scrambled.forEach((word, index) => {
-    const span = document.createElement("span");
-    span.textContent = word;
-    span.className = "word-tile";
-    span.setAttribute("draggable", "true");
-    span.setAttribute("id", `word-${index}`);
-
-    span.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", span.id);
+    scrambled.forEach((word, index) => {
+        const span = document.createElement("span");
+        span.textContent = word;
+        span.className = "word-tile";
+        span.setAttribute("id", `word-${index}`);
+        wordBank.appendChild(span);
     });
 
-    wordBank.appendChild(span);
-  });
-
-  // Add touch support AFTER words are created
-  addTouchSupport();
-
-  // Desktop drag and drop events
-  dropZone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-  });
-
-  dropZone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    const id = e.dataTransfer.getData("text/plain");
-    const draggedEl = document.getElementById(id);
-    dropZone.appendChild(draggedEl);
-  });
+    // Setup interaction based on device type
+    setupInteraction();
 });
 
 // RESET BUTTON - NOW WITH RE-SCRAMBLING!
 document.getElementById('resetButton').addEventListener('click', () => {
-  const wordBank = document.getElementById('wordBank');
-  const dropZone = document.getElementById('dropZone');
-  const droppedWords = Array.from(dropZone.children);
+    const wordBank = document.getElementById('wordBank');
+    const dropZone = document.getElementById('dropZone');
+    const droppedWords = Array.from(dropZone.children);
 
-  // Move words back to word bank
-  droppedWords.forEach(word => {
-    wordBank.appendChild(word);
-  });
-  
-  // RE-SCRAMBLE the word order!
-  const allWords = Array.from(wordBank.children);
-  const scrambledWords = [...allWords].sort(() => Math.random() - 0.5);
-  
-  // Clear word bank and add words in new scrambled order
-  wordBank.innerHTML = '';
-  scrambledWords.forEach(word => {
-    wordBank.appendChild(word);
-  });
-  
-  // Re-add touch support after reset
-  addTouchSupport();
+    // Move words back to word bank
+    droppedWords.forEach(word => {
+        wordBank.appendChild(word);
+    });
+    
+    // RE-SCRAMBLE the word order!
+    const allWords = Array.from(wordBank.children);
+    const scrambledWords = [...allWords].sort(() => Math.random() - 0.5);
+    
+    // Clear word bank and add words in new scrambled order
+    wordBank.innerHTML = '';
+    scrambledWords.forEach(word => {
+        wordBank.appendChild(word);
+    });
+    
+    // Re-setup interaction after reset
+    setupInteraction();
 });
 
 // CHECK ANSWER BUTTON
 document.getElementById('checkButton').addEventListener('click', () => {
-  const dropZone = document.getElementById('dropZone');
-  const droppedWords = Array.from(dropZone.children);
-  const correctOrder = ["I", "am", "always", "ready", "to", "help"];
-  
-  if (droppedWords.length !== correctOrder.length) {
-    alert("Please arrange all the words first!");
-    return;
-  }
-  
-  const userOrder = droppedWords.map(word => word.textContent);
-  const isCorrect = userOrder.every((word, index) => word === correctOrder[index]);
-  
-  if (isCorrect) {
-    explodeConfetti();
-  } else {
-    showTryAgain();
-  }
+    const dropZone = document.getElementById('dropZone');
+    const droppedWords = Array.from(dropZone.children);
+    const correctOrder = ["I", "am", "always", "ready", "to", "help"];
+    
+    if (droppedWords.length !== correctOrder.length) {
+        alert("Please arrange all the words first!");
+        return;
+    }
+    
+    const userOrder = droppedWords.map(word => word.textContent);
+    const isCorrect = userOrder.every((word, index) => word === correctOrder[index]);
+    
+    if (isCorrect) {
+        explodeConfetti();
+    } else {
+        showTryAgain();
+    }
 });
 
 </script>
 
 </body>
-</html>2
+</html>
