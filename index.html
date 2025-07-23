@@ -556,7 +556,7 @@ function setupInteraction() {
 
 // MAIN INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
-    const words = ["I", "am", "always", "very", "excited", "and", "ready", "to", "help", "you"];
+    const words = ["I", "am", "very", "excited", "and", "ready", "to", "help"];
     const scrambled = [...words].sort(() => Math.random() - 0.5);
 
     const wordBank = document.getElementById("wordBank");
@@ -603,7 +603,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
 document.getElementById('checkButton').addEventListener('click', () => {
     const dropZone = document.getElementById('dropZone');
     const droppedWords = Array.from(dropZone.children);
-    const correctOrder = ["I", "am", "always", "very", "excited", "and", "ready", "to", "help", "you"];
+    const correctOrder = ["I", "am", "very", "excited", "and", "ready", "to", "help"];
     
     if (droppedWords.length !== correctOrder.length) {
         alert("Please arrange all the words first!");
