@@ -442,7 +442,57 @@ function isMobileDevice() {
            (window.innerWidth <= 1200 && window.matchMedia("(orientation: landscape)").matches);
 }
 
-// TAP-TO-ADD FUNCTIONALITY FOR MOBILE
+// SMOOTH GLIDING ANIMATION FUNCTION
+function animateWordToDropZone(wordTile, dropZone) {
+    // Get current positions
+    const startRect = wordTile.getBoundingClientRect();
+    const dropRect = dropZone.getBoundingClientRect();
+    
+    // Calculate destination (end of drop zone)
+    const startX = startRect.left;
+    const startY = startRect.top;
+    const endX = dropRect.right - startRect.width - 20; // 20px padding from edge
+    const endY = dropRect.top + (dropRect.height - startRect.height) / 2;
+    
+    // Create animated clone
+    const clone = wordTile.cloneNode(true);
+    clone.style.position = 'fixed';
+    clone.style.left = startX + 'px';
+    clone.style.top = startY + 'px';
+    clone.style.zIndex = '999';
+    clone.style.pointerEvents = 'none';
+    clone.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    
+    // Hide original and add clone
+    wordTile.style.opacity = '0';
+    document.body.appendChild(clone);
+    
+    // Start animation on next frame
+    requestAnimationFrame(() => {
+        clone.style.left = endX + 'px';
+        clone.style.top = endY + 'px';
+        clone.style.transform = 'scale(1.05)';
+    });
+    
+    // After animation completes
+    setTimeout(() => {
+        // Remove clone and move original word
+        document.body.removeChild(clone);
+        dropZone.appendChild(wordTile);
+        wordTile.style.opacity = '1';
+        wordTile.style.transform = '';
+        
+        // Brief highlight effect
+        wordTile.style.background = '#10b981';
+        wordTile.style.color = 'white';
+        setTimeout(() => {
+            wordTile.style.background = 'white';
+            wordTile.style.color = 'black';
+        }, 200);
+    }, 400);
+}
+
+// TAP-TO-ADD FUNCTIONALITY FOR MOBILE WITH SMOOTH GLIDING
 function addTapToAdd() {
     const wordTiles = document.querySelectorAll('.word-tile');
     const dropZone = document.getElementById('dropZone');
@@ -453,14 +503,7 @@ function addTapToAdd() {
             
             // Only in word bank, not if already in drop zone
             if (tile.parentElement.id === 'wordBank') {
-                // Add visual feedback
-                tile.classList.add('word-moving');
-                
-                // Move to drop zone after short delay for animation
-                setTimeout(() => {
-                    dropZone.appendChild(tile);
-                    tile.classList.remove('word-moving');
-                }, 150);
+                animateWordToDropZone(tile, dropZone);
             }
         });
     });
@@ -573,4 +616,4 @@ document.getElementById('checkButton').addEventListener('click', () => {
 </script>
 
 </body>
-</html>3
+</html>1
