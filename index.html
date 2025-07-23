@@ -48,38 +48,54 @@
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
-/* LESSON NAVIGATION - MOVED BELOW TOP BUTTONS */
-.lesson-nav {
+/* PREVIOUS BUTTON - Next to Reset */
+.prev-btn {
     position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.nav-btn {
+    top: 15px;
+    left: 75px; /* Right next to Reset button */
     background: #93c5fd;
     color: #1f2937;
+    font-size: 16px;
     font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 4px 12px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    transition: all 0.2s ease;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
-.nav-btn:hover {
+.prev-btn:hover {
     background: #60a5fa;
-    transform: translateY(-1px);
 }
 
-.nav-btn:disabled {
+.prev-btn:disabled {
     background: #9ca3af;
     cursor: not-allowed;
-    transform: none;
+}
+
+/* NEXT BUTTON - Next to Check Answer */
+.next-btn {
+    position: absolute;
+    top: 15px;
+    right: 135px; /* Right next to Check Answer button */
+    background: #93c5fd;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+.next-btn:hover {
+    background: #60a5fa;
+}
+
+.next-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
 }
 
 .lesson-indicator {
@@ -374,19 +390,24 @@
         box-shadow: none !important;
     }
     
-    /* Mobile lesson navigation - simplified */
-    .lesson-nav {
-        top: 35px !important;
-        gap: 10px !important;
+    /* Mobile navigation buttons */
+    .prev-btn {
+        left: 65px !important;
+        padding: 4px 10px !important;
+        font-size: 14px !important;
     }
     
-    .nav-btn {
-        padding: 6px 12px !important;
+    .next-btn {
+        right: 125px !important;
+        padding: 4px 10px !important;
         font-size: 14px !important;
     }
 }
 
 </style>
+
+<!-- PREVIOUS BUTTON - Next to Reset -->
+<button class="prev-btn" id="prevBtn">←</button>
 
 <!-- RESET BUTTON -->
 <button class="reset-btn" id="resetButton">Reset</button>
@@ -394,11 +415,8 @@
 <!-- CHECK ANSWER BUTTON -->
 <button class="check-btn" id="checkButton">Check Answer</button>
 
-<!-- LESSON NAVIGATION - SIMPLIFIED -->
-<div class="lesson-nav">
-    <button class="nav-btn" id="prevBtn">← Previous</button>
-    <button class="nav-btn" id="nextBtn">Next →</button>
-</div>
+<!-- NEXT BUTTON - Next to Check Answer -->
+<button class="next-btn" id="nextBtn">→</button>
 
 <!-- adam CHARACTER -->
 <img src="Image/adam.png" alt="Adam" class="adam-image" id="adamImage" style="cursor: pointer;" />
