@@ -256,7 +256,7 @@
 
 .confetti.active {
     opacity: 1;
-    animation: confetti-explosion 2.5s ease-out forwards;
+    animation: confetti-explosion 3.5s ease-out forwards; /* Extended from 2.5s to 3.5s */
 }
 
 @keyframes confetti-explosion {
@@ -489,12 +489,6 @@ function createConfetti(x, y) {
 
 function explodeConfetti() {
     const container = document.getElementById('confettiContainer');
-    const successText = document.getElementById('successText');
-    
-    const randomMessage = congratsMessages[Math.floor(Math.random() * congratsMessages.length)];
-    successText.textContent = randomMessage;
-    
-    successText.classList.add('show');
     
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
@@ -517,13 +511,9 @@ function explodeConfetti() {
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
                 }
-            }, 2500);
+            }, 3500); // Extended cleanup time to match animation
         }, i * 10);
     }
-    
-    setTimeout(() => {
-        successText.classList.remove('show');
-    }, 2500);
 }
 
 function showTryAgain() {
