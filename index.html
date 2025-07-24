@@ -300,108 +300,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* SUCCESS TRANSLATION OVERLAY STYLES */
-.success-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.success-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.success-card {
-    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
-    border-radius: 20px;
-    padding: 40px 30px;
-    margin: 20px;
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border: 3px solid #81c784;
-    text-align: center;
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
-}
-
-.success-overlay.show .success-card {
-    transform: scale(1);
-}
-
-.return-btn {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    background: #f8bbd9;
-    color: #444;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-}
-
-.return-btn:hover {
-    background: #f48fb1;
-    transform: translateY(-1px);
-}
-
-.translation-content {
-    margin-top: 20px;
-}
-
-.english-text {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2e7d32;
-    margin-bottom: 20px;
-    line-height: 1.4;
-}
-
-.spanish-text {
-    font-size: 20px;
-    color: #388e3c;
-    font-style: italic;
-    line-height: 1.4;
-}
-
 /* MOBILE LANDSCAPE OPTIMIZATION */
-@media screen and (max-width: 1200px) and (orientation: landscape) {
-    .success-card {
-        padding: 25px 20px !important;
-        max-width: 400px !important;
-    }
-    
-    .english-text {
-        font-size: 20px !important;
-        margin-bottom: 15px !important;
-    }
-    
-    .spanish-text {
-        font-size: 18px !important;
-    }
-    
-    .return-btn {
-        padding: 6px 12px !important;
-        font-size: 12px !important;
-    }
-}
 @media screen and (max-width: 1200px) and (orientation: landscape) {
     .progress-area {
         top: 200px !important;
@@ -572,24 +471,11 @@
     </div>
     
     <div class="progress-section">
+        <div class="progress-label">
+            <span id="progressText">0/10 to Level 2</span>
+        </div>
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
-        </div>
-    </div>
-</div>
-
-<!-- SUCCESS TRANSLATION OVERLAY -->
-<div class="success-overlay" id="successOverlay">
-    <div class="success-card">
-        <button class="return-btn" id="returnBtn">Return</button>
-        
-        <div class="translation-content">
-            <div class="english-text" id="englishText">
-                I am always ready to help.
-            </div>
-            <div class="spanish-text" id="spanishText">
-                Siempre estoy listo para ayudar.
-            </div>
         </div>
     </div>
 </div>
@@ -600,17 +486,6 @@
 <!-- TRY AGAIN ANIMATION ELEMENT -->
 <div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
 
-<!-- SUCCESS TRANSLATION OVERLAY - HIDDEN BY DEFAULT -->
-<div class="success-overlay" id="successOverlay" style="display: none;">
-    <div class="success-card">
-        <button class="return-btn" id="returnBtn">Return</button>
-        <div class="translation-content">
-            <div class="english-text" id="englishText">English text here</div>
-            <div class="spanish-text" id="spanishText">Spanish text here</div>
-        </div>
-    </div>
-</div>
-
 <script>
 // LESSON DATA STRUCTURE
 const lessons = [
@@ -618,8 +493,6 @@ const lessons = [
         id: 1,
         sentence: ["I'm", "learning", "to", "speak", "English"],
         correctOrder: ["I'm", "learning", "to", "speak", "English"],
-        english: "I'm learning to speak English.",
-        spanish: "Estoy aprendiendo a hablar inglés.",
         difficulty: "easy",
         adamAudio: "Audio/learning-english-liam.mp3",
         jessicaAudio: "Audio/learning-english-jes.mp3"
@@ -628,8 +501,6 @@ const lessons = [
         id: 2, 
         sentence: ["I", "hope", "you", "have", "a", "nice", "day"],
         correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
-        english: "I hope you have a nice day.",
-        spanish: "Espero que tengas un lindo día.",
         difficulty: "medium",
         adamAudio: "Audio/hope-nice-day-liam.mp3",
         jessicaAudio: "Audio/hope-nice-day-jes.mp3"
@@ -637,9 +508,7 @@ const lessons = [
     {
         id: 3,
         sentence: ["Nice", "to", "meet", "you"],
-        correctOrder: ["Nice", "to", "meet", "you"],
-        english: "Nice to meet you.",
-        spanish: "Gusto en conocerte.",
+        correctOrder: ["Nice", "to", "meet", "you"], 
         difficulty: "easy",
         adamAudio: "Audio/nice-to-meet-liam.mp3",
         jessicaAudio: "Audio/nice-to-meet-jes.mp3"
@@ -673,18 +542,22 @@ const motivationMessages = [
 function updateProgress() {
     const currentLevelData = levelTargets.find(l => l.level === currentLevel);
     const currentLevelEl = document.getElementById('currentLevel');
+    const progressTextEl = document.getElementById('progressText');
     const progressBarEl = document.getElementById('progressBar');
     
     // Update displays
     currentLevelEl.textContent = currentLevel;
     
     if (currentLevelData.next === "MAX") {
+        progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
         progressBarEl.style.width = "100%";
     } else {
         // Calculate progress within current level
         const previousLevelTarget = levelTargets.find(l => l.level === currentLevel - 1)?.target || 0;
         const progressInCurrentLevel = correctAnswers - previousLevelTarget;
         const currentLevelRange = currentLevelData.target - previousLevelTarget;
+        
+        progressTextEl.textContent = `${progressInCurrentLevel}/${currentLevelRange} to Level ${currentLevelData.next}`;
         
         const progressPercent = (progressInCurrentLevel / currentLevelRange) * 100;
         progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
@@ -774,36 +647,7 @@ function explodeConfetti() {
     }
 }
 
-function showSuccessOverlay() {
-    const lesson = lessons[currentLessonIndex];
-    const overlay = document.getElementById('successOverlay');
-    const englishText = document.getElementById('englishText');
-    const spanishText = document.getElementById('spanishText');
-    
-    // Update content with current lesson
-    englishText.textContent = lesson.english;
-    spanishText.textContent = lesson.spanish;
-    
-    // Show overlay with animation
-    overlay.classList.add('show');
-}
-
-function hideSuccessOverlay() {
-    const overlay = document.getElementById('successOverlay');
-    overlay.classList.remove('show');
-}
-
-// Return button handler
-document.getElementById('returnBtn').addEventListener('click', () => {
 function showTryAgain() {
-    const tryAgainText = document.getElementById('tryAgainText');
-    
-    tryAgainText.classList.add('show');
-    
-    setTimeout(() => {
-        tryAgainText.classList.remove('show');
-    }, 1500);
-}
     const tryAgainText = document.getElementById('tryAgainText');
     
     tryAgainText.classList.add('show');
@@ -997,13 +841,8 @@ document.getElementById('checkButton').addEventListener('click', () => {
     const isCorrect = userOrder.every((word, index) => word === lesson.correctOrder[index]);
     
     if (isCorrect) {
-        incrementCorrectAnswers();
+        incrementCorrectAnswers(); // Add this line!
         explodeConfetti();
-        
-        // Show translation overlay after confetti
-        setTimeout(() => {
-            showSuccessOverlay();
-        }, 2000);
     } else {
         showTryAgain();
     }
@@ -1017,4 +856,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>8
+</html>9
