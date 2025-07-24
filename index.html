@@ -452,8 +452,8 @@ function explodeConfetti() {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     
-    // Create multiple waves of confetti over 10 seconds
-    for (let wave = 0; wave < 3; wave++) {
+    // Create 2 waves of confetti with no pause between them
+    for (let wave = 0; wave < 2; wave++) {
         setTimeout(() => {
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
@@ -476,7 +476,7 @@ function explodeConfetti() {
                     }, 3500);
                 }, i * 10);
             }
-        }, wave * 3000); // New wave every 3 seconds
+        }, wave * 1000); // Second wave starts after just 1 second
     }
 }
 
