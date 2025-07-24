@@ -238,16 +238,9 @@
     opacity: 0;
 }
 
-.starburst {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    opacity: 0;
-}
-
-.starburst.active {
+.firework.active {
     opacity: 1;
-    animation: starburst-explosion 4s ease-out forwards;
+    animation: firework-explosion 3s ease-out forwards;
 }
 
 @keyframes confetti-explosion {
@@ -282,34 +275,6 @@
     }
     100% {
         transform: translate(calc(var(--dx) * 3), calc(var(--dy) * 3)) scale(0.2);
-        opacity: 0;
-        box-shadow: 0 0 2px currentColor;
-    }
-}
-
-@keyframes starburst-explosion {
-    0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 1;
-        box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
-    }
-    25% {
-        transform: translate(var(--dx), var(--dy)) scale(1.5) rotate(180deg);
-        opacity: 1;
-        box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 36px currentColor;
-    }
-    50% {
-        transform: translate(calc(var(--dx) * 1.8), calc(var(--dy) * 1.8)) scale(1.2) rotate(360deg);
-        opacity: 0.9;
-        box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-    }
-    75% {
-        transform: translate(calc(var(--dx) * 2.2), calc(var(--dy) * 2.2)) scale(0.8) rotate(540deg);
-        opacity: 0.6;
-        box-shadow: 0 0 6px currentColor;
-    }
-    100% {
-        transform: translate(calc(var(--dx) * 2.5), calc(var(--dy) * 2.5)) scale(0.3) rotate(720deg);
         opacity: 0;
         box-shadow: 0 0 2px currentColor;
     }
@@ -494,12 +459,11 @@ const lessons = [
 let currentLessonIndex = 0;
 
 // CELEBRATION STYLES ARRAY
-const celebrationStyles = ['confetti', 'fireworks', 'starbursts'];
+const celebrationStyles = ['confetti', 'fireworks'];
 
 // CELEBRATION COLOR PALETTES
 const confettiColors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
 const fireworkColors = ['#FFD700', '#FF6B47', '#4ECDC4', '#45B7D1', '#FF69B4', '#32CD32', '#FF4500', '#9370DB', '#00CED1', '#FFB6C1'];
-const starburstColors = ['#FFD700', '#FFA500', '#FFFF00', '#F0E68C', '#DAA520', '#B8860B', '#FFE4B5', '#FFEFD5'];
 
 function createConfetti(x, y) {
     const confetti = document.createElement('div');
@@ -619,6 +583,8 @@ function explodeCelebration() {
                 });
             }, wave * 1000);
         }
+    }
+}
     }
 }
     } else if (style === 'starbursts') {
@@ -914,4 +880,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>5
+</html>1
