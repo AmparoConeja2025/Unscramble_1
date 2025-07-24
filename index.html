@@ -245,42 +245,125 @@
     }
 }
 
-.firework {
+/* PROGRESS TRACKING STYLES - MOBILE FIRST */
+.progress-area {
     position: absolute;
-    width: 8px;
-    height: 8px;
-    opacity: 0;
+    top: 580px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border: 2px solid #81d4fa;
 }
 
-.firework.active {
-    opacity: 1;
-    animation: firework-explosion 3s ease-out forwards;
+.level-badge {
+    background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: inline-block;
 }
 
-@keyframes firework-explosion {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-        box-shadow: 0 0 6px currentColor;
-    }
-    20% {
-        transform: translate(var(--dx), var(--dy)) scale(1.2);
-        opacity: 1;
-        box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
-    }
-    50% {
-        transform: translate(calc(var(--dx) * 2), calc(var(--dy) * 2)) scale(0.8);
-        opacity: 0.8;
-        box-shadow: 0 0 8px currentColor;
-    }
-    100% {
-        transform: translate(calc(var(--dx) * 3), calc(var(--dy) * 3)) scale(0.2);
-        opacity: 0;
-        box-shadow: 0 0 2px currentColor;
-    }
+.stats-row {
+    margin-bottom: 15px;
 }
 
-/* TRY AGAIN ANIMATION STYLES */
+.correct-count {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+    display: block;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2196f3;
+    display: block;
+}
+
+.progress-section {
+    margin-bottom: 15px;
+}
+
+.progress-label {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+    width: 0%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.motivation-text {
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* MOBILE LANDSCAPE OPTIMIZATION */
+@media screen and (max-width: 1200px) and (orientation: landscape) {
+    .progress-area {
+        top: 220px !important;
+        right: 20px !important;
+        left: auto !important;
+        transform: none !important;
+        width: 280px !important;
+        padding: 15px !important;
+    }
+    
+    .level-badge {
+        font-size: 14px !important;
+        padding: 6px 16px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .stat-value {
+        font-size: 20px !important;
+    }
+    
+    .progress-bar-container {
+        height: 10px !important;
+    }
+    
+    .motivation-text {
+        font-size: 12px !important;
+        margin-top: 8px !important;
+    }
+}
 .try-again-text {
     position: fixed;
     top:70%;
@@ -421,6 +504,33 @@
   <!-- Words will be inserted here dynamically -->
 </div>
 
+<!-- PROGRESS TRACKING AREA -->
+<div class="progress-area">
+    <div class="level-badge">
+        <span class="level-text">Level <span id="currentLevel">1</span></span>
+    </div>
+    
+    <div class="stats-row">
+        <div class="correct-count">
+            <span class="stat-label">Correct Answers</span>
+            <span class="stat-value" id="correctCount">0</span>
+        </div>
+    </div>
+    
+    <div class="progress-section">
+        <div class="progress-label">
+            <span id="progressText">0/10 to Level 2</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+    
+    <div class="motivation-text" id="motivationText">
+        Start your learning journey! 🌟
+    </div>
+</div>
+
 <!-- CONFETTI CELEBRATION ELEMENTS -->
 <div class="confetti-container" id="confettiContainer"></div>
 
@@ -458,39 +568,84 @@ const lessons = [
 
 let currentLessonIndex = 0;
 
+// PROGRESS TRACKING SYSTEM
+let correctAnswers = 0;
+let currentLevel = 1;
+
+const levelTargets = [
+    { level: 1, target: 10, next: 2 },
+    { level: 2, target: 25, next: 3 },
+    { level: 3, target: 50, next: 4 },
+    { level: 4, target: 100, next: "MAX" }
+];
+
+const motivationMessages = [
+    "Start your learning journey! 🌟",
+    "Great progress! Keep it up! 💪",
+    "You're doing amazing! 🚀",
+    "Almost there! Don't give up! 🔥",
+    "Fantastic work! 🎯",
+    "You're on fire! 🌟",
+    "Incredible progress! 💫",
+    "Learning master! 🏆"
+];
+
+function updateProgress() {
+    const currentLevelData = levelTargets.find(l => l.level === currentLevel);
+    const correctCountEl = document.getElementById('correctCount');
+    const currentLevelEl = document.getElementById('currentLevel');
+    const progressTextEl = document.getElementById('progressText');
+    const progressBarEl = document.getElementById('progressBar');
+    const motivationTextEl = document.getElementById('motivationText');
+    
+    // Update displays
+    correctCountEl.textContent = correctAnswers;
+    currentLevelEl.textContent = currentLevel;
+    
+    if (currentLevelData.next === "MAX") {
+        progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
+        progressBarEl.style.width = "100%";
+    } else {
+        const remaining = currentLevelData.target - correctAnswers;
+        progressTextEl.textContent = `${correctAnswers}/${currentLevelData.target} to Level ${currentLevelData.next}`;
+        
+        const progressPercent = (correctAnswers / currentLevelData.target) * 100;
+        progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
+    }
+    
+    // Update motivation message
+    const messageIndex = Math.min(Math.floor(correctAnswers / 5), motivationMessages.length - 1);
+    motivationTextEl.textContent = motivationMessages[messageIndex];
+    
+    // Check for level up
+    if (correctAnswers >= currentLevelData.target && currentLevelData.next !== "MAX") {
+        levelUp();
+    }
+}
+
+function levelUp() {
+    currentLevel++;
+    
+    // Level up celebration
+    const levelBadge = document.querySelector('.level-badge');
+    levelBadge.style.transform = 'scale(1.2)';
+    levelBadge.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%)';
+    
+    setTimeout(() => {
+        levelBadge.style.transform = 'scale(1)';
+        levelBadge.style.background = 'linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%)';
+    }, 1000);
+    
+    updateProgress();
+}
+
+function incrementCorrectAnswers() {
+    correctAnswers++;
+    updateProgress();
+}
+
 // CONFETTI CELEBRATION FUNCTIONS
 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
-
-// Add fireworks capability
-const celebrationStyles = ['confetti', 'fireworks'];
-const fireworkColors = ['#FFD700', '#FF6B47', '#4ECDC4', '#45B7D1', '#FF69B4', '#32CD32', '#FF4500', '#9370DB', '#00CED1', '#FFB6C1'];
-
-function createFirework(x, y) {
-    const firework = document.createElement('div');
-    firework.classList.add('firework');
-    
-    const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
-    firework.style.backgroundColor = color;
-    firework.style.color = color;
-    firework.style.borderRadius = '50%';
-    
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 50 + Math.random() * 100;
-    const dx = Math.cos(angle) * distance;
-    const dy = Math.sin(angle) * distance;
-    
-    firework.style.setProperty('--dx', dx + 'px');
-    firework.style.setProperty('--dy', dy + 'px');
-    
-    const size = Math.random() * 6 + 4;
-    firework.style.width = size + 'px';
-    firework.style.height = size + 'px';
-    
-    firework.style.left = x + 'px';
-    firework.style.top = y + 'px';
-    
-    return firework;
-}
 
 function createConfetti(x, y) {
     const confetti = document.createElement('div');
@@ -514,50 +669,35 @@ function createConfetti(x, y) {
 
 function explodeConfetti() {
     const container = document.getElementById('confettiContainer');
-    const style = celebrationStyles[Math.floor(Math.random() * celebrationStyles.length)];
+    
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     
-    const burstPoints = [
-        { x: centerX - 200, y: centerY - 100 },
-        { x: centerX + 200, y: centerY - 100 },
-        { x: centerX, y: centerY - 150 },
-        { x: centerX - 100, y: centerY + 50 },
-        { x: centerX + 100, y: centerY + 50 }
-    ];
-    
+    // Create 2 waves of confetti with no pause between them
     for (let wave = 0; wave < 2; wave++) {
         setTimeout(() => {
-            burstPoints.forEach((point, burstIndex) => {
+            for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
-                    if (style === 'confetti') {
-                        for (let i = 0; i < 20; i++) {
-                            setTimeout(() => {
-                                const spreadX = (Math.random() - 0.5) * 80;
-                                const spreadY = (Math.random() - 0.5) * 60;
-                                const confetti = createConfetti(point.x + spreadX, point.y + spreadY);
-                                container.appendChild(confetti);
-                                requestAnimationFrame(() => confetti.classList.add('active'));
-                                setTimeout(() => {
-                                    if (confetti.parentNode) confetti.parentNode.removeChild(confetti);
-                                }, 3500);
-                            }, i * 15);
+                    const angle = (i / 100) * Math.PI * 2;
+                    const radius = Math.random() * 100;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    
+                    const confetti = createConfetti(x, y);
+                    container.appendChild(confetti);
+                    
+                    requestAnimationFrame(() => {
+                        confetti.classList.add('active');
+                    });
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            confetti.parentNode.removeChild(confetti);
                         }
-                    } else {
-                        for (let i = 0; i < 15; i++) {
-                            setTimeout(() => {
-                                const firework = createFirework(point.x, point.y);
-                                container.appendChild(firework);
-                                requestAnimationFrame(() => firework.classList.add('active'));
-                                setTimeout(() => {
-                                    if (firework.parentNode) firework.parentNode.removeChild(firework);
-                                }, 3000);
-                            }, i * 20);
-                        }
-                    }
-                }, burstIndex * 200);
-            });
-        }, wave * 1000);
+                    }, 3500);
+                }, i * 10);
+            }
+        }, wave * 1000); // Second wave starts after just 1 second
     }
 }
 
@@ -755,6 +895,7 @@ document.getElementById('checkButton').addEventListener('click', () => {
     const isCorrect = userOrder.every((word, index) => word === lesson.correctOrder[index]);
     
     if (isCorrect) {
+        incrementCorrectAnswers(); // Add this line!
         explodeConfetti();
     } else {
         showTryAgain();
@@ -769,4 +910,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>1
+</html>2
