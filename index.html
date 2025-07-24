@@ -471,9 +471,6 @@
     </div>
     
     <div class="progress-section">
-        <div class="progress-label">
-            <span id="progressText">0/10 to Level 2</span>
-        </div>
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
@@ -542,22 +539,18 @@ const motivationMessages = [
 function updateProgress() {
     const currentLevelData = levelTargets.find(l => l.level === currentLevel);
     const currentLevelEl = document.getElementById('currentLevel');
-    const progressTextEl = document.getElementById('progressText');
     const progressBarEl = document.getElementById('progressBar');
     
     // Update displays
     currentLevelEl.textContent = currentLevel;
     
     if (currentLevelData.next === "MAX") {
-        progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
         progressBarEl.style.width = "100%";
     } else {
         // Calculate progress within current level
         const previousLevelTarget = levelTargets.find(l => l.level === currentLevel - 1)?.target || 0;
         const progressInCurrentLevel = correctAnswers - previousLevelTarget;
         const currentLevelRange = currentLevelData.target - previousLevelTarget;
-        
-        progressTextEl.textContent = `${progressInCurrentLevel}/${currentLevelRange} to Level ${currentLevelData.next}`;
         
         const progressPercent = (progressInCurrentLevel / currentLevelRange) * 100;
         progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
@@ -856,4 +849,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>9
+</html>1
