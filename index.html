@@ -248,7 +248,7 @@
 /* PROGRESS TRACKING STYLES - MOBILE FIRST - CLEAN VERSION */
 .progress-area {
     position: absolute;
-    top: 580px;
+    top: 560px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -554,9 +554,14 @@ function updateProgress() {
         progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
         progressBarEl.style.width = "100%";
     } else {
-        progressTextEl.textContent = `${correctAnswers}/${currentLevelData.target} to Level ${currentLevelData.next}`;
+        // Calculate progress within current level
+        const previousLevelTarget = levelTargets.find(l => l.level === currentLevel - 1)?.target || 0;
+        const progressInCurrentLevel = correctAnswers - previousLevelTarget;
+        const currentLevelRange = currentLevelData.target - previousLevelTarget;
         
-        const progressPercent = (correctAnswers / currentLevelData.target) * 100;
+        progressTextEl.textContent = `${progressInCurrentLevel}/${currentLevelRange} to Level ${currentLevelData.next}`;
+        
+        const progressPercent = (progressInCurrentLevel / currentLevelRange) * 100;
         progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
     }
     
@@ -853,4 +858,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>3
+</html>4
