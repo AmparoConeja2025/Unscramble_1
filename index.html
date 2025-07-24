@@ -228,7 +228,7 @@
 
 .confetti.active {
     opacity: 1;
-    animation: confetti-explosion 15s ease-out forwards; /* MUCH LONGER GLITTER - 15 seconds! */
+    animation: confetti-explosion 3.5s ease-out forwards; /* Back to normal speed */
 }
 
 @keyframes confetti-explosion {
@@ -236,8 +236,8 @@
         transform: translateY(0) rotate(0deg) scale(1);
         opacity: 1;
     }
-    90% {
-        opacity: 1;   /* Stay visible until 90% through the animation */
+    25% {
+        opacity: 1;   
     }
     100% {
         transform: translateY(100vh) rotate(1440deg) scale(0.2);
@@ -452,26 +452,31 @@ function explodeConfetti() {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     
-    for (let i = 0; i < 150; i++) { // More confetti pieces for longer show
+    // Create multiple waves of confetti over 10 seconds
+    for (let wave = 0; wave < 3; wave++) {
         setTimeout(() => {
-            const angle = (i / 150) * Math.PI * 2;
-            const radius = Math.random() * 100;
-            const x = centerX + Math.cos(angle) * radius;
-            const y = centerY + Math.sin(angle) * radius;
-            
-            const confetti = createConfetti(x, y);
-            container.appendChild(confetti);
-            
-            requestAnimationFrame(() => {
-                confetti.classList.add('active');
-            });
-            
-            setTimeout(() => {
-                if (confetti.parentNode) {
-                    confetti.parentNode.removeChild(confetti);
-                }
-            }, 15000); // 15 second cleanup to match animation
-        }, i * 15); // Slower stagger for longer effect
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const angle = (i / 100) * Math.PI * 2;
+                    const radius = Math.random() * 100;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    
+                    const confetti = createConfetti(x, y);
+                    container.appendChild(confetti);
+                    
+                    requestAnimationFrame(() => {
+                        confetti.classList.add('active');
+                    });
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            confetti.parentNode.removeChild(confetti);
+                        }
+                    }, 3500);
+                }, i * 10);
+            }
+        }, wave * 3000); // New wave every 3 seconds
     }
 }
 
