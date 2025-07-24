@@ -461,6 +461,37 @@ let currentLessonIndex = 0;
 // CONFETTI CELEBRATION FUNCTIONS
 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
 
+// Add fireworks capability
+const celebrationStyles = ['confetti', 'fireworks'];
+const fireworkColors = ['#FFD700', '#FF6B47', '#4ECDC4', '#45B7D1', '#FF69B4', '#32CD32', '#FF4500', '#9370DB', '#00CED1', '#FFB6C1'];
+
+function createFirework(x, y) {
+    const firework = document.createElement('div');
+    firework.classList.add('firework');
+    
+    const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+    firework.style.backgroundColor = color;
+    firework.style.color = color;
+    firework.style.borderRadius = '50%';
+    
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 50 + Math.random() * 100;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+    
+    firework.style.setProperty('--dx', dx + 'px');
+    firework.style.setProperty('--dy', dy + 'px');
+    
+    const size = Math.random() * 6 + 4;
+    firework.style.width = size + 'px';
+    firework.style.height = size + 'px';
+    
+    firework.style.left = x + 'px';
+    firework.style.top = y + 'px';
+    
+    return firework;
+}
+
 function createConfetti(x, y) {
     const confetti = document.createElement('div');
     confetti.classList.add('confetti');
@@ -723,4 +754,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>1
+</html>2
