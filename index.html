@@ -245,7 +245,7 @@
     }
 }
 
-/* PROGRESS TRACKING STYLES - MOBILE FIRST */
+/* PROGRESS TRACKING STYLES - MOBILE FIRST - CLEAN VERSION */
 .progress-area {
     position: absolute;
     top: 580px;
@@ -253,12 +253,9 @@
     transform: translateX(-50%);
     width: 90%;
     max-width: 400px;
-    background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: transparent;
     text-align: center;
-    border: 2px solid #81d4fa;
+    padding: 20px 0;
 }
 
 .level-badge {
@@ -273,65 +270,35 @@
     display: inline-block;
 }
 
-.stats-row {
-    margin-bottom: 15px;
-}
-
-.correct-count {
-    background: white;
-    padding: 12px 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-}
-
-.stat-label {
-    font-size: 14px;
-    color: #666;
-    display: block;
-}
-
-.stat-value {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2196f3;
-    display: block;
-}
-
 .progress-section {
     margin-bottom: 15px;
 }
 
 .progress-label {
-    font-size: 14px;
-    color: #444;
+    font-size: 16px;
+    color: white;
     margin-bottom: 8px;
     font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .progress-bar-container {
     width: 100%;
-    height: 12px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 6px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 7px;
     overflow: hidden;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .progress-bar {
     height: 100%;
     background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
     width: 0%;
-    border-radius: 6px;
+    border-radius: 7px;
     transition: width 0.5s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.motivation-text {
-    font-size: 14px;
-    color: #555;
-    font-style: italic;
-    margin-top: 10px;
 }
 
 /* MOBILE LANDSCAPE OPTIMIZATION */
@@ -342,7 +309,7 @@
         left: auto !important;
         transform: none !important;
         width: 280px !important;
-        padding: 15px !important;
+        padding: 15px 0 !important;
     }
     
     .level-badge {
@@ -351,17 +318,12 @@
         margin-bottom: 10px !important;
     }
     
-    .stat-value {
-        font-size: 20px !important;
+    .progress-label {
+        font-size: 14px !important;
     }
     
     .progress-bar-container {
-        height: 10px !important;
-    }
-    
-    .motivation-text {
-        font-size: 12px !important;
-        margin-top: 8px !important;
+        height: 12px !important;
     }
 }
 .try-again-text {
@@ -510,13 +472,6 @@
         <span class="level-text">Level <span id="currentLevel">1</span></span>
     </div>
     
-    <div class="stats-row">
-        <div class="correct-count">
-            <span class="stat-label">Correct Answers</span>
-            <span class="stat-value" id="correctCount">0</span>
-        </div>
-    </div>
-    
     <div class="progress-section">
         <div class="progress-label">
             <span id="progressText">0/10 to Level 2</span>
@@ -524,10 +479,6 @@
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-    </div>
-    
-    <div class="motivation-text" id="motivationText">
-        Start your learning journey! 🌟
     </div>
 </div>
 
@@ -592,30 +543,22 @@ const motivationMessages = [
 
 function updateProgress() {
     const currentLevelData = levelTargets.find(l => l.level === currentLevel);
-    const correctCountEl = document.getElementById('correctCount');
     const currentLevelEl = document.getElementById('currentLevel');
     const progressTextEl = document.getElementById('progressText');
     const progressBarEl = document.getElementById('progressBar');
-    const motivationTextEl = document.getElementById('motivationText');
     
     // Update displays
-    correctCountEl.textContent = correctAnswers;
     currentLevelEl.textContent = currentLevel;
     
     if (currentLevelData.next === "MAX") {
         progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
         progressBarEl.style.width = "100%";
     } else {
-        const remaining = currentLevelData.target - correctAnswers;
         progressTextEl.textContent = `${correctAnswers}/${currentLevelData.target} to Level ${currentLevelData.next}`;
         
         const progressPercent = (correctAnswers / currentLevelData.target) * 100;
         progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
     }
-    
-    // Update motivation message
-    const messageIndex = Math.min(Math.floor(correctAnswers / 5), motivationMessages.length - 1);
-    motivationTextEl.textContent = motivationMessages[messageIndex];
     
     // Check for level up
     if (correctAnswers >= currentLevelData.target && currentLevelData.next !== "MAX") {
@@ -910,4 +853,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
