@@ -208,7 +208,7 @@
     z-index: 100;
 }
 
-/* CONFETTI CELEBRATION STYLES */
+/* CONFETTI CELEBRATION STYLES - EXTENDED DURATION */
 .confetti-container {
     position: fixed;
     top: 0;
@@ -217,34 +217,6 @@
     height: 100%;
     pointer-events: none;
     z-index: 1000;
-}
-
-.success-text {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #00c851;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-    z-index: 1001;
-    opacity: 0;
-    transition: all 0.5s ease;
-}
-
-.success-text.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    animation: pulse 3s ease ;
-}
-
-@keyframes pulse {
-    0% { transform: translate(-50%, -50%) scale(1); }
-    25% { transform: translate(-50%, -50%) scale(1.15); }
-    50% { transform: translate(-50%, -50%) scale(1.05); }
-    75% { transform: translate(-50%, -50%) scale(1.1); }
-    100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 .confetti {
@@ -256,7 +228,7 @@
 
 .confetti.active {
     opacity: 1;
-    animation: confetti-explosion 3.5s ease-out forwards; /* Extended from 2.5s to 3.5s */
+    animation: confetti-explosion 15s ease-out forwards; /* MUCH LONGER GLITTER - 15 seconds! */
 }
 
 @keyframes confetti-explosion {
@@ -264,8 +236,8 @@
         transform: translateY(0) rotate(0deg) scale(1);
         opacity: 1;
     }
-    25% {
-        opacity: 1;   
+    90% {
+        opacity: 1;   /* Stay visible until 90% through the animation */
     }
     100% {
         transform: translateY(100vh) rotate(1440deg) scale(0.2);
@@ -323,10 +295,6 @@
         width: 112px !important;
         top: 56% !important;
         left: 40px !important;
-    }
-
-    .success-text {
-        top: 10% !important;
     }
     
     /* Smaller, repositioned buttons */
@@ -420,7 +388,6 @@
 
 <!-- CONFETTI CELEBRATION ELEMENTS -->
 <div class="confetti-container" id="confettiContainer"></div>
-<div class="success-text" id="successText">👏 🎉 🎉 👏</div>
 
 <!-- TRY AGAIN ANIMATION ELEMENT -->
 <div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
@@ -459,14 +426,6 @@ let currentLessonIndex = 0;
 // CONFETTI CELEBRATION FUNCTIONS
 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
 
-const congratsMessages = [
-    "👏 🎉 🎉 👏",
-    "🙌 😊 😊 🙌", 
-    "✨ 🎊 🎊 ✨",
-    "🎆 ⭐ ⭐ 🎆",
-    "👍 🚀 🚀 👍"
-];
-
 function createConfetti(x, y) {
     const confetti = document.createElement('div');
     confetti.classList.add('confetti');
@@ -493,9 +452,9 @@ function explodeConfetti() {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 150; i++) { // More confetti pieces for longer show
         setTimeout(() => {
-            const angle = (i / 100) * Math.PI * 2;
+            const angle = (i / 150) * Math.PI * 2;
             const radius = Math.random() * 100;
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
@@ -511,8 +470,8 @@ function explodeConfetti() {
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
                 }
-            }, 3500); // Extended cleanup time to match animation
-        }, i * 10);
+            }, 15000); // 15 second cleanup to match animation
+        }, i * 15); // Slower stagger for longer effect
     }
 }
 
@@ -724,4 +683,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>1
+</html>
