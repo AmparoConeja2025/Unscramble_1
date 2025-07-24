@@ -245,41 +245,6 @@
     }
 }
 
-.firework {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    opacity: 0;
-}
-
-.firework.active {
-    opacity: 1;
-    animation: firework-explosion 3s ease-out forwards;
-}
-
-@keyframes firework-explosion {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-        box-shadow: 0 0 6px currentColor;
-    }
-    20% {
-        transform: translate(var(--dx), var(--dy)) scale(1.2);
-        opacity: 1;
-        box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
-    }
-    50% {
-        transform: translate(calc(var(--dx) * 2), calc(var(--dy) * 2)) scale(0.8);
-        opacity: 0.8;
-        box-shadow: 0 0 8px currentColor;
-    }
-    100% {
-        transform: translate(calc(var(--dx) * 3), calc(var(--dy) * 3)) scale(0.2);
-        opacity: 0;
-        box-shadow: 0 0 2px currentColor;
-    }
-}
-
 /* TRY AGAIN ANIMATION STYLES */
 .try-again-text {
     position: fixed;
@@ -723,4 +688,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>
+</html>1
