@@ -523,30 +523,44 @@ function explodeCelebration() {
     const centerY = window.innerHeight / 2;
     
     if (style === 'confetti') {
-        // Original confetti celebration
+        // Upgraded confetti celebration - burst pattern like fireworks!
+        const burstPoints = [
+            { x: centerX - 200, y: centerY - 100 },
+            { x: centerX + 200, y: centerY - 100 },
+            { x: centerX, y: centerY - 150 },
+            { x: centerX - 100, y: centerY + 50 },
+            { x: centerX + 100, y: centerY + 50 }
+        ];
+        
         for (let wave = 0; wave < 2; wave++) {
             setTimeout(() => {
-                for (let i = 0; i < 100; i++) {
+                burstPoints.forEach((point, burstIndex) => {
                     setTimeout(() => {
-                        const angle = (i / 100) * Math.PI * 2;
-                        const radius = Math.random() * 100;
-                        const x = centerX + Math.cos(angle) * radius;
-                        const y = centerY + Math.sin(angle) * radius;
-                        
-                        const confetti = createConfetti(x, y);
-                        container.appendChild(confetti);
-                        
-                        requestAnimationFrame(() => {
-                            confetti.classList.add('active');
-                        });
-                        
-                        setTimeout(() => {
-                            if (confetti.parentNode) {
-                                confetti.parentNode.removeChild(confetti);
-                            }
-                        }, 3500);
-                    }, i * 10);
-                }
+                        // Create confetti burst at this point
+                        for (let i = 0; i < 20; i++) {
+                            setTimeout(() => {
+                                // Add some random spread from the burst point
+                                const spreadX = (Math.random() - 0.5) * 80;
+                                const spreadY = (Math.random() - 0.5) * 60;
+                                const x = point.x + spreadX;
+                                const y = point.y + spreadY;
+                                
+                                const confetti = createConfetti(x, y);
+                                container.appendChild(confetti);
+                                
+                                requestAnimationFrame(() => {
+                                    confetti.classList.add('active');
+                                });
+                                
+                                setTimeout(() => {
+                                    if (confetti.parentNode) {
+                                        confetti.parentNode.removeChild(confetti);
+                                    }
+                                }, 3500);
+                            }, i * 15);
+                        }
+                    }, burstIndex * 200); // Stagger the bursts
+                });
             }, wave * 1000);
         }
     } else if (style === 'fireworks') {
@@ -795,4 +809,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
