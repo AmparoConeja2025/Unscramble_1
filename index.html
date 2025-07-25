@@ -566,6 +566,9 @@
 <!-- CHECK ANSWER BUTTON -->
 <button class="check-btn" id="checkButton">Check Answer</button>
 
+<!-- UNDO BUTTON - Smart One-Time Undo -->
+<button class="undo-btn" id="undoButton" disabled>Undo</button>
+
 <!-- LESSON NAVIGATION - RESTORED TO PROMINENT POSITION -->
 <div class="lesson-nav">
     <button class="nav-btn" id="prevBtn">← Previous</button>
@@ -947,13 +950,47 @@ function showTryAgain() {
     }, 1500);
 }
 
+// SMART UNDO SYSTEM - ONE UNDO PER WORD ADDITION
+let lastAddedWord = null;
+let canUndo = false;
+
+function updateUndoButton() {
+    const undoBtn = document.getElementById('undoButton');
+    if (canUndo && lastAddedWord) {
+        undoBtn.disabled = false;
+        undoBtn.classList.add('active');
+    } else {
+        undoBtn.disabled = true;
+        undoBtn.classList.remove('active');
+    }
+}
+
+function performUndo() {
+    if (!canUndo || !lastAddedWord) return;
+    
+    const wordBank = document.getElementById('wordBank');
+    const dropZone = document.getElementById('dropZone');
+    
+    // Move the last added word back to word bank
+    if (lastAddedWord.parentElement === dropZone) {
+        wordBank.appendChild(lastAddedWord);
+        
+        // Reset undo state
+        lastAddedWord = null;
+        canUndo = false;
+        updateUndoButton();
+        
+        // Re-setup interactions for the moved word
+        setupInteraction();
+    }
+}
 // DEVICE DETECTION
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
            (window.innerWidth <= 1200 && window.matchMedia("(orientation: landscape)").matches);
 }
 
-// SMOOTH GLIDING ANIMATION FUNCTION
+// SMOOTH GLIDING ANIMATION FUNCTION - UPDATED WITH UNDO TRACKING
 function animateWordToDropZone(wordTile, dropZone) {
     const startRect = wordTile.getBoundingClientRect();
     const dropRect = dropZone.getBoundingClientRect();
@@ -986,6 +1023,11 @@ function animateWordToDropZone(wordTile, dropZone) {
         wordTile.style.opacity = '1';
         wordTile.style.transform = '';
         
+        // Track for undo functionality
+        lastAddedWord = wordTile;
+        canUndo = true;
+        updateUndoButton();
+        
         wordTile.style.background = '#10b981';
         wordTile.style.color = 'white';
         setTimeout(() => {
@@ -1011,7 +1053,7 @@ function addTapToAdd() {
     });
 }
 
-// DRAG-AND-DROP FUNCTIONALITY FOR DESKTOP
+// DRAG-AND-DROP FUNCTIONALITY FOR DESKTOP - UPDATED WITH UNDO TRACKING
 function addDragAndDrop() {
     const wordTiles = document.querySelectorAll('.word-tile');
     const dropZone = document.getElementById('dropZone');
@@ -1032,8 +1074,13 @@ function addDragAndDrop() {
         e.preventDefault();
         const id = e.dataTransfer.getData('text/plain');
         const draggedEl = document.getElementById(id);
-        if (draggedEl) {
+        if (draggedEl && draggedEl.parentElement.id === 'wordBank') {
             dropZone.appendChild(draggedEl);
+            
+            // Track for undo functionality
+            lastAddedWord = draggedEl;
+            canUndo = true;
+            updateUndoButton();
         }
     });
 }
@@ -1064,6 +1111,11 @@ function loadLesson(index) {
     // Clear existing content
     wordBank.innerHTML = '';
     dropZone.innerHTML = '';
+    
+    // Reset undo state
+    lastAddedWord = null;
+    canUndo = false;
+    updateUndoButton();
     
     // Create scrambled words
     const scrambled = [...lesson.sentence].sort(() => Math.random() - 0.5);
@@ -1111,10 +1163,18 @@ document.getElementById('jessicaImage').addEventListener('click', () => {
     document.getElementById('jessicaAudio').play();
 });
 
-// RESET BUTTON
+// RESET BUTTON - UPDATED WITH UNDO RESET
 document.getElementById('resetButton').addEventListener('click', () => {
+    // Reset undo state
+    lastAddedWord = null;
+    canUndo = false;
+    updateUndoButton();
+    
     loadLesson(currentLessonIndex); // Reload current lesson
 });
+
+// UNDO BUTTON - Smart One-Time Undo
+document.getElementById('undoButton').addEventListener('click', performUndo);
 
 // CHECK ANSWER BUTTON WITH TRANSLATION OVERLAY - UPDATED!
 document.getElementById('checkButton').addEventListener('click', () => {
@@ -1151,4 +1211,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>f4
+</html>f5
