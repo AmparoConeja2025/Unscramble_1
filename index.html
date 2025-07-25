@@ -208,8 +208,8 @@
     z-index: 100;
 }
 
-/* FIREWORKS CELEBRATION STYLES - RESTORED! */
-.fireworks-container {
+/* CONFETTI CELEBRATION STYLES - EXTENDED DURATION */
+.confetti-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -219,29 +219,28 @@
     z-index: 1000;
 }
 
-.firework {
+.confetti {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
+    width: 12px;
+    height: 12px;
     opacity: 0;
 }
 
-.firework.active {
+.confetti.active {
     opacity: 1;
-    animation: firework-explosion 2s ease-out forwards;
+    animation: confetti-explosion 3.5s ease-out forwards; /* Back to normal speed */
 }
 
-@keyframes firework-explosion {
+@keyframes confetti-explosion {
     0% {
-        transform: scale(1);
+        transform: translateY(0) rotate(0deg) scale(1);
         opacity: 1;
     }
-    20% {
-        opacity: 1;
+    25% {
+        opacity: 1;   
     }
     100% {
-        transform: scale(25);
+        transform: translateY(100vh) rotate(1440deg) scale(0.2);
         opacity: 0;
     }
 }
@@ -359,107 +358,127 @@
     100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
 }
 
-/* TRANSLATION OVERLAY STYLES - PERFECT VERSION! */
+/* TRANSLATION OVERLAY STYLES - SIMPLIFIED TO MATCH MAIN PAGE! */
 .translation-overlay {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    padding: 30px 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #6b7280;
     z-index: 1002;
     opacity: 0;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    text-align: center;
-    min-width: 350px;
-    max-width: 90vw;
+    transition: all 0.6s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(100vh);
 }
 
 .translation-overlay.show {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateY(0);
 }
 
 .translation-overlay.hide {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translateY(-100vh);
 }
 
-.translation-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+.translation-return-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #fbdada;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
 .translation-content {
-    margin-bottom: 25px;
+    background: #d1fae5;
+    padding: 40px 30px;
+    border-radius: 20px;
+    max-width: 90vw;
+    min-width: 350px;
+    text-align: center;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+    margin: 0 20px;
 }
 
 .translation-english {
-    font-size: 24px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 20px;
     line-height: 1.3;
 }
 
 .translation-spanish {
-    font-size: 20px;
-    color: #dcfce7;
+    font-size: 22px;
+    color: #1f2937;
     font-style: italic;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
     line-height: 1.4;
 }
 
-.translation-close-btn {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 16px;
+.translation-characters {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 80px;
 }
 
-.translation-close-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
+.translation-character-left {
+    width: 120px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+    cursor: pointer;
+}
+
+.translation-character-right {
+    width: 120px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+    cursor: pointer;
 }
 
 /* Mobile optimization for translation overlay */
 @media screen and (max-width: 1200px) {
-    .translation-overlay {
+    .translation-content {
+        padding: 30px 25px !important;
+        margin: 0 15px !important;
         min-width: 300px !important;
-        padding: 25px 30px !important;
-        margin: 0 20px !important;
-    }
-    
-    .translation-header {
-        font-size: 20px !important;
-        margin-bottom: 15px !important;
+        max-width: 95vw !important;
     }
     
     .translation-english {
-        font-size: 20px !important;
-        margin-bottom: 12px !important;
+        font-size: 24px !important;
+        margin-bottom: 18px !important;
     }
     
     .translation-spanish {
-        font-size: 18px !important;
+        font-size: 20px !important;
     }
     
-    .translation-close-btn {
-        padding: 10px 20px !important;
-        font-size: 14px !important;
+    .translation-characters {
+        bottom: 40px !important;
+        padding: 0 60px !important;
+    }
+    
+    .translation-character-left {
+        width: 80px !important;
+    }
+    
+    .translation-character-right {
+        width: 80px !important;
     }
 }
 
@@ -586,20 +605,25 @@
     </div>
 </div>
 
-<!-- FIREWORKS CELEBRATION ELEMENTS - RESTORED! -->
-<div class="fireworks-container" id="fireworksContainer"></div>
+<!-- CONFETTI CELEBRATION ELEMENTS -->
+<div class="confetti-container" id="confettiContainer"></div>
 
 <!-- TRY AGAIN ANIMATION ELEMENT -->
 <div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
 
-<!-- TRANSLATION OVERLAY - PERFECT VERSION! -->
+<!-- TRANSLATION OVERLAY - SIMPLIFIED TO MATCH MAIN PAGE! -->
 <div class="translation-overlay" id="translationOverlay">
-    <div class="translation-header">🎉 Perfect! 🎉</div>
+    <button class="translation-return-btn" id="translationReturnBtn">Return</button>
+    
     <div class="translation-content">
         <div class="translation-english" id="translationEnglish"></div>
         <div class="translation-spanish" id="translationSpanish"></div>
     </div>
-    <button class="translation-close-btn" id="translationCloseBtn">Continue Learning</button>
+    
+    <div class="translation-characters">
+        <img src="Image/jessica.png" alt="Jessica" class="translation-character-left" id="translationJessica" />
+        <img src="Image/adam.png" alt="Adam" class="translation-character-right" id="translationAdam" />
+    </div>
 </div>
 
 <script>
@@ -744,44 +768,60 @@ document.getElementById('translationOverlay').addEventListener('click', (e) => {
     }
 });
 
-// FIREWORKS CELEBRATION FUNCTIONS - RESTORED!
-const fireworkColors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
+// CONFETTI CELEBRATION FUNCTIONS
+const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
 
-function createFirework(x, y) {
-    const firework = document.createElement('div');
-    firework.classList.add('firework');
+function createConfetti(x, y) {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
     
-    firework.style.backgroundColor = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
-    firework.style.left = x + 'px';
-    firework.style.top = y + 'px';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
     
-    return firework;
+    if (Math.random() > 0.5) {
+        confetti.style.borderRadius = '50%';
+    }
+    
+    const size = Math.random() * 8 + 6;
+    confetti.style.width = size + 'px';
+    confetti.style.height = size + 'px';
+    
+    confetti.style.left = x + 'px';
+    confetti.style.top = y + 'px';
+    
+    return confetti;
 }
 
-function explodeFireworks() {
-    const container = document.getElementById('fireworksContainer');
+function explodeConfetti() {
+    const container = document.getElementById('confettiContainer');
     
-    // Create multiple firework bursts
-    for (let burst = 0; burst < 5; burst++) {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    // Create 2 waves of confetti with no pause between them
+    for (let wave = 0; wave < 2; wave++) {
         setTimeout(() => {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight * 0.6;
-            
-            for (let i = 0; i < 8; i++) {
-                const firework = createFirework(x, y);
-                container.appendChild(firework);
-                
-                requestAnimationFrame(() => {
-                    firework.classList.add('active');
-                });
-                
+            for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
-                    if (firework.parentNode) {
-                        firework.parentNode.removeChild(firework);
-                    }
-                }, 2000);
+                    const angle = (i / 100) * Math.PI * 2;
+                    const radius = Math.random() * 100;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    
+                    const confetti = createConfetti(x, y);
+                    container.appendChild(confetti);
+                    
+                    requestAnimationFrame(() => {
+                        confetti.classList.add('active');
+                    });
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            confetti.parentNode.removeChild(confetti);
+                        }
+                    }, 3500);
+                }, i * 10);
             }
-        }, burst * 400);
+        }, wave * 1000); // Second wave starts after just 1 second
     }
 }
 
@@ -980,7 +1020,7 @@ document.getElementById('checkButton').addEventListener('click', () => {
     
     if (isCorrect) {
         incrementCorrectAnswers();
-        explodeFireworks();
+        explodeConfetti();
         
         // Show translation overlay after a short delay
         setTimeout(() => {
@@ -999,4 +1039,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
