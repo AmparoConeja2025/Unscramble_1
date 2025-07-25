@@ -56,6 +56,51 @@
     -webkit-touch-callout: none;
 }
 
+/* UNDO BUTTON - Green Circular Design */
+.undo-btn {
+    position: absolute;
+    top: 75px;
+    right: 15px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    opacity: 0.5;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.undo-btn.active {
+    opacity: 1;
+    transform: scale(1);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.undo-btn:hover.active {
+    background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+    transform: translateY(-2px) scale(1);
+}
+
+.undo-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #9ca3af;
+}
+
 /* LESSON NAVIGATION - RESTORED TO PROMINENT POSITION */
 .lesson-nav {
     position: absolute;
@@ -1211,4 +1256,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>9
+</html>1
