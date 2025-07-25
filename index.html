@@ -324,6 +324,7 @@
         height: 12px !important;
     }
 }
+
 .try-again-text {
     position: fixed;
     top:55%;
@@ -355,6 +356,108 @@
     70% { transform: translate(-50%, -50%) scale(1.01) rotate(1deg); }
     80% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
     100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+/* TRANSLATION OVERLAY STYLES - NEW! */
+.translation-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 1002;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-align: center;
+    min-width: 350px;
+    max-width: 90vw;
+}
+
+.translation-overlay.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.translation-overlay.hide {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.translation-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.translation-content {
+    margin-bottom: 25px;
+}
+
+.translation-english {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.translation-spanish {
+    font-size: 20px;
+    color: #dcfce7;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.translation-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.translation-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Mobile optimization for translation overlay */
+@media screen and (max-width: 1200px) {
+    .translation-overlay {
+        min-width: 300px !important;
+        padding: 25px 30px !important;
+        margin: 0 20px !important;
+    }
+    
+    .translation-header {
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .translation-english {
+        font-size: 18px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .translation-spanish {
+        font-size: 16px !important;
+    }
+    
+    .translation-close-btn {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+    }
 }
 
 /* ========================================== */
@@ -486,8 +589,18 @@
 <!-- TRY AGAIN ANIMATION ELEMENT -->
 <div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
 
+<!-- TRANSLATION OVERLAY - NEW! -->
+<div class="translation-overlay" id="translationOverlay">
+    <div class="translation-header">🎉 Perfect! 🎉</div>
+    <div class="translation-content">
+        <div class="translation-english" id="translationEnglish"></div>
+        <div class="translation-spanish" id="translationSpanish"></div>
+    </div>
+    <button class="translation-close-btn" id="translationCloseBtn">Continue Learning</button>
+</div>
+
 <script>
-// LESSON DATA STRUCTURE
+// LESSON DATA STRUCTURE WITH SPANISH TRANSLATIONS - UPDATED!
 const lessons = [
     {
         id: 1,
@@ -495,7 +608,9 @@ const lessons = [
         correctOrder: ["I'm", "learning", "to", "speak", "English"],
         difficulty: "easy",
         adamAudio: "Audio/learning-english-liam.mp3",
-        jessicaAudio: "Audio/learning-english-jes.mp3"
+        jessicaAudio: "Audio/learning-english-jes.mp3",
+        english: "I'm learning to speak English",
+        spanish: "Estoy aprendiendo a hablar inglés"
     },
     {
         id: 2, 
@@ -503,7 +618,9 @@ const lessons = [
         correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
         difficulty: "medium",
         adamAudio: "Audio/hope-nice-day-liam.mp3",
-        jessicaAudio: "Audio/hope-nice-day-jes.mp3"
+        jessicaAudio: "Audio/hope-nice-day-jes.mp3",
+        english: "I hope you have a nice day",
+        spanish: "Espero que tengas un buen día"
     },
     {
         id: 3,
@@ -511,7 +628,9 @@ const lessons = [
         correctOrder: ["Nice", "to", "meet", "you"], 
         difficulty: "easy",
         adamAudio: "Audio/nice-to-meet-liam.mp3",
-        jessicaAudio: "Audio/nice-to-meet-jes.mp3"
+        jessicaAudio: "Audio/nice-to-meet-jes.mp3",
+        english: "Nice to meet you",
+        spanish: "Mucho gusto conocerte"
     }
 ];
 
@@ -589,6 +708,38 @@ function incrementCorrectAnswers() {
     correctAnswers++;
     updateProgress();
 }
+
+// TRANSLATION OVERLAY FUNCTIONS - NEW!
+function showTranslationOverlay(lesson) {
+    const overlay = document.getElementById('translationOverlay');
+    const englishEl = document.getElementById('translationEnglish');
+    const spanishEl = document.getElementById('translationSpanish');
+    
+    englishEl.textContent = lesson.english;
+    spanishEl.textContent = lesson.spanish;
+    
+    overlay.classList.add('show');
+}
+
+function hideTranslationOverlay() {
+    const overlay = document.getElementById('translationOverlay');
+    overlay.classList.remove('show');
+    overlay.classList.add('hide');
+    
+    setTimeout(() => {
+        overlay.classList.remove('hide');
+    }, 500);
+}
+
+// TRANSLATION OVERLAY EVENT LISTENERS - NEW!
+document.getElementById('translationCloseBtn').addEventListener('click', hideTranslationOverlay);
+
+// Close overlay when clicking outside of it
+document.getElementById('translationOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'translationOverlay') {
+        hideTranslationOverlay();
+    }
+});
 
 // CONFETTI CELEBRATION FUNCTIONS
 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#10ac84', '#ee5a6f'];
@@ -826,7 +977,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
     loadLesson(currentLessonIndex); // Reload current lesson
 });
 
-// CHECK ANSWER BUTTON
+// CHECK ANSWER BUTTON WITH TRANSLATION OVERLAY - UPDATED!
 document.getElementById('checkButton').addEventListener('click', () => {
     const dropZone = document.getElementById('dropZone');
     const droppedWords = Array.from(dropZone.children);
@@ -841,8 +992,13 @@ document.getElementById('checkButton').addEventListener('click', () => {
     const isCorrect = userOrder.every((word, index) => word === lesson.correctOrder[index]);
     
     if (isCorrect) {
-        incrementCorrectAnswers(); // Add this line!
+        incrementCorrectAnswers();
         explodeConfetti();
+        
+        // Show translation overlay after a short delay
+        setTimeout(() => {
+            showTranslationOverlay(lesson);
+        }, 1000);
     } else {
         showTryAgain();
     }
@@ -856,4 +1012,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>9
+</html>1
