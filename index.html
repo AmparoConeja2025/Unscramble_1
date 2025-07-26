@@ -1139,6 +1139,16 @@ function setupInteraction() {
     }
 }
 
+// FISHER-YATES SHUFFLE - TRUE RANDOMIZATION
+function fisherYatesShuffle(array) {
+    const shuffled = [...array]; // Create a copy
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+    }
+    return shuffled;
+}
+
 // LESSON MANAGEMENT - SIMPLIFIED
 function updateNavigationButtons() {
     const prevBtn = document.getElementById('prevBtn');
@@ -1162,8 +1172,8 @@ function loadLesson(index) {
     canUndo = false;
     updateUndoButton();
     
-    // Create scrambled words
-    const scrambled = [...lesson.sentence].sort(() => Math.random() - 0.5);
+    // Create scrambled words using proper Fisher-Yates shuffle
+    const scrambled = fisherYatesShuffle(lesson.sentence);
     
     scrambled.forEach((word, wordIndex) => {
         const span = document.createElement('span');
@@ -1256,4 +1266,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
