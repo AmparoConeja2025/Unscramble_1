@@ -1268,8 +1268,25 @@ function loadLesson(index) {
         wordBank.appendChild(span);
     });
     
+    // Set audio sources
     document.getElementById('adamAudio').src = lesson.adamAudio;
     document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
+    
+    // AVATAR SWITCHING BASED ON CATEGORY
+    const adamImage = document.getElementById('adamImage');
+    const jessicaImage = document.getElementById('jessicaImage');
+    
+    if (lesson.category === 'panic') {
+        adamImage.src = 'Image/john.png';
+        jessicaImage.src = 'Image/becky.png';
+        adamImage.alt = 'John';
+        jessicaImage.alt = 'Becky';
+    } else {
+        adamImage.src = 'Image/adam.png';
+        jessicaImage.src = 'Image/jessica.png';
+        adamImage.alt = 'Adam';
+        jessicaImage.alt = 'Jessica';
+    }
     
     updateNavigationButtons();
     setupInteraction();
@@ -1378,4 +1395,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>4
+</html>5
