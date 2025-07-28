@@ -392,18 +392,6 @@
     text-align: center;
     min-width: 350px;
     max-width: 90vw;
-  /* CATEGORY-SPECIFIC OVERLAY COLORS */
-.translation-overlay-panic {
-    background: #ff6b35 !important;
-}
-
-.translation-overlay-practice {
-    background: #6c5ce7 !important;
-}
-
-.translation-overlay-default {
-background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-}
 }
 
 .translation-overlay-show {
@@ -679,13 +667,13 @@ background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
 </div>
 
 <script>
-// LESSON DATA - COMPLETELY FLAT STRUCTURE WITH CATEGORIES
+// LESSON DATA - COMPLETELY FLAT STRUCTURE
 const lessons = [
     {
         id: 1,
         sentence: ["I'm", "learning", "to", "speak", "English"],
         correctOrder: ["I'm", "learning", "to", "speak", "English"],
-        category: "default",
+        difficulty: "easy",
         adamAudio: "Audio/learning-english-liam.mp3",
         jessicaAudio: "Audio/learning-english-jes.mp3",
         english: "I'm learning to speak English.",
@@ -695,7 +683,7 @@ const lessons = [
         id: 2, 
         sentence: ["I", "hope", "you", "have", "a", "nice", "day"],
         correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
-        category: "default",
+        difficulty: "medium",
         adamAudio: "Audio/hope-nice-day-liam.mp3",
         jessicaAudio: "Audio/hope-nice-day-jes.mp3",
         english: "I hope you have a nice day.",
@@ -705,7 +693,7 @@ const lessons = [
         id: 3,
         sentence: ["Nice", "to", "meet", "you"],
         correctOrder: ["Nice", "to", "meet", "you"], 
-        category: "default",
+        difficulty: "easy",
         adamAudio: "Audio/nice-to-meet-liam.mp3",
         jessicaAudio: "Audio/nice-to-meet-jes.mp3",
         english: "Nice to meet you.",
@@ -715,7 +703,7 @@ const lessons = [
         id: 4,
         sentence: ["Sorry", "I", "don't", "understand"],
         correctOrder: ["Sorry", "I", "don't", "understand"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-sorry-dont-understand.mp3",
         jessicaAudio: "Audio/panic-jessica-sorry-dont-understand.mp3",
         english: "Sorry I don't understand.",
@@ -725,7 +713,7 @@ const lessons = [
         id: 5,
         sentence: ["Can", "you", "repeat", "that", "please"],
         correctOrder: ["Can", "you", "repeat", "that", "please"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-repeat-please.mp3",
         jessicaAudio: "Audio/panic-jessica-repeat-please.mp3",
         english: "Can you repeat that please?",
@@ -735,7 +723,7 @@ const lessons = [
         id: 6,
         sentence: ["Can", "you", "speak", "slower", "please"],
         correctOrder: ["Can", "you", "speak", "slower", "please"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-speak-slowly.mp3",
         jessicaAudio: "Audio/panic-jessica-speak-slowly.mp3",
         english: "Can you speak slower please?",
@@ -745,7 +733,7 @@ const lessons = [
         id: 7,
         sentence: ["I'm", "still", "learning", "English"],
         correctOrder: ["I'm", "still", "learning", "English"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-still-learning.mp3",
         jessicaAudio: "Audio/panic-jessica-still-learning.mp3",
         english: "I'm still learning English.",
@@ -755,7 +743,7 @@ const lessons = [
         id: 8,
         sentence: ["What", "does", "that", "mean"],
         correctOrder: ["What", "does", "that", "mean"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-what-does-mean.mp3",
         jessicaAudio: "Audio/panic-jessica-what-does-mean.mp3",
         english: "What does that mean?",
@@ -765,7 +753,7 @@ const lessons = [
         id: 9,
         sentence: ["Can", "you", "say", "that", "again"],
         correctOrder: ["Can", "you", "say", "that", "again"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-say-again.mp3",
         jessicaAudio: "Audio/panic-jessica-say-again.mp3",
         english: "Can you say that again?",
@@ -775,7 +763,7 @@ const lessons = [
         id: 10,
         sentence: ["I", "didn't", "get", "that"],
         correctOrder: ["I", "didn't", "get", "that"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-didnt-get-that.mp3",
         jessicaAudio: "Audio/panic-jessica-didnt-get-that.mp3",
         english: "I didn't get that.",
@@ -785,7 +773,7 @@ const lessons = [
         id: 11,
         sentence: ["Can", "you", "help", "me", "understand", "this"],
         correctOrder: ["Can", "you", "help", "me", "understand", "this"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-help-understand.mp3",
         jessicaAudio: "Audio/panic-jessica-help-understand.mp3",
         english: "Can you help me understand this?",
@@ -795,7 +783,7 @@ const lessons = [
         id: 12,
         sentence: ["I'm", "not", "sure", "what", "you", "mean"],
         correctOrder: ["I'm", "not", "sure", "what", "you", "mean"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-not-sure-mean.mp3",
         jessicaAudio: "Audio/panic-jessica-not-sure-mean.mp3",
         english: "I'm not sure what you mean.",
@@ -805,7 +793,7 @@ const lessons = [
         id: 13,
         sentence: ["Can", "you", "explain", "that", "again"],
         correctOrder: ["Can", "you", "explain", "that", "again"],
-        category: "panic",
+        difficulty: "easy",
         adamAudio: "Audio/panic-adam-explain-again.mp3",
         jessicaAudio: "Audio/panic-jessica-explain-again.mp3",
         english: "Can you explain that again?",
@@ -815,7 +803,7 @@ const lessons = [
         id: 14,
         sentence: ["Hi,", "can", "I", "practice", "my", "English", "with", "you?"],
         correctOrder: ["Hi,", "can", "I", "practice", "my", "English", "with", "you?"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-hi-practice-english-with-you.mp3",
         jessicaAudio: "Audio/practice-jessica-hi-practice-english-with-you.mp3",
         english: "Hi, can I practice my English with you?",
@@ -825,17 +813,17 @@ const lessons = [
         id: 15,
         sentence: ["Excuse", "me,", "do", "you", "speak", "Spanish?"],
         correctOrder: ["Excuse", "me,", "do", "you", "speak", "Spanish?"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-excuse-me-speak-spanish.mp3",
         jessicaAudio: "Audio/practice-jessica-excuse-me-speak-spanish.mp3",
-        english: "Excuse me, do you speak Spanish?",
+        English: "Excuse me, do you speak Spanish?",
         spanish: "Disculpe, ¿hablas español?"
     },
     {
         id: 16,
         sentence: ["I", "need", "help", "with", "my", "English"],
         correctOrder: ["I", "need", "help", "with", "my", "English"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-need-help-with-english.mp3",
         jessicaAudio: "Audio/practice-jessica-need-help-with-english.mp3",
         english: "I need help with my English.",
@@ -845,7 +833,7 @@ const lessons = [
         id: 17,
         sentence: ["I", "need", "to", "practice", "my", "English"],
         correctOrder: ["I", "need", "to", "practice", "my", "English"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-need-practice-english.mp3",
         jessicaAudio: "Audio/practice-jessica-need-practice-english.mp3",
         english: "I need to practice my English.",
@@ -855,7 +843,7 @@ const lessons = [
         id: 18,
         sentence: ["Can", "I", "practice", "speaking", "English", "with", "you?"],
         correctOrder: ["Can", "I", "practice", "speaking", "English", "with", "you?"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-practice-speaking-english-with-you.mp3",
         jessicaAudio: "Audio/practice-jessica-practice-speaking-english-with-you.mp3",
         english: "Can I practice speaking English with you?",
@@ -865,7 +853,7 @@ const lessons = [
         id: 19,
         sentence: ["I'm", "new", "to", "speaking", "English"],
         correctOrder: ["I'm", "new", "to", "speaking", "English"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-new-to-speaking-english.mp3",
         jessicaAudio: "Audio/practice-jessica-new-to-speaking-english.mp3",
         english: "I'm new to speaking English.",
@@ -875,7 +863,7 @@ const lessons = [
         id: 20,
         sentence: ["I", "need", "to", "learn", "English"],
         correctOrder: ["I", "need", "to", "learn", "English"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-need-to-learn-english.mp3",
         jessicaAudio: "Audio/practice-jessica-need-to-learn-english.mp3",
         english: "I need to learn English.",
@@ -885,7 +873,7 @@ const lessons = [
         id: 21,
         sentence: ["Do", "you", "speak", "English?"],
         correctOrder: ["Do", "you", "speak", "English?"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam- do-you-speak-english.mp3",
         jessicaAudio: "Audio/practice-jessica- do-you-speak-english.mp3",
         english: "Do you speak English?",
@@ -895,7 +883,7 @@ const lessons = [
         id: 22,
         sentence: ["I'm", "trying", "hard", "to", "learn", "English"],
         correctOrder: ["I'm", "trying", "hard", "to", "learn", "English"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-trying-hard-learn-english.mp3",
         jessicaAudio: "Audio/practice-jessica-trying-hard-learn-english.mp3",
         english: "I'm trying hard to learn English.",
@@ -905,7 +893,7 @@ const lessons = [
         id: 23,
         sentence: ["Why", "is", "English", "so", "difficult?"],
         correctOrder: ["Why", "is", "English", "so", "difficult?"],
-        category: "practice",
+        difficulty: "easy",
         adamAudio: "Audio/practice-adam-why-english-so-difficult.mp3",
         jessicaAudio: "Audio/practice-jessica-why-english-so-difficult.mp3",
         english: "Why is English so difficult?",
@@ -1136,12 +1124,6 @@ function showTranslationOverlay(lesson) {
     
     englishEl.textContent = lesson.english;
     spanishEl.textContent = lesson.spanish;
-    
-    // Remove any existing category classes
-    overlay.classList.remove('translation-overlay-panic', 'translation-overlay-practice', 'translation-overlay-default');
-    
-    // Add the appropriate category class
-    overlay.classList.add(`translation-overlay-${lesson.category}`);
     
     overlay.classList.add('translation-overlay-show');
 }
@@ -1396,4 +1378,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>4
+</html>3
