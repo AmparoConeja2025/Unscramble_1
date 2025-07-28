@@ -258,7 +258,7 @@
     color: black;
     padding: 10px 18px;
     border-radius: 4px;
-    cursor: move;
+    cursor: pointer;
     user-select: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transition: all 0.2s ease;
@@ -1208,48 +1208,17 @@ function addTapToAdd() {
     });
 }
 
-// DRAG AND DROP FUNCTIONALITY
-function addDragAndDrop() {
-    const wordTiles = document.querySelectorAll('.word-tile');
-    const dropZone = document.getElementById('dropZone');
-    
-    wordTiles.forEach(tile => {
-        tile.setAttribute('draggable', 'true');
-        
-        tile.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', tile.id);
-        });
-    });
-    
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-    
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData('text/plain');
-        const draggedEl = document.getElementById(id);
-        if (draggedEl && draggedEl.parentElement.id === 'wordBank') {
-            dropZone.appendChild(draggedEl);
-            
-            lastAddedWord = draggedEl;
-            canUndo = true;
-            updateUndoButton();
-        }
-    });
-}
+
 
 // SETUP INTERACTION
 function setupInteraction() {
+    addTapToAdd();
+    
+    // Apply mobile classes to word tiles if on mobile
     if (isMobileDevice()) {
-        addTapToAdd();
-        
-        // Apply mobile classes to word tiles
         document.querySelectorAll('.word-tile').forEach(tile => {
             tile.classList.add('mobile-landscape-word-tile');
         });
-    } else {
-        addDragAndDrop();
     }
 }
 
@@ -1409,4 +1378,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
