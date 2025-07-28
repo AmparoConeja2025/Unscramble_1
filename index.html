@@ -11,12 +11,14 @@
 
 <style>
 
-/* FLAT STRUCTURE CSS - NO NESTING! */
+/* FLAT STRUCTURE CSS - ZERO NESTING! */
+
+/* DROP SHADOW UTILITY */
 .drop-shadow-custom {
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
-/* RESET BUTTON - Top Left */
+/* RESET BUTTON */
 .reset-btn {
     position: absolute;
     top: 15px;
@@ -36,7 +38,7 @@
     -webkit-touch-callout: none;
 }
 
-/* CHECK BUTTON - Top Right */
+/* CHECK BUTTON */
 .check-btn {
     position: absolute;
     top: 15px;
@@ -56,7 +58,7 @@
     -webkit-touch-callout: none;
 }
 
-/* UNDO BUTTON - Green Circular Design */
+/* UNDO BUTTON */
 .undo-btn {
     position: absolute;
     top: 85px;
@@ -84,24 +86,24 @@
     justify-content: center;
 }
 
-.undo-btn.active {
+.undo-btn-active {
     opacity: 1;
     transform: scale(1);
     background: linear-gradient(135deg, #059669 0%, #047857 100%);
 }
 
-.undo-btn:hover.active {
+.undo-btn-hover-active {
     background: linear-gradient(135deg, #047857 0%, #065f46 100%);
     transform: translateY(-2px) scale(1);
 }
 
-.undo-btn:disabled {
+.undo-btn-disabled {
     opacity: 0.3;
     cursor: not-allowed;
     background: #9ca3af;
 }
 
-/* LESSON NAVIGATION - RESTORED TO PROMINENT POSITION */
+/* LESSON NAVIGATION */
 .lesson-nav {
     position: absolute;
     top: 95px;
@@ -128,12 +130,12 @@
     -webkit-touch-callout: none;
 }
 
-.nav-btn:hover {
+.nav-btn-hover {
     background: #60a5fa;
     transform: translateY(-1px);
 }
 
-.nav-btn:disabled {
+.nav-btn-disabled {
     background: #9ca3af;
     cursor: not-allowed;
     transform: none;
@@ -148,12 +150,23 @@
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
-/* LESSON DIFFICULTY BADGES */
-.difficulty-easy { background: #d1fae5; color: #065f46; }
-.difficulty-medium { background: #fef3c7; color: #92400e; }
-.difficulty-hard { background: #fecaca; color: #991b1b; }
+/* DIFFICULTY BADGES */
+.difficulty-easy { 
+    background: #d1fae5; 
+    color: #065f46; 
+}
 
-/* adam CHARACTER */
+.difficulty-medium { 
+    background: #fef3c7; 
+    color: #92400e; 
+}
+
+.difficulty-hard { 
+    background: #fecaca; 
+    color: #991b1b; 
+}
+
+/* ADAM CHARACTER */
 .adam-image {
     position: absolute;
     top: 96px;
@@ -176,11 +189,11 @@
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
-.adam-btn:hover {
+.adam-btn-hover {
     background: #60a5fa;
 }
 
-/* jessica CHARACTER */
+/* JESSICA CHARACTER */
 .jessica-image {
     position: absolute;
     top: 96px;
@@ -203,7 +216,7 @@
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
-.jessica-btn:hover {
+.jessica-btn-hover {
     background: #f472b6;
 }
 
@@ -252,20 +265,18 @@
     font-size: 16px;
 }
 
-/* MOBILE TAP FEEDBACK */
-.word-tile:active {
+.word-tile-active {
     transform: scale(0.95);
     opacity: 0.8;
 }
 
-/* TAP TO ADD ANIMATION */
 .word-moving {
     transition: all 0.3s ease;
     transform: scale(1.1);
     z-index: 100;
 }
 
-/* YOUR BELOVED FIREWORKS STYLES - PERFECTLY RESTORED! */
+/* FIREWORKS CONTAINER */
 .fireworks-container {
     position: fixed;
     top: 0;
@@ -283,35 +294,12 @@
     opacity: 0;
 }
 
-.firework.active {
+.firework-active {
     opacity: 1;
     animation: firework-explosion 3s ease-out forwards;
 }
 
-@keyframes firework-explosion {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-        box-shadow: 0 0 6px currentColor;
-    }
-    20% {
-        transform: translate(var(--dx), var(--dy)) scale(1.2);
-        opacity: 1;
-        box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
-    }
-    50% {
-        transform: translate(calc(var(--dx) * 2), calc(var(--dy) * 2)) scale(0.8);
-        opacity: 0.8;
-        box-shadow: 0 0 8px currentColor;
-    }
-    100% {
-        transform: translate(calc(var(--dx) * 3), calc(var(--dy) * 3)) scale(0.2);
-        opacity: 0;
-        box-shadow: 0 0 2px currentColor;
-    }
-}
-
-/* PROGRESS TRACKING STYLES - MOBILE FIRST - CLEAN VERSION */
+/* PROGRESS TRACKING */
 .progress-area {
     position: absolute;
     top: 540px;
@@ -366,34 +354,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* MOBILE LANDSCAPE OPTIMIZATION */
-@media screen and (max-width: 1200px) and (orientation: landscape) {
-    .progress-area {
-        top: 200px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 280px !important;
-        padding: 15px 0 !important;
-    }
-    
-    .level-badge {
-        font-size: 14px !important;
-        padding: 6px 16px !important;
-        margin-bottom: 10px !important;
-    }
-    
-    .progress-label {
-        font-size: 14px !important;
-    }
-    
-    .progress-bar-container {
-        height: 12px !important;
-    }
-}
-
+/* TRY AGAIN TEXT */
 .try-again-text {
     position: fixed;
-    top:55%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     font-size: 2em;
@@ -405,26 +369,13 @@
     transition: all 0.4s ease;
 }
 
-.try-again-text.show {
+.try-again-text-show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     animation: gentle-shake 0.8s ease;
 }
 
-@keyframes gentle-shake {
-    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    10% { transform: translate(-50%, -50%) scale(1.05) rotate(-2deg); }
-    20% { transform: translate(-50%, -50%) scale(1) rotate(2deg); }
-    30% { transform: translate(-50%, -50%) scale(1.02) rotate(-1deg); }
-    40% { transform: translate(-50%, -50%) scale(1) rotate(1deg); }
-    50% { transform: translate(-50%, -50%) scale(1.02) rotate(0deg); }
-    60% { transform: translate(-50%, -50%) scale(1) rotate(-1deg); }
-    70% { transform: translate(-50%, -50%) scale(1.01) rotate(1deg); }
-    80% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-}
-
-/* TRANSLATION OVERLAY STYLES - PERFECT VERSION! */
+/* TRANSLATION OVERLAY */
 .translation-overlay {
     position: fixed;
     top: 50%;
@@ -443,12 +394,12 @@
     max-width: 90vw;
 }
 
-.translation-overlay.show {
+.translation-overlay-show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
 
-.translation-overlay.hide {
+.translation-overlay-hide {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
 }
@@ -494,113 +445,158 @@
     font-size: 16px;
 }
 
-.translation-close-btn:hover {
+.translation-close-btn-hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
 }
 
-/* Mobile optimization for translation overlay */
-@media screen and (max-width: 1200px) {
-    .translation-overlay {
-        min-width: 300px !important;
-        padding: 25px 30px !important;
-        margin: 0 20px !important;
+/* MOBILE LANDSCAPE CLASSES - FLAT OVERRIDES */
+.mobile-landscape-adam-image {
+    width: 112px;
+    top: 58%;
+    right: 40px;
+}
+
+.mobile-landscape-jessica-image {
+    width: 112px;
+    top: 56%;
+    left: 40px;
+}
+
+.mobile-landscape-adam-btn {
+    top: 250px;
+    right: 80px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.mobile-landscape-jessica-btn {
+    top: 250px;
+    left: 80px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.mobile-landscape-drop-zone {
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 250px;
+    min-height: 50px;
+    padding: 12px 16px;
+}
+
+.mobile-landscape-word-bank {
+    top: 145px;
+    gap: 8px;
+    max-width: 95%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.mobile-landscape-word-tile {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.mobile-landscape-lesson-nav {
+    top: 20px;
+    gap: 8px;
+}
+
+.mobile-landscape-nav-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.mobile-landscape-progress-area {
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    padding: 15px 0;
+}
+
+.mobile-landscape-level-badge {
+    font-size: 14px;
+    padding: 6px 16px;
+    margin-bottom: 10px;
+}
+
+.mobile-landscape-progress-label {
+    font-size: 14px;
+}
+
+.mobile-landscape-progress-bar-container {
+    height: 12px;
+}
+
+.mobile-landscape-translation-overlay {
+    min-width: 300px;
+    padding: 25px 30px;
+    margin: 0 20px;
+}
+
+.mobile-landscape-translation-header {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.mobile-landscape-translation-english {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.mobile-landscape-translation-spanish {
+    font-size: 18px;
+}
+
+.mobile-landscape-translation-close-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* ANIMATIONS - FLAT KEYFRAMES */
+@keyframes firework-explosion {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+        box-shadow: 0 0 6px currentColor;
     }
-    
-    .translation-header {
-        font-size: 20px !important;
-        margin-bottom: 15px !important;
+    20% {
+        transform: translate(var(--dx), var(--dy)) scale(1.2);
+        opacity: 1;
+        box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
     }
-    
-    .translation-english {
-        font-size: 20px !important;
-        margin-bottom: 12px !important;
+    50% {
+        transform: translate(calc(var(--dx) * 2), calc(var(--dy) * 2)) scale(0.8);
+        opacity: 0.8;
+        box-shadow: 0 0 8px currentColor;
     }
-    
-    .translation-spanish {
-        font-size: 18px !important;
-    }
-    
-    .translation-close-btn {
-        padding: 10px 20px !important;
-        font-size: 14px !important;
+    100% {
+        transform: translate(calc(var(--dx) * 3), calc(var(--dy) * 3)) scale(0.2);
+        opacity: 0;
+        box-shadow: 0 0 2px currentColor;
     }
 }
 
-/* ========================================== */
-/* MOBILE LANDSCAPE OPTIMIZATION */
-/* ========================================== */
-@media screen and (max-width: 1200px) and (orientation: landscape) {
-    
-    /* Smaller character images */
-    .adam-image {
-        width: 112px !important;
-        top: 58% !important;
-        right: 40px !important;
-    }
-    
-    .jessica-image {
-        width: 112px !important;
-        top: 56% !important;
-        left: 40px !important;
-    }
-    
-    /* Smaller, repositioned buttons */
-    .adam-btn {
-        top: 250px !important;
-        right: 80px !important;
-        padding: 6px 12px !important;
-        font-size: 14px !important;
-    }
-    
-    .jessica-btn {
-        top: 250px !important;
-        left: 80px !important;
-        padding: 6px 12px !important;
-        font-size: 14px !important;
-    }
-    
-    /* Compact drop zone */
-    .drop-zone {
-        top: 80px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        min-width: 250px !important;
-        min-height: 50px !important;
-        padding: 12px 16px !important;
-    }
-    
-    /* Fixed word bank position - stays put regardless of content */
-    .word-bank {
-        top: 145px !important;
-        gap: 8px !important;
-        max-width: 95% !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        min-height: 60px !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    
-    /* Bigger word tiles on mobile */
-    .word-tile {
-        padding: 8px 16px !important;
-        font-size: 16px !important;
-        cursor: pointer !important;
-        box-shadow: none !important;
-    }
-    
-    /* Mobile lesson navigation - restored */
-    .lesson-nav {
-        top: 20px !important;
-        gap: 8px !important;
-    }
-    
-    .nav-btn {
-        padding: 6px 12px !important;
-        font-size: 14px !important;
-    }
+@keyframes gentle-shake {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    10% { transform: translate(-50%, -50%) scale(1.05) rotate(-2deg); }
+    20% { transform: translate(-50%, -50%) scale(1) rotate(2deg); }
+    30% { transform: translate(-50%, -50%) scale(1.02) rotate(-1deg); }
+    40% { transform: translate(-50%, -50%) scale(1) rotate(1deg); }
+    50% { transform: translate(-50%, -50%) scale(1.02) rotate(0deg); }
+    60% { transform: translate(-50%, -50%) scale(1) rotate(-1deg); }
+    70% { transform: translate(-50%, -50%) scale(1.01) rotate(1deg); }
+    80% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
 }
 
 </style>
@@ -611,20 +607,20 @@
 <!-- CHECK ANSWER BUTTON -->
 <button class="check-btn" id="checkButton">Check Answer</button>
 
-<!-- UNDO BUTTON - Green Circular Design -->
+<!-- UNDO BUTTON -->
 <button class="undo-btn" id="undoButton" disabled>↶</button>
 
-<!-- LESSON NAVIGATION - RESTORED TO PROMINENT POSITION -->
+<!-- LESSON NAVIGATION -->
 <div class="lesson-nav">
     <button class="nav-btn" id="prevBtn">← Previous</button>
     <button class="nav-btn" id="nextBtn">Next →</button>
 </div>
 
-<!-- adam CHARACTER -->
+<!-- ADAM CHARACTER -->
 <img src="Image/adam.png" alt="Adam" class="adam-image" id="adamImage" style="cursor: pointer;" />
 <audio id="adamAudio"></audio>
 
-<!-- jessica CHARACTER -->
+<!-- JESSICA CHARACTER -->
 <img src="Image/jessica.png" alt="Jessica" class="jessica-image" id="jessicaImage" style="cursor: pointer;" />
 <audio id="jessicaAudio"></audio>
 
@@ -654,13 +650,13 @@
     </div>
 </div>
 
-<!-- FIREWORKS CELEBRATION ELEMENTS - RESTORED! -->
+<!-- FIREWORKS CELEBRATION ELEMENTS -->
 <div class="fireworks-container" id="fireworksContainer"></div>
 
 <!-- TRY AGAIN ANIMATION ELEMENT -->
 <div class="try-again-text" id="tryAgainText">🤔 Try Again! 💭</div>
 
-<!-- TRANSLATION OVERLAY - PERFECT VERSION! -->
+<!-- TRANSLATION OVERLAY -->
 <div class="translation-overlay" id="translationOverlay">
     <div class="translation-header">🎉 Perfect! 🎉</div>
     <div class="translation-content">
@@ -671,7 +667,7 @@
 </div>
 
 <script>
-// LESSON DATA STRUCTURE WITH SPANISH TRANSLATIONS - EXPANDED WITH PANIC BUTTONS & PRACTICE!
+// LESSON DATA - COMPLETELY FLAT STRUCTURE
 const lessons = [
     {
         id: 1,
@@ -703,7 +699,6 @@ const lessons = [
         english: "Nice to meet you.",
         spanish: "Gusto en conocerte."
     },
-    // PANIC BUTTONS CATEGORY - CONVERSATION SURVIVAL TOOLKIT!
     {
         id: 4,
         sentence: ["Sorry", "I", "don't", "understand"],
@@ -804,7 +799,6 @@ const lessons = [
         english: "Can you explain that again?",
         spanish: "¿Puedes explicar eso de nuevo?"
     },
-    // PRACTICE CATEGORY - CONVERSATION STARTERS!
     {
         id: 14,
         sentence: ["Hi,", "can", "I", "practice", "my", "English", "with", "you?"],
@@ -822,7 +816,7 @@ const lessons = [
         difficulty: "easy",
         adamAudio: "Audio/practice-adam-excuse-me-speak-spanish.mp3",
         jessicaAudio: "Audio/practice-jessica-excuse-me-speak-spanish.mp3",
-        english: "Excuse me, do you speak Spanish?",
+        English: "Excuse me, do you speak Spanish?",
         spanish: "Disculpe, ¿hablas español?"
     },
     {
@@ -907,12 +901,14 @@ const lessons = [
     }
 ];
 
+// GLOBAL STATE VARIABLES - FLAT STRUCTURE
 let currentLessonIndex = 0;
-
-// PROGRESS TRACKING SYSTEM
 let correctAnswers = 0;
 let currentLevel = 1;
+let lastAddedWord = null;
+let canUndo = false;
 
+// LEVEL TARGETS - FLAT ARRAY
 const levelTargets = [
     { level: 1, target: 10, next: 2 },
     { level: 2, target: 25, next: 3 },
@@ -920,51 +916,71 @@ const levelTargets = [
     { level: 4, target: 100, next: "MAX" }
 ];
 
-const motivationMessages = [
-    "Start your learning journey! 🌟",
-    "Great progress! Keep it up! 💪",
-    "You're doing amazing! 🚀",
-    "Almost there! Don't give up! 🔥",
-    "Fantastic work! 🎯",
-    "You're on fire! 🌟",
-    "Incredible progress! 💫",
-    "Learning master! 🏆"
-];
+// FIREWORK COLORS - FLAT ARRAY
+const fireworkColors = ['#FFD700', '#FF6B47', '#4ECDC4', '#45B7D1', '#FF69B4', '#32CD32', '#FF4500', '#9370DB', '#00CED1', '#FFB6C1'];
 
+// DEVICE DETECTION FUNCTION
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (window.innerWidth <= 1200 && window.matchMedia("(orientation: landscape)").matches);
+}
+
+// MOBILE CLASS APPLICATION
+function applyMobileClasses() {
+    if (!isMobileDevice()) return;
+    
+    document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
+    document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
+    document.getElementById('dropZone').classList.add('mobile-landscape-drop-zone');
+    document.getElementById('wordBank').classList.add('mobile-landscape-word-bank');
+    document.querySelector('.lesson-nav').classList.add('mobile-landscape-lesson-nav');
+    document.querySelector('.progress-area').classList.add('mobile-landscape-progress-area');
+    document.querySelector('.level-badge').classList.add('mobile-landscape-level-badge');
+    document.querySelector('.progress-label').classList.add('mobile-landscape-progress-label');
+    document.querySelector('.progress-bar-container').classList.add('mobile-landscape-progress-bar-container');
+    document.getElementById('translationOverlay').classList.add('mobile-landscape-translation-overlay');
+    document.querySelector('.translation-header').classList.add('mobile-landscape-translation-header');
+    document.querySelector('.translation-english').classList.add('mobile-landscape-translation-english');
+    document.querySelector('.translation-spanish').classList.add('mobile-landscape-translation-spanish');
+    document.querySelector('.translation-close-btn').classList.add('mobile-landscape-translation-close-btn');
+    
+    // Apply mobile classes to navigation buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.add('mobile-landscape-nav-btn'));
+}
+
+// PROGRESS UPDATE FUNCTION
 function updateProgress() {
     const currentLevelData = levelTargets.find(l => l.level === currentLevel);
     const currentLevelEl = document.getElementById('currentLevel');
     const progressTextEl = document.getElementById('progressText');
     const progressBarEl = document.getElementById('progressBar');
     
-    // Update displays
     currentLevelEl.textContent = currentLevel;
     
     if (currentLevelData.next === "MAX") {
         progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
         progressBarEl.style.width = "100%";
-    } else {
-        // Calculate progress within current level
-        const previousLevelTarget = levelTargets.find(l => l.level === currentLevel - 1)?.target || 0;
-        const progressInCurrentLevel = correctAnswers - previousLevelTarget;
-        const currentLevelRange = currentLevelData.target - previousLevelTarget;
-        
-        progressTextEl.textContent = `${progressInCurrentLevel}/${currentLevelRange} to Level ${currentLevelData.next}`;
-        
-        const progressPercent = (progressInCurrentLevel / currentLevelRange) * 100;
-        progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
+        return;
     }
     
-    // Check for level up
+    const previousLevelTarget = levelTargets.find(l => l.level === currentLevel - 1)?.target || 0;
+    const progressInCurrentLevel = correctAnswers - previousLevelTarget;
+    const currentLevelRange = currentLevelData.target - previousLevelTarget;
+    
+    progressTextEl.textContent = `${progressInCurrentLevel}/${currentLevelRange} to Level ${currentLevelData.next}`;
+    
+    const progressPercent = (progressInCurrentLevel / currentLevelRange) * 100;
+    progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
+    
     if (correctAnswers >= currentLevelData.target && currentLevelData.next !== "MAX") {
         levelUp();
     }
 }
 
+// LEVEL UP FUNCTION
 function levelUp() {
     currentLevel++;
     
-    // Level up celebration
     const levelBadge = document.querySelector('.level-badge');
     levelBadge.style.transform = 'scale(1.2)';
     levelBadge.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%)';
@@ -977,46 +993,52 @@ function levelUp() {
     updateProgress();
 }
 
+// INCREMENT CORRECT ANSWERS
 function incrementCorrectAnswers() {
     correctAnswers++;
     updateProgress();
 }
 
-// TRANSLATION OVERLAY FUNCTIONS - NEW!
-function showTranslationOverlay(lesson) {
-    const overlay = document.getElementById('translationOverlay');
-    const englishEl = document.getElementById('translationEnglish');
-    const spanishEl = document.getElementById('translationSpanish');
+// UNDO BUTTON UPDATE
+function updateUndoButton() {
+    const undoBtn = document.getElementById('undoButton');
+    undoBtn.classList.remove('undo-btn-active');
     
-    englishEl.textContent = lesson.english;
-    spanishEl.textContent = lesson.spanish;
-    
-    overlay.classList.add('show');
-}
-
-function hideTranslationOverlay() {
-    const overlay = document.getElementById('translationOverlay');
-    overlay.classList.remove('show');
-    overlay.classList.add('hide');
-    
-    setTimeout(() => {
-        overlay.classList.remove('hide');
-    }, 500);
-}
-
-// TRANSLATION OVERLAY EVENT LISTENERS - NEW!
-document.getElementById('translationCloseBtn').addEventListener('click', hideTranslationOverlay);
-
-// Close overlay when clicking outside of it
-document.getElementById('translationOverlay').addEventListener('click', (e) => {
-    if (e.target.id === 'translationOverlay') {
-        hideTranslationOverlay();
+    if (canUndo && lastAddedWord) {
+        undoBtn.disabled = false;
+        undoBtn.classList.add('undo-btn-active');
+    } else {
+        undoBtn.disabled = true;
     }
-});
+}
 
-// YOUR BELOVED FIREWORKS FUNCTIONS - PERFECTLY RESTORED!
-const fireworkColors = ['#FFD700', '#FF6B47', '#4ECDC4', '#45B7D1', '#FF69B4', '#32CD32', '#FF4500', '#9370DB', '#00CED1', '#FFB6C1'];
+// PERFORM UNDO
+function performUndo() {
+    if (!canUndo || !lastAddedWord) return;
+    
+    const wordBank = document.getElementById('wordBank');
+    const dropZone = document.getElementById('dropZone');
+    
+    if (lastAddedWord.parentElement === dropZone) {
+        wordBank.appendChild(lastAddedWord);
+        lastAddedWord = null;
+        canUndo = false;
+        updateUndoButton();
+        setupInteraction();
+    }
+}
 
+// FISHER-YATES SHUFFLE
+function fisherYatesShuffle(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// FIREWORK CREATION
 function createFirework(x, y) {
     const firework = document.createElement('div');
     firework.classList.add('firework');
@@ -1026,7 +1048,6 @@ function createFirework(x, y) {
     firework.style.color = color;
     firework.style.borderRadius = '50%';
     
-    // Random explosion direction
     const angle = Math.random() * Math.PI * 2;
     const distance = 50 + Math.random() * 100;
     const dx = Math.cos(angle) * distance;
@@ -1045,12 +1066,12 @@ function createFirework(x, y) {
     return firework;
 }
 
+// EXPLODE FIREWORKS
 function explodeFireworks() {
     const container = document.getElementById('fireworksContainer');
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     
-    // YOUR BELOVED 5 BURST POINTS!
     const burstPoints = [
         { x: centerX - 200, y: centerY - 100 },
         { x: centerX + 200, y: centerY - 100 },
@@ -1063,14 +1084,13 @@ function explodeFireworks() {
         setTimeout(() => {
             burstPoints.forEach((point, burstIndex) => {
                 setTimeout(() => {
-                    // Create firework burst at this point
                     for (let i = 0; i < 15; i++) {
                         setTimeout(() => {
                             const firework = createFirework(point.x, point.y);
                             container.appendChild(firework);
                             
                             requestAnimationFrame(() => {
-                                firework.classList.add('active');
+                                firework.classList.add('firework-active');
                             });
                             
                             setTimeout(() => {
@@ -1080,63 +1100,45 @@ function explodeFireworks() {
                             }, 3000);
                         }, i * 20);
                     }
-                }, burstIndex * 200); // Stagger the bursts
+                }, burstIndex * 200);
             });
         }, wave * 1000);
     }
 }
 
+// SHOW TRY AGAIN
 function showTryAgain() {
     const tryAgainText = document.getElementById('tryAgainText');
-    
-    tryAgainText.classList.add('show');
+    tryAgainText.classList.add('try-again-text-show');
     
     setTimeout(() => {
-        tryAgainText.classList.remove('show');
+        tryAgainText.classList.remove('try-again-text-show');
     }, 1500);
 }
 
-// SMART UNDO SYSTEM - ONE UNDO PER WORD ADDITION
-let lastAddedWord = null;
-let canUndo = false;
-
-function updateUndoButton() {
-    const undoBtn = document.getElementById('undoButton');
-    if (canUndo && lastAddedWord) {
-        undoBtn.disabled = false;
-        undoBtn.classList.add('active');
-    } else {
-        undoBtn.disabled = true;
-        undoBtn.classList.remove('active');
-    }
-}
-
-function performUndo() {
-    if (!canUndo || !lastAddedWord) return;
+// TRANSLATION OVERLAY FUNCTIONS
+function showTranslationOverlay(lesson) {
+    const overlay = document.getElementById('translationOverlay');
+    const englishEl = document.getElementById('translationEnglish');
+    const spanishEl = document.getElementById('translationSpanish');
     
-    const wordBank = document.getElementById('wordBank');
-    const dropZone = document.getElementById('dropZone');
+    englishEl.textContent = lesson.english;
+    spanishEl.textContent = lesson.spanish;
     
-    // Move the last added word back to word bank
-    if (lastAddedWord.parentElement === dropZone) {
-        wordBank.appendChild(lastAddedWord);
-        
-        // Reset undo state
-        lastAddedWord = null;
-        canUndo = false;
-        updateUndoButton();
-        
-        // Re-setup interactions for the moved word
-        setupInteraction();
-    }
-}
-// DEVICE DETECTION
-function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-           (window.innerWidth <= 1200 && window.matchMedia("(orientation: landscape)").matches);
+    overlay.classList.add('translation-overlay-show');
 }
 
-// SMOOTH GLIDING ANIMATION FUNCTION - UPDATED WITH UNDO TRACKING
+function hideTranslationOverlay() {
+    const overlay = document.getElementById('translationOverlay');
+    overlay.classList.remove('translation-overlay-show');
+    overlay.classList.add('translation-overlay-hide');
+    
+    setTimeout(() => {
+        overlay.classList.remove('translation-overlay-hide');
+    }, 500);
+}
+
+// ANIMATE WORD TO DROP ZONE
 function animateWordToDropZone(wordTile, dropZone) {
     const startRect = wordTile.getBoundingClientRect();
     const dropRect = dropZone.getBoundingClientRect();
@@ -1169,7 +1171,6 @@ function animateWordToDropZone(wordTile, dropZone) {
         wordTile.style.opacity = '1';
         wordTile.style.transform = '';
         
-        // Track for undo functionality
         lastAddedWord = wordTile;
         canUndo = true;
         updateUndoButton();
@@ -1183,7 +1184,7 @@ function animateWordToDropZone(wordTile, dropZone) {
     }, 400);
 }
 
-// TAP-TO-ADD FUNCTIONALITY FOR MOBILE WITH SMOOTH GLIDING
+// TAP TO ADD FUNCTIONALITY
 function addTapToAdd() {
     const wordTiles = document.querySelectorAll('.word-tile');
     const dropZone = document.getElementById('dropZone');
@@ -1196,10 +1197,18 @@ function addTapToAdd() {
                 animateWordToDropZone(tile, dropZone);
             }
         });
+        
+        tile.addEventListener('touchstart', () => {
+            tile.classList.add('word-tile-active');
+        });
+        
+        tile.addEventListener('touchend', () => {
+            tile.classList.remove('word-tile-active');
+        });
     });
 }
 
-// DRAG-AND-DROP FUNCTIONALITY FOR DESKTOP - UPDATED WITH UNDO TRACKING
+// DRAG AND DROP FUNCTIONALITY
 function addDragAndDrop() {
     const wordTiles = document.querySelectorAll('.word-tile');
     const dropZone = document.getElementById('dropZone');
@@ -1223,7 +1232,6 @@ function addDragAndDrop() {
         if (draggedEl && draggedEl.parentElement.id === 'wordBank') {
             dropZone.appendChild(draggedEl);
             
-            // Track for undo functionality
             lastAddedWord = draggedEl;
             canUndo = true;
             updateUndoButton();
@@ -1231,49 +1239,56 @@ function addDragAndDrop() {
     });
 }
 
-// HYBRID INTERACTION SYSTEM
+// SETUP INTERACTION
 function setupInteraction() {
     if (isMobileDevice()) {
         addTapToAdd();
+        
+        // Apply mobile classes to word tiles
+        document.querySelectorAll('.word-tile').forEach(tile => {
+            tile.classList.add('mobile-landscape-word-tile');
+        });
     } else {
         addDragAndDrop();
     }
 }
 
-// FISHER-YATES SHUFFLE - TRUE RANDOMIZATION
-function fisherYatesShuffle(array) {
-    const shuffled = [...array]; // Create a copy
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
-    }
-    return shuffled;
-}
-
-// LESSON MANAGEMENT - SIMPLIFIED
+// UPDATE NAVIGATION BUTTONS
 function updateNavigationButtons() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     
-    prevBtn.disabled = currentLessonIndex === 0;
-    nextBtn.disabled = currentLessonIndex === lessons.length - 1;
+    prevBtn.classList.remove('nav-btn-disabled');
+    nextBtn.classList.remove('nav-btn-disabled');
+    
+    if (currentLessonIndex === 0) {
+        prevBtn.disabled = true;
+        prevBtn.classList.add('nav-btn-disabled');
+    } else {
+        prevBtn.disabled = false;
+    }
+    
+    if (currentLessonIndex === lessons.length - 1) {
+        nextBtn.disabled = true;
+        nextBtn.classList.add('nav-btn-disabled');
+    } else {
+        nextBtn.disabled = false;
+    }
 }
 
+// LOAD LESSON FUNCTION
 function loadLesson(index) {
     const lesson = lessons[index];
     const wordBank = document.getElementById('wordBank');
     const dropZone = document.getElementById('dropZone');
     
-    // Clear existing content
     wordBank.innerHTML = '';
     dropZone.innerHTML = '';
     
-    // Reset undo state
     lastAddedWord = null;
     canUndo = false;
     updateUndoButton();
     
-    // Create scrambled words using proper Fisher-Yates shuffle
     const scrambled = fisherYatesShuffle(lesson.sentence);
     
     scrambled.forEach((word, wordIndex) => {
@@ -1284,18 +1299,14 @@ function loadLesson(index) {
         wordBank.appendChild(span);
     });
     
-    // Update audio sources
     document.getElementById('adamAudio').src = lesson.adamAudio;
     document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
     
-    // Update UI - simplified
     updateNavigationButtons();
-    
-    // Setup interactions
     setupInteraction();
 }
 
-// NAVIGATION HANDLERS
+// EVENT LISTENERS - FLAT STRUCTURE
 document.getElementById('prevBtn').addEventListener('click', () => {
     if (currentLessonIndex > 0) {
         currentLessonIndex--;
@@ -1310,7 +1321,6 @@ document.getElementById('nextBtn').addEventListener('click', () => {
     }
 });
 
-// CHARACTER AUDIO HANDLERS
 document.getElementById('adamImage').addEventListener('click', () => {
     document.getElementById('adamAudio').play();
 });
@@ -1319,20 +1329,15 @@ document.getElementById('jessicaImage').addEventListener('click', () => {
     document.getElementById('jessicaAudio').play();
 });
 
-// RESET BUTTON - UPDATED WITH UNDO RESET
 document.getElementById('resetButton').addEventListener('click', () => {
-    // Reset undo state
     lastAddedWord = null;
     canUndo = false;
     updateUndoButton();
-    
-    loadLesson(currentLessonIndex); // Reload current lesson
+    loadLesson(currentLessonIndex);
 });
 
-// UNDO BUTTON - Smart One-Time Undo
 document.getElementById('undoButton').addEventListener('click', performUndo);
 
-// CHECK ANSWER BUTTON WITH TRANSLATION OVERLAY - UPDATED!
 document.getElementById('checkButton').addEventListener('click', () => {
     const dropZone = document.getElementById('dropZone');
     const droppedWords = Array.from(dropZone.children);
@@ -1350,7 +1355,6 @@ document.getElementById('checkButton').addEventListener('click', () => {
         incrementCorrectAnswers();
         explodeFireworks();
         
-        // Show translation overlay after a short delay
         setTimeout(() => {
             showTranslationOverlay(lesson);
         }, 1000);
@@ -1359,12 +1363,50 @@ document.getElementById('checkButton').addEventListener('click', () => {
     }
 });
 
+document.getElementById('translationCloseBtn').addEventListener('click', hideTranslationOverlay);
+
+document.getElementById('translationOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'translationOverlay') {
+        hideTranslationOverlay();
+    }
+});
+
+// HOVER EFFECTS - FLAT EVENT LISTENERS
+document.getElementById('prevBtn').addEventListener('mouseenter', (e) => {
+    if (!e.target.disabled) e.target.classList.add('nav-btn-hover');
+});
+document.getElementById('prevBtn').addEventListener('mouseleave', (e) => {
+    e.target.classList.remove('nav-btn-hover');
+});
+
+document.getElementById('nextBtn').addEventListener('mouseenter', (e) => {
+    if (!e.target.disabled) e.target.classList.add('nav-btn-hover');
+});
+document.getElementById('nextBtn').addEventListener('mouseleave', (e) => {
+    e.target.classList.remove('nav-btn-hover');
+});
+
+document.getElementById('undoButton').addEventListener('mouseenter', (e) => {
+    if (!e.target.disabled) e.target.classList.add('undo-btn-hover-active');
+});
+document.getElementById('undoButton').addEventListener('mouseleave', (e) => {
+    e.target.classList.remove('undo-btn-hover-active');
+});
+
+document.getElementById('translationCloseBtn').addEventListener('mouseenter', (e) => {
+    e.target.classList.add('translation-close-btn-hover');
+});
+document.getElementById('translationCloseBtn').addEventListener('mouseleave', (e) => {
+    e.target.classList.remove('translation-close-btn-hover');
+});
+
 // INITIALIZE APP
 document.addEventListener("DOMContentLoaded", () => {
-    loadLesson(0); // Start with first lesson
+    applyMobileClasses();
+    loadLesson(0);
 });
 
 </script>
 
 </body>
-</html>1
+</html>2
