@@ -673,7 +673,7 @@ const lessons = [
         id: 1,
         sentence: ["I'm", "learning", "to", "speak", "English"],
         correctOrder: ["I'm", "learning", "to", "speak", "English"],
-        category: "default",
+        category: "practice",
         adamAudio: "Audio/learning-english-liam.mp3",
         jessicaAudio: "Audio/learning-english-jes.mp3",
         english: "I'm learning to speak English.",
@@ -683,7 +683,7 @@ const lessons = [
         id: 2, 
         sentence: ["I", "hope", "you", "have", "a", "nice", "day"],
         correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
-        category: "default",
+        category: "finishers",
         adamAudio: "Audio/hope-nice-day-liam.mp3",
         jessicaAudio: "Audio/hope-nice-day-jes.mp3",
         english: "I hope you have a nice day.",
@@ -693,7 +693,7 @@ const lessons = [
         id: 3,
         sentence: ["Nice", "to", "meet", "you"],
         correctOrder: ["Nice", "to", "meet", "you"], 
-        category: "default",
+        category: "greetings",
         adamAudio: "Audio/nice-to-meet-liam.mp3",
         jessicaAudio: "Audio/nice-to-meet-jes.mp3",
         english: "Nice to meet you.",
@@ -1421,6 +1421,11 @@ if (lesson.category === 'finishers') {
     jessicaImage.src = 'Image/laura.png';
     adamImage.alt = 'Mark';
     jessicaImage.alt = 'Laura';
+} else if (lesson.category === 'greetings') {
+    adamImage.src = 'Image/adam.png';
+    jessicaImage.src = 'Image/jessica.png';
+    adamImage.alt = 'Adam';
+    jessicaImage.alt = 'Jessica';
 } else {
         adamImage.src = 'Image/adam.png';
         jessicaImage.src = 'Image/jessica.png';
@@ -1535,4 +1540,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>5
+</html>6
