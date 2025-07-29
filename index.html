@@ -1398,9 +1398,14 @@ function loadLesson(index) {
         wordBank.appendChild(span);
     });
     
-    // Set audio sources
+    // Set audio sources based on category
+if (lesson.category === 'finishers') {
+    document.getElementById('adamAudio').src = lesson.markAudio;
+    document.getElementById('jessicaAudio').src = lesson.lauraAudio;
+} else {
     document.getElementById('adamAudio').src = lesson.adamAudio;
     document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
+}
     
     // AVATAR SWITCHING BASED ON CATEGORY
     const adamImage = document.getElementById('adamImage');
@@ -1411,7 +1416,12 @@ function loadLesson(index) {
         jessicaImage.src = 'Image/becky.png';
         adamImage.alt = 'John';
         jessicaImage.alt = 'Becky';
-    } else {
+    } else if (lesson.category === 'finishers') {
+    adamImage.src = 'Image/mark.png';
+    jessicaImage.src = 'Image/laura.png';
+    adamImage.alt = 'Mark';
+    jessicaImage.alt = 'Laura';
+} else {
         adamImage.src = 'Image/adam.png';
         jessicaImage.src = 'Image/jessica.png';
         adamImage.alt = 'Adam';
