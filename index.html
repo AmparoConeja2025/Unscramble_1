@@ -465,6 +465,30 @@
     left: 40px;
 }
 
+.mobile-landscape-john-image {
+    width: 112px;
+    top: 48px;  /* 10px higher than current */
+    right: 40px;
+}
+
+.mobile-landscape-becky-image {
+    width: 112px;
+    top: 46px;  /* 10px higher than current */
+    left: 40px;
+}
+
+.mobile-landscape-mark-image {
+    width: 112px;
+    top: 48px;  /* 10px higher than current */
+    right: 40px;
+}
+
+.mobile-landscape-laura-image {
+    width: 112px;
+    top: 46px;  /* 10px higher than current */
+    left: 40px;
+}
+
 .mobile-landscape-adam-btn {
     top: 250px;
     right: 80px;
@@ -1060,8 +1084,18 @@ function isMobileDevice() {
 function applyMobileClasses() {
     if (!isMobileDevice()) return;
     
+    // Apply avatar classes based on current lesson category
+const currentLesson = lessons[currentLessonIndex];
+if (currentLesson.category === 'panic') {
+    document.getElementById('adamImage').classList.add('mobile-landscape-john-image');
+    document.getElementById('jessicaImage').classList.add('mobile-landscape-becky-image');
+} else if (currentLesson.category === 'finishers') {
+    document.getElementById('adamImage').classList.add('mobile-landscape-mark-image');
+    document.getElementById('jessicaImage').classList.add('mobile-landscape-laura-image');
+} else {
     document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
     document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
+}
     document.getElementById('dropZone').classList.add('mobile-landscape-drop-zone');
     document.getElementById('wordBank').classList.add('mobile-landscape-word-bank');
     document.querySelector('.lesson-nav').classList.add('mobile-landscape-lesson-nav');
