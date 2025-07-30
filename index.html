@@ -455,7 +455,7 @@
 /* MOBILE LANDSCAPE CLASSES - FLAT OVERRIDES */
 .mobile-landscape-adam-image {
     width: 112px;
-    top: 70%;
+    top: 58%;
     right: 40px;
 }
 
@@ -1092,7 +1092,7 @@ if (currentLesson.category === 'panic') {
 } else if (currentLesson.category === 'finishers') {
     document.getElementById('adamImage').classList.add('mobile-landscape-mark-image');
     document.getElementById('jessicaImage').classList.add('mobile-landscape-laura-image');
-} else {
+} else if (currentLesson.category === 'practice' || currentLesson.category === 'greetings') {
     document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
     document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
 }
