@@ -1085,6 +1085,9 @@ function isMobileDevice() {
 function applyMobileClasses() {
     if (!isMobileDevice()) return;
     
+    console.log('applyMobileClasses called, isMobile:', isMobileDevice());
+    if (!isMobileDevice()) return;
+    
     // Apply avatar classes based on current lesson category
 const currentLesson = lessons[currentLessonIndex];
 if (currentLesson.category === 'panic') {
@@ -1578,4 +1581,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>7
+</html>8
