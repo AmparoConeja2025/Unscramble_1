@@ -1084,18 +1084,7 @@ function isMobileDevice() {
 function applyMobileClasses() {
     if (!isMobileDevice()) return;
     
-    // Apply avatar classes based on current lesson category
-const currentLesson = lessons[currentLessonIndex];
-if (currentLesson.category === 'panic') {
-    document.getElementById('adamImage').classList.add('mobile-landscape-john-image');
-    document.getElementById('jessicaImage').classList.add('mobile-landscape-becky-image');
-} else if (currentLesson.category === 'finishers') {
-    document.getElementById('adamImage').classList.add('mobile-landscape-mark-image');
-    document.getElementById('jessicaImage').classList.add('mobile-landscape-laura-image');
-} else {
-    document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
-    document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
-}
+    // Apply non-avatar mobile classes only (avatars handled in loadLesson after switching)
     document.getElementById('dropZone').classList.add('mobile-landscape-drop-zone');
     document.getElementById('wordBank').classList.add('mobile-landscape-word-bank');
     document.querySelector('.lesson-nav').classList.add('mobile-landscape-lesson-nav');
@@ -1466,6 +1455,20 @@ if (lesson.category === 'finishers') {
         jessicaImage.src = 'Image/jessica.png';
         adamImage.alt = 'Adam';
         jessicaImage.alt = 'Jessica';
+    }
+
+    // Apply mobile avatar classes AFTER avatar switching (if on mobile)
+    if (isMobileDevice()) {
+        if (lesson.category === 'panic') {
+            adamImage.classList.add('mobile-landscape-john-image');
+            jessicaImage.classList.add('mobile-landscape-becky-image');
+        } else if (lesson.category === 'finishers') {
+            adamImage.classList.add('mobile-landscape-mark-image');
+            jessicaImage.classList.add('mobile-landscape-laura-image');
+        } else {
+            adamImage.classList.add('mobile-landscape-adam-image');
+            jessicaImage.classList.add('mobile-landscape-jessica-image');
+        }
     }
     
     updateNavigationButtons();
