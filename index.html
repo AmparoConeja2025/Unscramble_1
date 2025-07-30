@@ -1092,8 +1092,10 @@ if (currentLesson.category === 'panic') {
     document.getElementById('jessicaImage').classList.add('mobile-landscape-becky-image');
 } else if (currentLesson.category === 'finishers') {
     document.getElementById('adamImage').classList.add('mobile-landscape-mark-image');
+    console.log('Applied Mark class to adamImage');
     document.getElementById('jessicaImage').classList.add('mobile-landscape-laura-image');
 } else if (currentLesson.category === 'practice' || currentLesson.category === 'greetings') {
+    console.log('Applied Adam class to adamImage');
     document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
     document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
 }
@@ -1576,4 +1578,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>6
+</html>7
