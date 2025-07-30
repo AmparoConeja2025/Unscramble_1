@@ -455,7 +455,7 @@
 /* MOBILE LANDSCAPE CLASSES - FLAT OVERRIDES */
 .mobile-landscape-adam-image {
     width: 112px;
-    top: 58%;
+    top: 70%;
     right: 40px;
 }
 
@@ -1077,7 +1077,7 @@ const fireworkColors = ['#FFD700', '#FF6B47', '#4ECDC4', '#45B7D1', '#FF69B4', '
 // DEVICE DETECTION FUNCTION
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-           (window.innerWidth <= 1200 && window.matchMedia("(orientation: landscape)").matches);
+           (window.innerWidth <= 800 && window.matchMedia("(orientation: landscape)").matches);
 }
 
 // MOBILE CLASS APPLICATION
