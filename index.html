@@ -202,6 +202,42 @@
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
+/* JOHN CHARACTER (Panic) */
+.john-image {
+    position: absolute;
+    top: 96px;
+    right: 64px;
+    width: 256px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* BECKY CHARACTER (Panic) */
+.becky-image {
+    position: absolute;
+    top: 96px;
+    left: 64px;
+    width: 256px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* MARK CHARACTER (Finishers) */
+.mark-image {
+    position: absolute;
+    top: 96px;
+    right: 64px;
+    width: 256px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
+/* LAURA CHARACTER (Finishers) */
+.laura-image {
+    position: absolute;
+    top: 96px;
+    left: 64px;
+    width: 256px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+}
+
 .jessica-btn {
     position: absolute;
     top: 376px;
@@ -454,40 +490,45 @@
 
 /* MOBILE LANDSCAPE CLASSES - FLAT OVERRIDES */
 .mobile-landscape-adam-image {
+    position: absolute;
     width: 112px;
     top: 55%;
     right: 20px;
 }
 
 .mobile-landscape-jessica-image {
+    position: absolute;
     width: 112px;
     top: 55%;
     left: 20px;
 }
 
 .mobile-landscape-john-image {
+    position: absolute;
     width: 112px;
-    top: 48px;  
-    right: 40px;
+    top: 48%;  
+    right: 20px;
 }
 
 .mobile-landscape-becky-image {
+    position: absolute;
     width: 112px;
-    top: 46px;  
-    left: 40px;
+    top: 48%;  
+    left: 20px;
 }
 
 .mobile-landscape-mark-image {
+    position: absolute;
     width: 112px;
-    top:48%;  
-    right: 40px;
-    
+    top: 45%;  
+    right: 20px;
 }
 
 .mobile-landscape-laura-image {
+    position: absolute;
     width: 112px;
-    top: 50px;  /
-    left: 40px;
+    top: 45%;  
+    left: 20px;
 }
 
 .mobile-landscape-adam-btn {
@@ -642,13 +683,30 @@
     <button class="nav-btn" id="nextBtn">Next →</button>
 </div>
 
-<!-- ADAM CHARACTER -->
-<img src="Image/adam.png" alt="Adam" class="adam-image" id="adamImage" style="cursor: pointer;" />
+
+<!-- ADAM CHARACTER (Practice/Greetings) -->
+<img src="Image/adam.png" alt="Adam" class="adam-image" id="adamImage" style="cursor: pointer; display: none;" />
 <audio id="adamAudio"></audio>
 
-<!-- JESSICA CHARACTER -->
-<img src="Image/jessica.png" alt="Jessica" class="jessica-image" id="jessicaImage" style="cursor: pointer;" />
+<!-- JESSICA CHARACTER (Practice/Greetings) -->
+<img src="Image/jessica.png" alt="Jessica" class="jessica-image" id="jessicaImage" style="cursor: pointer; display: none;" />
 <audio id="jessicaAudio"></audio>
+
+<!-- JOHN CHARACTER (Panic) -->
+<img src="Image/john.png" alt="John" class="john-image" id="johnImage" style="cursor: pointer; display: none;" />
+<audio id="johnAudio"></audio>
+
+<!-- BECKY CHARACTER (Panic) -->
+<img src="Image/becky.png" alt="Becky" class="becky-image" id="beckyImage" style="cursor: pointer; display: none;" />
+<audio id="beckyAudio"></audio>
+
+<!-- MARK CHARACTER (Finishers) -->
+<img src="Image/mark.png" alt="Mark" class="mark-image" id="markImage" style="cursor: pointer; display: none;" />
+<audio id="markAudio"></audio>
+
+<!-- LAURA CHARACTER (Finishers) -->
+<img src="Image/laura.png" alt="Laura" class="laura-image" id="lauraImage" style="cursor: pointer; display: none;" />
+<audio id="lauraAudio"></audio>
 
 <!-- DROP ZONE -->
 <div id="dropZone" class="drop-zone">
@@ -1088,20 +1146,18 @@ function applyMobileClasses() {
     console.log('applyMobileClasses called, isMobile:', isMobileDevice());
     if (!isMobileDevice()) return;
     
-    // Apply avatar classes based on current lesson category
-const currentLesson = lessons[currentLessonIndex];
-if (currentLesson.category === 'panic') {
-    document.getElementById('adamImage').classList.add('mobile-landscape-john-image');
-    document.getElementById('jessicaImage').classList.add('mobile-landscape-becky-image');
-} else if (currentLesson.category === 'finishers') {
-    document.getElementById('adamImage').classList.add('mobile-landscape-mark-image');
-    console.log('Applied Mark class to adamImage');
-    document.getElementById('jessicaImage').classList.add('mobile-landscape-laura-image');
-} else if (currentLesson.category === 'practice' || currentLesson.category === 'greetings') {
-    console.log('Applied Adam class to adamImage');
-    document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
-    document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
-}
+    // Apply avatar mobile classes based on current lesson category
+    const currentLesson = lessons[currentLessonIndex];
+    if (currentLesson.category === 'panic') {
+        document.getElementById('johnImage').classList.add('mobile-landscape-john-image');
+        document.getElementById('beckyImage').classList.add('mobile-landscape-becky-image');
+    } else if (currentLesson.category === 'finishers') {
+        document.getElementById('markImage').classList.add('mobile-landscape-mark-image');
+        document.getElementById('lauraImage').classList.add('mobile-landscape-laura-image');
+    } else if (currentLesson.category === 'practice' || currentLesson.category === 'greetings') {
+        document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
+        document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
+    }
     document.getElementById('dropZone').classList.add('mobile-landscape-drop-zone');
     document.getElementById('wordBank').classList.add('mobile-landscape-word-bank');
     document.querySelector('.lesson-nav').classList.add('mobile-landscape-lesson-nav');
@@ -1440,38 +1496,37 @@ function loadLesson(index) {
     });
     
     // Set audio sources based on category
-if (lesson.category === 'finishers') {
-    document.getElementById('adamAudio').src = lesson.markAudio;
-    document.getElementById('jessicaAudio').src = lesson.lauraAudio;
-} else {
-    document.getElementById('adamAudio').src = lesson.adamAudio;
-    document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
-}
+    if (lesson.category === 'finishers') {
+        document.getElementById('markAudio').src = lesson.markAudio;
+        document.getElementById('lauraAudio').src = lesson.lauraAudio;
+    } else if (lesson.category === 'panic') {
+        document.getElementById('johnAudio').src = lesson.adamAudio;  // Use adamAudio for John
+        document.getElementById('beckyAudio').src = lesson.jessicaAudio;  // Use jessicaAudio for Becky
+    } else {
+        document.getElementById('adamAudio').src = lesson.adamAudio;
+        document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
+    }
     
     // AVATAR SWITCHING BASED ON CATEGORY
-    const adamImage = document.getElementById('adamImage');
-    const jessicaImage = document.getElementById('jessicaImage');
+    // Hide all avatars first
+    document.getElementById('adamImage').style.display = 'none';
+    document.getElementById('jessicaImage').style.display = 'none';
+    document.getElementById('johnImage').style.display = 'none';
+    document.getElementById('beckyImage').style.display = 'none';
+    document.getElementById('markImage').style.display = 'none';
+    document.getElementById('lauraImage').style.display = 'none';
     
+    // Show the correct avatars based on category
     if (lesson.category === 'panic') {
-        adamImage.src = 'Image/john.png';
-        jessicaImage.src = 'Image/becky.png';
-        adamImage.alt = 'John';
-        jessicaImage.alt = 'Becky';
+        document.getElementById('johnImage').style.display = 'block';
+        document.getElementById('beckyImage').style.display = 'block';
     } else if (lesson.category === 'finishers') {
-    adamImage.src = 'Image/mark.png';
-    jessicaImage.src = 'Image/laura.png';
-    adamImage.alt = 'Mark';
-    jessicaImage.alt = 'Laura';
-} else if (lesson.category === 'greetings') {
-    adamImage.src = 'Image/adam.png';
-    jessicaImage.src = 'Image/jessica.png';
-    adamImage.alt = 'Adam';
-    jessicaImage.alt = 'Jessica';
-} else {
-        adamImage.src = 'Image/adam.png';
-        jessicaImage.src = 'Image/jessica.png';
-        adamImage.alt = 'Adam';
-        jessicaImage.alt = 'Jessica';
+        document.getElementById('markImage').style.display = 'block';
+        document.getElementById('lauraImage').style.display = 'block';
+    } else {
+        // practice, greetings, or default
+        document.getElementById('adamImage').style.display = 'block';
+        document.getElementById('jessicaImage').style.display = 'block';
     }
     
     updateNavigationButtons();
@@ -1493,12 +1548,29 @@ document.getElementById('nextBtn').addEventListener('click', () => {
     }
 });
 
+// Avatar click handlers for audio playback
 document.getElementById('adamImage').addEventListener('click', () => {
     document.getElementById('adamAudio').play();
 });
 
 document.getElementById('jessicaImage').addEventListener('click', () => {
     document.getElementById('jessicaAudio').play();
+});
+
+document.getElementById('johnImage').addEventListener('click', () => {
+    document.getElementById('johnAudio').play();
+});
+
+document.getElementById('beckyImage').addEventListener('click', () => {
+    document.getElementById('beckyAudio').play();
+});
+
+document.getElementById('markImage').addEventListener('click', () => {
+    document.getElementById('markAudio').play();
+});
+
+document.getElementById('lauraImage').addEventListener('click', () => {
+    document.getElementById('lauraAudio').play();
 });
 
 document.getElementById('resetButton').addEventListener('click', () => {
