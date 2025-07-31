@@ -2029,8 +2029,10 @@ function toggleRandomMode(enable) {
         categoryBtn.classList.remove('mode-active');
         randomBtn.classList.add('mode-active');
         usedLessonsInRandomMode = []; // Reset when entering random mode
+        document.getElementById('randomNavBtn').style.display = 'none';
     } else {
         randomBtn.classList.remove('mode-active');
+        document.getElementById('randomNavBtn').style.display = 'inline-block';
         categoryBtn.classList.add('mode-active');
     }
 }
