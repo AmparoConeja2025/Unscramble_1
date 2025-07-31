@@ -150,6 +150,33 @@
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
+/* RANDOM NAVIGATION BUTTON */
+.random-nav-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.random-nav-btn-hover {
+    background: linear-gradient(135deg, #ff5252 0%, #f44336 100%);
+    transform: translateY(-1px);
+}
+
+.mobile-landscape-random-nav-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
 /* DIFFICULTY BADGES */
 .difficulty-easy { 
     background: #d1fae5; 
@@ -889,9 +916,7 @@
         </div>
 
         <div class="menu-section">
-            <h3>Random Learning</h3>
-            <button class="random-btn" id="randomJumpBtn">Random Lesson</button>
-            
+            <h3>Learning Mode</h3> 
             <div class="mode-toggle-section">
                 <div class="mode-toggle-label">Learning Mode:</div>
                 <div class="mode-toggle-container">
@@ -917,6 +942,7 @@
 <div class="lesson-nav">
     <button class="nav-btn" id="prevBtn">← Previous</button>
     <button class="nav-btn" id="nextBtn">Next →</button>
+    <button class="random-nav-btn" id="randomNavBtn">Random</button>
 </div>
 
 
@@ -1404,6 +1430,7 @@ function applyMobileClasses() {
     document.getElementById('dropZone').classList.add('mobile-landscape-drop-zone');
     document.getElementById('wordBank').classList.add('mobile-landscape-word-bank');
     document.querySelector('.lesson-nav').classList.add('mobile-landscape-lesson-nav');
+    document.getElementById('randomNavBtn').classList.add('mobile-landscape-random-nav-btn');
     document.querySelector('.progress-area').classList.add('mobile-landscape-progress-area');
     document.querySelector('.level-badge').classList.add('mobile-landscape-level-badge');
     document.querySelector('.progress-label').classList.add('mobile-landscape-progress-label');
@@ -2009,12 +2036,6 @@ function toggleRandomMode(enable) {
 }
 
 // RANDOM SYSTEM EVENT LISTENERS
-document.getElementById('randomJumpBtn').addEventListener('click', () => {
-    const randomIndex = getRandomLesson();
-    currentLessonIndex = randomIndex;
-    loadLesson(currentLessonIndex);
-    hideMenu();
-});
 
 document.getElementById('categoryModeBtn').addEventListener('click', () => {
     toggleRandomMode(false);
@@ -2024,12 +2045,20 @@ document.getElementById('randomModeBtn').addEventListener('click', () => {
     toggleRandomMode(true);
 });
 
-// Add hover effect to random button
-document.getElementById('randomJumpBtn').addEventListener('mouseenter', (e) => {
-    e.target.classList.add('random-btn-hover');
+
+// NAVIGATION RANDOM BUTTON FUNCTIONALITY
+document.getElementById('randomNavBtn').addEventListener('click', () => {
+    const randomIndex = getRandomLesson();
+    currentLessonIndex = randomIndex;
+    loadLesson(currentLessonIndex);
 });
-document.getElementById('randomJumpBtn').addEventListener('mouseleave', (e) => {
-    e.target.classList.remove('random-btn-hover');
+
+// Add hover effects for navigation random button
+document.getElementById('randomNavBtn').addEventListener('mouseenter', (e) => {
+    e.target.classList.add('random-nav-btn-hover');
+});
+document.getElementById('randomNavBtn').addEventListener('mouseleave', (e) => {
+    e.target.classList.remove('random-nav-btn-hover');
 });
 
 // INITIALIZE APP
