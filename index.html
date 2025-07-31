@@ -789,28 +789,8 @@
 </div>
 
 <script>
-// LESSON DATA - WITH CATEGORIES FOR AVATAR SWITCHING
 const lessons = [
-    {
-        id: 1,
-        sentence: ["I'm", "learning", "to", "speak", "English"],
-        correctOrder: ["I'm", "learning", "to", "speak", "English"],
-        category: "practice",
-        adamAudio: "Audio/learning-english-liam.mp3",
-        jessicaAudio: "Audio/learning-english-jes.mp3",
-        english: "I'm learning to speak English.",
-        spanish: "Estoy aprendiendo a hablar inglés."
-    },
-    {
-        id: 2, 
-        sentence: ["I", "hope", "you", "have", "a", "nice", "day"],
-        correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
-        category: "finishers",
-        markAudio: "Audio/hope-nice-day-liam.mp3",
-        lauraAudio: "Audio/hope-nice-day-jes.mp3",
-        english: "I hope you have a nice day.",
-        spanish: "Espero que tengas un buen día."
-    },
+    // GREETINGS CATEGORY
     {
         id: 3,
         sentence: ["Nice", "to", "meet", "you"],
@@ -821,105 +801,17 @@ const lessons = [
         english: "Nice to meet you.",
         spanish: "Gusto en conocerte."
     },
+
+    // PRACTICE CATEGORY
     {
-        id: 4,
-        sentence: ["Sorry", "I", "don't", "understand"],
-        correctOrder: ["Sorry", "I", "don't", "understand"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-sorry-dont-understand.mp3",
-        jessicaAudio: "Audio/panic-jessica-sorry-dont-understand.mp3",
-        english: "Sorry I don't understand.",
-        spanish: "Disculpa, no entiendo."
-    },
-    {
-        id: 5,
-        sentence: ["Can", "you", "repeat", "that", "please"],
-        correctOrder: ["Can", "you", "repeat", "that", "please"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-repeat-please.mp3",
-        jessicaAudio: "Audio/panic-jessica-repeat-please.mp3",
-        english: "Can you repeat that please?",
-        spanish: "¿Puedes repetir eso, por favor?"
-    },
-    {
-        id: 6,
-        sentence: ["Can", "you", "speak", "slower", "please"],
-        correctOrder: ["Can", "you", "speak", "slower", "please"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-speak-slowly.mp3",
-        jessicaAudio: "Audio/panic-jessica-speak-slowly.mp3",
-        english: "Can you speak slower please?",
-        spanish: "¿Puedes hablar más despacio por favor?"
-    },
-    {
-        id: 7,
-        sentence: ["I'm", "still", "learning", "English"],
-        correctOrder: ["I'm", "still", "learning", "English"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-still-learning.mp3",
-        jessicaAudio: "Audio/panic-jessica-still-learning.mp3",
-        english: "I'm still learning English.",
-        spanish: "Todavía estoy aprendiendo inglés."
-    },
-    {
-        id: 8,
-        sentence: ["What", "does", "that", "mean"],
-        correctOrder: ["What", "does", "that", "mean"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-what-does-mean.mp3",
-        jessicaAudio: "Audio/panic-jessica-what-does-mean.mp3",
-        english: "What does that mean?",
-        spanish: "¿Qué significa eso?"
-    },
-    {
-        id: 9,
-        sentence: ["Can", "you", "say", "that", "again"],
-        correctOrder: ["Can", "you", "say", "that", "again"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-say-again.mp3",
-        jessicaAudio: "Audio/panic-jessica-say-again.mp3",
-        english: "Can you say that again?",
-        spanish: "¿Puedes decir eso de nuevo?"
-    },
-    {
-        id: 10,
-        sentence: ["I", "didn't", "get", "that"],
-        correctOrder: ["I", "didn't", "get", "that"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-didnt-get-that.mp3",
-        jessicaAudio: "Audio/panic-jessica-didnt-get-that.mp3",
-        english: "I didn't get that.",
-        spanish: "No entendí eso."
-    },
-    {
-        id: 11,
-        sentence: ["Can", "you", "help", "me", "understand", "this"],
-        correctOrder: ["Can", "you", "help", "me", "understand", "this"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-help-understand.mp3",
-        jessicaAudio: "Audio/panic-jessica-help-understand.mp3",
-        english: "Can you help me understand this?",
-        spanish: "¿Puedes ayudarme a entender esto?"
-    },
-    {
-        id: 12,
-        sentence: ["I'm", "not", "sure", "what", "you", "mean"],
-        correctOrder: ["I'm", "not", "sure", "what", "you", "mean"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-not-sure-mean.mp3",
-        jessicaAudio: "Audio/panic-jessica-not-sure-mean.mp3",
-        english: "I'm not sure what you mean.",
-        spanish: "No estoy seguro de lo que dices."
-    },
-    {
-        id: 13,
-        sentence: ["Can", "you", "explain", "that", "again"],
-        correctOrder: ["Can", "you", "explain", "that", "again"],
-        category: "panic",
-        adamAudio: "Audio/panic-adam-explain-again.mp3",
-        jessicaAudio: "Audio/panic-jessica-explain-again.mp3",
-        english: "Can you explain that again?",
-        spanish: "¿Puedes explicar eso de nuevo?"
+        id: 1,
+        sentence: ["I'm", "learning", "to", "speak", "English"],
+        correctOrder: ["I'm", "learning", "to", "speak", "English"],
+        category: "practice",
+        adamAudio: "Audio/learning-english-liam.mp3",
+        jessicaAudio: "Audio/learning-english-jes.mp3",
+        english: "I'm learning to speak English.",
+        spanish: "Estoy aprendiendo a hablar inglés."
     },
     {
         id: 14,
@@ -1020,6 +912,120 @@ const lessons = [
         jessicaAudio: "Audio/practice-jessica-why-english-so-difficult.mp3",
         english: "Why is English so difficult?",
         spanish: "¿Por qué es tan difícil el inglés?"
+    },
+
+    // PANIC CATEGORY
+    {
+        id: 4,
+        sentence: ["Sorry", "I", "don't", "understand"],
+        correctOrder: ["Sorry", "I", "don't", "understand"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-sorry-dont-understand.mp3",
+        jessicaAudio: "Audio/panic-jessica-sorry-dont-understand.mp3",
+        english: "Sorry I don't understand.",
+        spanish: "Disculpa, no entiendo."
+    },
+    {
+        id: 5,
+        sentence: ["Can", "you", "repeat", "that", "please"],
+        correctOrder: ["Can", "you", "repeat", "that", "please"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-repeat-please.mp3",
+        jessicaAudio: "Audio/panic-jessica-repeat-please.mp3",
+        english: "Can you repeat that please?",
+        spanish: "¿Puedes repetir eso, por favor?"
+    },
+    {
+        id: 6,
+        sentence: ["Can", "you", "speak", "slower", "please"],
+        correctOrder: ["Can", "you", "speak", "slower", "please"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-speak-slowly.mp3",
+        jessicaAudio: "Audio/panic-jessica-speak-slowly.mp3",
+        english: "Can you speak slower please?",
+        spanish: "¿Puedes hablar más despacio por favor?"
+    },
+    {
+        id: 7,
+        sentence: ["I'm", "still", "learning", "English"],
+        correctOrder: ["I'm", "still", "learning", "English"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-still-learning.mp3",
+        jessicaAudio: "Audio/panic-jessica-still-learning.mp3",
+        english: "I'm still learning English.",
+        spanish: "Todavía estoy aprendiendo inglés."
+    },
+    {
+        id: 8,
+        sentence: ["What", "does", "that", "mean"],
+        correctOrder: ["What", "does", "that", "mean"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-what-does-mean.mp3",
+        jessicaAudio: "Audio/panic-jessica-what-does-mean.mp3",
+        english: "What does that mean?",
+        spanish: "¿Qué significa eso?"
+    },
+    {
+        id: 9,
+        sentence: ["Can", "you", "say", "that", "again"],
+        correctOrder: ["Can", "you", "say", "that", "again"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-say-again.mp3",
+        jessicaAudio: "Audio/panic-jessica-say-again.mp3",
+        english: "Can you say that again?",
+        spanish: "¿Puedes decir eso de nuevo?"
+    },
+    {
+        id: 10,
+        sentence: ["I", "didn't", "get", "that"],
+        correctOrder: ["I", "didn't", "get", "that"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-didnt-get-that.mp3",
+        jessicaAudio: "Audio/panic-jessica-didnt-get-that.mp3",
+        english: "I didn't get that.",
+        spanish: "No entendí eso."
+    },
+    {
+        id: 11,
+        sentence: ["Can", "you", "help", "me", "understand", "this"],
+        correctOrder: ["Can", "you", "help", "me", "understand", "this"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-help-understand.mp3",
+        jessicaAudio: "Audio/panic-jessica-help-understand.mp3",
+        english: "Can you help me understand this?",
+        spanish: "¿Puedes ayudarme a entender esto?"
+    },
+    {
+        id: 12,
+        sentence: ["I'm", "not", "sure", "what", "you", "mean"],
+        correctOrder: ["I'm", "not", "sure", "what", "you", "mean"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-not-sure-mean.mp3",
+        jessicaAudio: "Audio/panic-jessica-not-sure-mean.mp3",
+        english: "I'm not sure what you mean.",
+        spanish: "No estoy seguro de lo que dices."
+    },
+    {
+        id: 13,
+        sentence: ["Can", "you", "explain", "that", "again"],
+        correctOrder: ["Can", "you", "explain", "that", "again"],
+        category: "panic",
+        adamAudio: "Audio/panic-adam-explain-again.mp3",
+        jessicaAudio: "Audio/panic-jessica-explain-again.mp3",
+        english: "Can you explain that again?",
+        spanish: "¿Puedes explicar eso de nuevo?"
+    },
+
+    // FINISHERS CATEGORY
+    {
+        id: 2, 
+        sentence: ["I", "hope", "you", "have", "a", "nice", "day"],
+        correctOrder: ["I", "hope", "you", "have", "a", "nice", "day"],
+        category: "finishers",
+        markAudio: "Audio/hope-nice-day-liam.mp3",
+        lauraAudio: "Audio/hope-nice-day-jes.mp3",
+        english: "I hope you have a nice day.",
+        spanish: "Espero que tengas un buen día."
     },
     {
         id: 24,
