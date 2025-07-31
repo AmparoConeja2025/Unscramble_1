@@ -772,6 +772,59 @@
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
+.random-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.random-btn-hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+}
+
+.mode-toggle-section {
+    margin-top: 15px;
+}
+
+.mode-toggle-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.mode-toggle-container {
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #e5e7eb;
+}
+
+.mode-toggle-btn {
+    flex: 1;
+    background: #f9fafb;
+    color: #6b7280;
+    border: none;
+    padding: 12px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-active {
+    background: #10b981;
+    color: white;
+}
+
 /* ANIMATIONS - FLAT KEYFRAMES */
 @keyframes firework-explosion {
     0% {
@@ -832,6 +885,19 @@
                 <button class="category-btn" data-category="practice">Practice</button>
                 <button class="category-btn" data-category="panic">Panic Phrases</button>
                 <button class="category-btn" data-category="finishers">Finishers</button>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h3>Random Learning</h3>
+            <button class="random-btn" id="randomJumpBtn">Random Lesson</button>
+            
+            <div class="mode-toggle-section">
+                <div class="mode-toggle-label">Learning Mode:</div>
+                <div class="mode-toggle-container">
+                    <button class="mode-toggle-btn mode-active" id="categoryModeBtn">Category</button>
+                    <button class="mode-toggle-btn" id="randomModeBtn">Random</button>
+                </div>
             </div>
         </div>
         
@@ -1723,16 +1789,32 @@ function loadLesson(index) {
 
 // EVENT LISTENERS - FLAT STRUCTURE
 document.getElementById('prevBtn').addEventListener('click', () => {
-    if (currentLessonIndex > 0) {
-        currentLessonIndex--;
+    if (isRandomMode) {
+        // In random mode, both prev and next go to random lessons
+        const randomIndex = getRandomLesson();
+        currentLessonIndex = randomIndex;
         loadLesson(currentLessonIndex);
+    } else {
+        // Normal sequential navigation
+        if (currentLessonIndex > 0) {
+            currentLessonIndex--;
+            loadLesson(currentLessonIndex);
+        }
     }
 });
 
 document.getElementById('nextBtn').addEventListener('click', () => {
-    if (currentLessonIndex < lessons.length - 1) {
-        currentLessonIndex++;
+    if (isRandomMode) {
+        // In random mode, both prev and next go to random lessons
+        const randomIndex = getRandomLesson();
+        currentLessonIndex = randomIndex;
         loadLesson(currentLessonIndex);
+    } else {
+        // Normal sequential navigation
+        if (currentLessonIndex < lessons.length - 1) {
+            currentLessonIndex++;
+            loadLesson(currentLessonIndex);
+        }
     }
 });
 
@@ -1877,6 +1959,77 @@ document.getElementById('menuOverlay').addEventListener('click', (e) => {
     if (e.target.id === 'menuOverlay') {
         hideMenu();
     }
+});
+
+// RANDOM LEARNING SYSTEM
+let isRandomMode = false;
+let usedLessonsInRandomMode = [];
+
+function getRandomLesson() {
+    // If in random mode and we've used all lessons, reset the used list
+    if (isRandomMode && usedLessonsInRandomMode.length >= lessons.length) {
+        usedLessonsInRandomMode = [];
+    }
+    
+    let availableLessons;
+    if (isRandomMode) {
+        // Get lessons not yet used in this cycle
+        availableLessons = lessons.filter((lesson, index) => 
+            !usedLessonsInRandomMode.includes(index)
+        );
+    } else {
+        // For random jump button, any lesson is available
+        availableLessons = lessons;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * availableLessons.length);
+    const selectedLesson = availableLessons[randomIndex];
+    const actualIndex = lessons.indexOf(selectedLesson);
+    
+    if (isRandomMode) {
+        usedLessonsInRandomMode.push(actualIndex);
+    }
+    
+    return actualIndex;
+}
+
+function toggleRandomMode(enable) {
+    isRandomMode = enable;
+    const categoryBtn = document.getElementById('categoryModeBtn');
+    const randomBtn = document.getElementById('randomModeBtn');
+    
+    if (enable) {
+        categoryBtn.classList.remove('mode-active');
+        randomBtn.classList.add('mode-active');
+        usedLessonsInRandomMode = []; // Reset when entering random mode
+    } else {
+        randomBtn.classList.remove('mode-active');
+        categoryBtn.classList.add('mode-active');
+    }
+}
+
+// RANDOM SYSTEM EVENT LISTENERS
+document.getElementById('randomJumpBtn').addEventListener('click', () => {
+    const randomIndex = getRandomLesson();
+    currentLessonIndex = randomIndex;
+    loadLesson(currentLessonIndex);
+    hideMenu();
+});
+
+document.getElementById('categoryModeBtn').addEventListener('click', () => {
+    toggleRandomMode(false);
+});
+
+document.getElementById('randomModeBtn').addEventListener('click', () => {
+    toggleRandomMode(true);
+});
+
+// Add hover effect to random button
+document.getElementById('randomJumpBtn').addEventListener('mouseenter', (e) => {
+    e.target.classList.add('random-btn-hover');
+});
+document.getElementById('randomJumpBtn').addEventListener('mouseleave', (e) => {
+    e.target.classList.remove('random-btn-hover');
 });
 
 // INITIALIZE APP
