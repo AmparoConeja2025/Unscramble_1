@@ -1441,12 +1441,23 @@ function animateWordToDropZone(wordTile, dropZone) {
         canUndo = true;
         updateUndoButton();
         
-        wordTile.style.background = '#10b981';
-        wordTile.style.color = 'white';
-        setTimeout(() => {
-            wordTile.style.background = 'white';
-            wordTile.style.color = 'black';
-        }, 200);
+        // Check if word is in correct position
+const currentPosition = dropZone.children.length - 1;
+const lesson = lessons[currentLessonIndex];
+const isCorrect = wordTile.textContent === lesson.correctOrder[currentPosition];
+
+if (isCorrect) {
+    wordTile.style.background = '#10b981';
+    wordTile.style.color = 'white';
+} else {
+    wordTile.style.background = '#ff9500';
+    wordTile.style.color = 'white';
+}
+
+setTimeout(() => {
+    wordTile.style.background = 'white';
+    wordTile.style.color = 'black';
+}, 200);
     }, 400);
 }
 
