@@ -667,6 +667,111 @@
     font-size: 14px;
 }
 
+/* MENU SYSTEM - FLAT CLASSES */
+.menu-btn {
+    position: absolute;
+    top: 15px;
+    left: 80px;
+    background: #93c5fd;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 15px;
+}
+
+.menu-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6b7280;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.category-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.category-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.category-btn-hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+}
+
+.menu-action-btn {
+    background: #93c5fd;
+    color: #1f2937;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
 /* ANIMATIONS - FLAT KEYFRAMES */
 @keyframes firework-explosion {
     0% {
@@ -708,6 +813,33 @@
 
 <!-- RESET BUTTON -->
 <button class="reset-btn" id="resetButton">Reset</button>
+
+<!-- MENU BUTTON -->
+<button class="menu-btn" id="menuButton">Menu</button>
+
+<!-- MENU OVERLAY (hidden by default) -->
+<div class="menu-overlay" id="menuOverlay" style="display: none;">
+    <div class="menu-content">
+        <div class="menu-header">
+            <h2>Learning Menu</h2>
+            <button class="menu-close-btn" id="menuCloseBtn">×</button>
+        </div>
+        
+        <div class="menu-section">
+            <h3>Choose Category</h3>
+            <div class="category-buttons">
+                <button class="category-btn" data-category="greetings">Greetings</button>
+                <button class="category-btn" data-category="practice">Practice</button>
+                <button class="category-btn" data-category="panic">Panic Phrases</button>
+                <button class="category-btn" data-category="finishers">Finishers</button>
+            </div>
+        </div>
+        
+        <div class="menu-section">
+            <button class="menu-action-btn" id="backToGameBtn">Back to Game</button>
+        </div>
+    </div>
+</div>
 
 <!-- CHECK ANSWER BUTTON -->
 <button class="check-btn" id="checkButton">Check Answer</button>
@@ -1700,6 +1832,53 @@ document.getElementById('translationCloseBtn').addEventListener('mouseleave', (e
     e.target.classList.remove('translation-close-btn-hover');
 });
 
+// MENU SYSTEM FUNCTIONALITY
+function showMenu() {
+    document.getElementById('menuOverlay').style.display = 'flex';
+}
+
+function hideMenu() {
+    document.getElementById('menuOverlay').style.display = 'none';
+}
+
+function jumpToCategory(category) {
+    // Find first lesson of the specified category
+    const categoryIndex = lessons.findIndex(lesson => lesson.category === category);
+    if (categoryIndex !== -1) {
+        currentLessonIndex = categoryIndex;
+        loadLesson(currentLessonIndex);
+        hideMenu();
+    }
+}
+
+// MENU EVENT LISTENERS
+document.getElementById('menuButton').addEventListener('click', showMenu);
+document.getElementById('menuCloseBtn').addEventListener('click', hideMenu);
+document.getElementById('backToGameBtn').addEventListener('click', hideMenu);
+
+// Category button event listeners
+document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        jumpToCategory(category);
+    });
+    
+    // Hover effects
+    btn.addEventListener('mouseenter', () => {
+        btn.classList.add('category-btn-hover');
+    });
+    btn.addEventListener('mouseleave', () => {
+        btn.classList.remove('category-btn-hover');
+    });
+});
+
+// Click outside menu to close
+document.getElementById('menuOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'menuOverlay') {
+        hideMenu();
+    }
+});
+
 // INITIALIZE APP
 document.addEventListener("DOMContentLoaded", () => {
     applyMobileClasses();
@@ -1709,4 +1888,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
