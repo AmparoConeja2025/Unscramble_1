@@ -303,42 +303,6 @@
     }
 }
 
-/* HARRY CHARACTER (Greetings) */
-.harry-image {
-    position: absolute;
-    top: 96px;
-    right: 64px;
-    width: 256px;
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
-}
-
-/* HARRY MOBILE - AUTOMATIC */
-@media (max-width: 800px) and (orientation: landscape) {
-    .harry-image {
-        width: 120px !important;
-        top: 50% !important;
-        right: 20px !important;
-    }
-}
-
-/* DIANNE CHARACTER (Greetings) */
-.dianne-image {
-    position: absolute;
-    top: 96px;
-    left: 64px;
-    width: 256px;
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
-}
-
-/* DIANNE MOBILE - AUTOMATIC */
-@media (max-width: 800px) and (orientation: landscape) {
-    .dianne-image {
-        width: 120px !important;
-        top: 50% !important;
-        left: 20px !important;
-    }
-}
-
 .jessica-btn {
     position: absolute;
     top: 376px;
@@ -359,7 +323,7 @@
 
 /* DROP ZONE */
 .drop-zone {
-    position: absolute;   
+    position: absolute;
     top: 480px;
     left: 50%;
     transform: translateX(-50%);
@@ -628,20 +592,6 @@
 }
 
 .mobile-landscape-laura-image {
-    position: absolute;
-    width: 112px;
-    top: 45%;  
-    left: 20px;
-}
-
-.mobile-landscape-harry-image {
-    position: absolute;
-    width: 112px;
-    top: 45%;  
-    right: 20px;
-}
-
-.mobile-landscape-dianne-image {
     position: absolute;
     width: 112px;
     top: 45%;  
@@ -1022,14 +972,6 @@
 <img src="Image/laura.png" alt="Laura" class="laura-image" id="lauraImage" style="cursor: pointer; display: none;" />
 <audio id="lauraAudio"></audio>
 
-<!-- HARRY CHARACTER (Greetings) -->
-<img src="Image/harry.png" alt="Harry" class="harry-image" id="harryImage" style="cursor: pointer; display: none;" />
-<audio id="harryAudio"></audio>
-
-<!-- DIANNE CHARACTER (Greetings) -->
-<img src="Image/dianne.png" alt="Dianne" class="dianne-image" id="dianneImage" style="cursor: pointer; display: none;" />
-<audio id="dianneAudio"></audio>
-
 <!-- DROP ZONE -->
 <div id="dropZone" class="drop-zone">
   <!-- words will drop here -->
@@ -1080,8 +1022,8 @@ const lessons = [
         sentence: ["Nice", "to", "meet", "you"],
         correctOrder: ["Nice", "to", "meet", "you"], 
         category: "greetings",
-        harryAudio: "Audio/nice-to-meet-liam.mp3",
-        dianneAudio: "Audio/nice-to-meet-jes.mp3",
+        adamAudio: "Audio/nice-to-meet-liam.mp3",
+        jessicaAudio: "Audio/nice-to-meet-jes.mp3",
         english: "Nice to meet you.",
         spanish: "Gusto en conocerte."
     },
@@ -1483,12 +1425,9 @@ function applyMobileClasses() {
     console.log('Applying finishers mobile classes');
         document.getElementById('markImage').classList.add('mobile-landscape-mark-image');
         document.getElementById('lauraImage').classList.add('mobile-landscape-laura-image');
-    } else if (currentLesson.category === 'practice') {
+    } else if (currentLesson.category === 'practice' || currentLesson.category === 'greetings') {
         document.getElementById('adamImage').classList.add('mobile-landscape-adam-image');
         document.getElementById('jessicaImage').classList.add('mobile-landscape-jessica-image');
-    } else if (currentLesson.category === 'greetings') {
-        document.getElementById('harryImage').classList.add('mobile-landscape-harry-image');
-        document.getElementById('dianneImage').classList.add('mobile-landscape-dianne-image');
     }
     document.getElementById('dropZone').classList.add('mobile-landscape-drop-zone');
     document.getElementById('wordBank').classList.add('mobile-landscape-word-bank');
@@ -1846,9 +1785,6 @@ function loadLesson(index) {
     } else if (lesson.category === 'panic') {
         document.getElementById('johnAudio').src = lesson.adamAudio;  // Use adamAudio for John
         document.getElementById('beckyAudio').src = lesson.jessicaAudio;  // Use jessicaAudio for Becky
-        } else if (lesson.category === 'greetings') {
-        document.getElementById('harryAudio').src = lesson.harryAudio;
-        document.getElementById('dianneAudio').src = lesson.dianneAudio;
     } else {
         document.getElementById('adamAudio').src = lesson.adamAudio;
         document.getElementById('jessicaAudio').src = lesson.jessicaAudio;
@@ -1862,8 +1798,6 @@ function loadLesson(index) {
     document.getElementById('beckyImage').style.display = 'none';
     document.getElementById('markImage').style.display = 'none';
     document.getElementById('lauraImage').style.display = 'none';
-    document.getElementById('harryImage').style.display = 'none';
-    document.getElementById('dianneImage').style.display = 'none';
     
     // Show the correct avatars based on category
     if (lesson.category === 'panic') {
@@ -1872,10 +1806,8 @@ function loadLesson(index) {
     } else if (lesson.category === 'finishers') {
         document.getElementById('markImage').style.display = 'block';
         document.getElementById('lauraImage').style.display = 'block';
-    } else if (lesson.category === 'greetings') {
-        document.getElementById('harryImage').style.display = 'block';
-        document.getElementById('dianneImage').style.display = 'block';
-    } else if (lesson.category === 'practice') {
+    } else {
+        // practice, greetings, or default
         document.getElementById('adamImage').style.display = 'block';
         document.getElementById('jessicaImage').style.display = 'block';
     }
@@ -1938,14 +1870,6 @@ document.getElementById('markImage').addEventListener('click', () => {
 
 document.getElementById('lauraImage').addEventListener('click', () => {
     document.getElementById('lauraAudio').play();
-});
-
-document.getElementById('harryImage').addEventListener('click', () => {
-    document.getElementById('harryAudio').play();
-});
-
-document.getElementById('dianneImage').addEventListener('click', () => {
-    document.getElementById('dianneAudio').play();
 });
 
 document.getElementById('resetButton').addEventListener('click', () => {
