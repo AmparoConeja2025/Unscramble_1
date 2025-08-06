@@ -2287,9 +2287,13 @@ function showStatsOverlay() {
     updateStatsDisplay();
     const overlay = document.getElementById('statsOverlay');
     overlay.style.display = 'flex';
-    setTimeout(() => {
-        overlay.classList.add('stats-overlay-show');
-    }, 10);
+    overlay.classList.remove('stats-overlay-show'); // Reset any previous state
+    
+    // Force a reflow to ensure display is applied
+    overlay.offsetHeight;
+    
+    // Add the animation class immediately
+    overlay.classList.add('stats-overlay-show');
 }
 
 function hideStatsOverlay() {
@@ -2432,4 +2436,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>7
+</html>8
