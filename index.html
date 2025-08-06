@@ -1040,6 +1040,9 @@
 <!-- MENU BUTTON -->
 <button class="menu-btn" id="menuButton">Menu</button>
 
+<!-- STATS BUTTON -->
+<button class="menu-btn" id="statsBtn" onclick="showStatsOverlay()">Stats</button>
+
 <!-- MENU OVERLAY (hidden by default) -->
 <div class="menu-overlay" id="menuOverlay" style="display: none;">
     <div class="menu-content">
@@ -1067,11 +1070,6 @@
                     <button class="mode-toggle-btn" id="randomModeBtn">Random</button>
                 </div>
             </div>
-        </div>
-
-        <div class="menu-section">
-            <h3>Progress</h3>
-            <button class="category-btn" id="statsBtn" onclick="showStatsOverlay()">View Stats</button>
         </div>
         
         <div class="menu-section">
@@ -1147,7 +1145,7 @@
             <span id="progressText">0/10 to Level 2</span>
         </div>
         <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-bar" id="progressBar"></div>  
         </div>
     </div>
 </div>
@@ -2434,4 +2432,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>1
+</html>2
