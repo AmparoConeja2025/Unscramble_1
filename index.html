@@ -857,6 +857,25 @@
     -webkit-touch-callout: none;
 }
 
+.stats-btn {
+    position: absolute;
+    top: 15px;
+    left: 145px;
+    background: #93c5fd;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -1041,7 +1060,7 @@
 <button class="menu-btn" id="menuButton">Menu</button>
 
 <!-- STATS BUTTON -->
-<button class="menu-btn" id="statsBtn" onclick="showStatsOverlay()">Stats</button>
+<button class="stats-btn" id="statsBtn" onclick="showStatsOverlay()">Stats</button>
 
 <!-- MENU OVERLAY (hidden by default) -->
 <div class="menu-overlay" id="menuOverlay" style="display: none;">
@@ -2432,4 +2451,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>2
+</html>3
