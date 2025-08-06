@@ -2267,7 +2267,14 @@ document.getElementById('checkButton').addEventListener('click', () => {
     
     if (isCorrect) {
         incrementCorrectAnswers();
+         
+        // POINT TRACKING SYSTEM
+        const currentLesson = lessons[currentLessonIndex];
+        const pointsEarned = currentLesson.sentence.length; // Points = word count
+        awardPoints(currentLesson.id, pointsEarned);
+        
         explodeFireworks();
+        
         
         setTimeout(() => {
             showTranslationOverlay(lesson);
@@ -2367,13 +2374,81 @@ function updateStatsDisplay() {
 }
 
 function getStatsData() {
-    // Simple stats structure for now
+    const today = new Date().toDateString();
+    const progressData = JSON.parse(localStorage.getItem('englishLearningProgress') || '{}');
+    
+    // Calculate today's stats
+    let todayPoints = 0;
+    let todaySentences = 0;
+    if (progressData.weeklyStats && progressData.weeklyStats[today]) {
+        todayPoints = progressData.weeklyStats[today].points;
+        todaySentences = progressData.weeklyStats[today].sentences;
+    }
+    
+    // Calculate weekly totals (last 7 days)
+    let weeklyPoints = 0;
+    let activeDays = 0;
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    
+    if (progressData.weeklyStats) {
+        Object.keys(progressData.weeklyStats).forEach(date => {
+            const statDate = new Date(date);
+            if (statDate >= oneWeekAgo) {
+                weeklyPoints += progressData.weeklyStats[date].points;
+                if (progressData.weeklyStats[date].sentences > 0) {
+                    activeDays++;
+                }
+            }
+        });
+    }
+    
     return {
-        todayPoints: 0,
-        todaySentences: 0,
-        weeklyPoints: 0,
-        activeDays: 0
+        todayPoints: todayPoints,
+        todaySentences: todaySentences,
+        weeklyPoints: weeklyPoints,
+        activeDays: activeDays
     };
+}
+
+function awardPoints(lessonId, points) {
+    const today = new Date().toDateString();
+    let progressData = JSON.parse(localStorage.getItem('englishLearningProgress') || '{}');
+    
+    // Initialize data structure if needed
+    if (!progressData.dailyProgress) progressData.dailyProgress = {};
+    if (!progressData.lessonHistory) progressData.lessonHistory = {};
+    if (!progressData.weeklyStats) progressData.weeklyStats = {};
+    
+    // Check daily cooldown - can only earn points once per day per lesson
+    const todayKey = `${lessonId}_${today}`;
+    if (progressData.dailyProgress[todayKey]) {
+        console.log('Already completed this lesson today - no points awarded');
+        return; // No points awarded - already done today
+    }
+    
+    // Check max completion limit (3 times total per lesson)
+    if (!progressData.lessonHistory[lessonId]) progressData.lessonHistory[lessonId] = 0;
+    if (progressData.lessonHistory[lessonId] >= 3) {
+        console.log('Lesson completed maximum times - no points awarded');
+        return; // No points - reached 3-time limit
+    }
+    
+    // Award points!
+    progressData.dailyProgress[todayKey] = points;
+    progressData.lessonHistory[lessonId]++;
+    
+    // Update today's totals
+    if (!progressData.weeklyStats[today]) {
+        progressData.weeklyStats[today] = { points: 0, sentences: 0 };
+    }
+    progressData.weeklyStats[today].points += points;
+    progressData.weeklyStats[today].sentences += 1;
+    
+    // Save progress
+    localStorage.setItem('englishLearningProgress', JSON.stringify(progressData));
+    
+    console.log(`Awarded ${points} points for completing lesson ${lessonId}!`);
 }
 
 // MENU EVENT LISTENERS
@@ -2501,4 +2576,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>6
+</html>7
