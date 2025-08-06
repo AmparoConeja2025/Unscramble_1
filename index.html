@@ -1786,6 +1786,14 @@ function applyMobileClasses() {
     document.querySelector('.translation-english').classList.add('mobile-landscape-translation-english');
     document.querySelector('.translation-spanish').classList.add('mobile-landscape-translation-spanish');
     document.querySelector('.translation-close-btn').classList.add('mobile-landscape-translation-close-btn');
+    // Stats overlay mobile classes
+    document.getElementById('statsOverlay').classList.add('mobile-landscape-stats-overlay');
+    document.querySelector('.stats-header').classList.add('mobile-landscape-stats-header');
+    document.querySelectorAll('.stats-section').forEach(section => section.classList.add('mobile-landscape-stats-section'));
+    document.querySelectorAll('.stat-item').forEach(item => item.classList.add('mobile-landscape-stat-item'));
+    document.querySelectorAll('.stat-label').forEach(label => label.classList.add('mobile-landscape-stat-label'));
+    document.querySelectorAll('.stat-value').forEach(value => value.classList.add('mobile-landscape-stat-value'));
+    document.querySelector('.stats-action-btn').classList.add('mobile-landscape-stats-action-btn');
     
     // Apply mobile classes to navigation buttons
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.add('mobile-landscape-nav-btn'));
@@ -2490,4 +2498,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>3
+</html>5
