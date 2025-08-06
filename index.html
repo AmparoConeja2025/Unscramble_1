@@ -2218,21 +2218,6 @@ document.getElementById('translationOverlay').addEventListener('click', (e) => {
     }
 });
 
-// STATS SYSTEM EVENT LISTENERS
-document.getElementById('statsBtn').addEventListener('click', showStatsOverlay);
-
-document.getElementById('statsCloseBtn').addEventListener('click', hideStatsOverlay);
-
-document.getElementById('statsBackBtn').addEventListener('click', () => {
-    hideStatsOverlay();
-    showMenu();
-});
-
-document.getElementById('statsOverlay').addEventListener('click', (e) => {
-    if (e.target.id === 'statsOverlay') {
-        hideStatsOverlay();
-    }
-});
 
 // HOVER EFFECTS - FLAT EVENT LISTENERS
 document.getElementById('prevBtn').addEventListener('mouseenter', (e) => {
@@ -2429,6 +2414,19 @@ document.getElementById('randomNavBtn').addEventListener('mouseleave', (e) => {
 
 // INITIALIZE APP
 document.addEventListener("DOMContentLoaded", () => {
+    // STATS SYSTEM EVENT LISTENERS
+    document.getElementById('statsBtn').addEventListener('click', showStatsOverlay);
+    document.getElementById('statsCloseBtn').addEventListener('click', hideStatsOverlay);
+    document.getElementById('statsBackBtn').addEventListener('click', () => {
+        hideStatsOverlay();
+        showMenu();
+    });
+    document.getElementById('statsOverlay').addEventListener('click', (e) => {
+        if (e.target.id === 'statsOverlay') {
+            hideStatsOverlay();
+        }
+    });
+    
     applyMobileClasses();
     loadLesson(0);
 });
@@ -2436,4 +2434,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>8
+</html>9
