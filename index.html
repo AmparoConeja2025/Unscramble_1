@@ -532,6 +532,104 @@
     max-width: 90vw;
 }
 
+/* STATS OVERLAY */
+.stats-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 1002;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-align: center;
+    min-width: 350px;
+    max-width: 90vw;
+    display: none;
+}
+
+.stats-overlay-show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.stats-content {
+    width: 100%;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 15px;
+}
+
+.stats-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-section {
+    margin-bottom: 25px;
+}
+
+.stats-section h3 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px 0;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+}
+
+.stat-value {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.stats-action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.stats-action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
 .translation-overlay-show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -970,6 +1068,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="menu-section">
+            <h3>Progress</h3>
+            <button class="category-btn" id="statsBtn">View Stats</button>
+        </div>
         
         <div class="menu-section">
             <button class="menu-action-btn" id="backToGameBtn">Back to Game</button>
@@ -1063,6 +1166,44 @@
         <div class="translation-spanish" id="translationSpanish"></div>
     </div>
     <button class="translation-close-btn" id="translationCloseBtn">Continue Learning</button>
+</div>
+
+<!-- STATS OVERLAY -->
+<div class="stats-overlay" id="statsOverlay" style="display: none;">
+    <div class="stats-content">
+        <div class="stats-header">
+            <h2>📊 Your Progress</h2>
+            <button class="stats-close-btn" id="statsCloseBtn">×</button>
+        </div>
+        
+        <div class="stats-section">
+            <h3>Today's Progress</h3>
+            <div class="stat-item">
+                <span class="stat-label">Points Earned:</span>
+                <span class="stat-value" id="todayPoints">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Sentences Completed:</span>
+                <span class="stat-value" id="todaySentences">0</span>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <h3>Weekly Summary</h3>
+            <div class="stat-item">
+                <span class="stat-label">Total Points:</span>
+                <span class="stat-value" id="weeklyPoints">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Days Active:</span>
+                <span class="stat-value" id="activeDays">0</span>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <button class="stats-action-btn" id="statsBackBtn">Back to Menu</button>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -2077,6 +2218,22 @@ document.getElementById('translationOverlay').addEventListener('click', (e) => {
     }
 });
 
+// STATS SYSTEM EVENT LISTENERS
+document.getElementById('statsBtn').addEventListener('click', showStatsOverlay);
+
+document.getElementById('statsCloseBtn').addEventListener('click', hideStatsOverlay);
+
+document.getElementById('statsBackBtn').addEventListener('click', () => {
+    hideStatsOverlay();
+    showMenu();
+});
+
+document.getElementById('statsOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'statsOverlay') {
+        hideStatsOverlay();
+    }
+});
+
 // HOVER EFFECTS - FLAT EVENT LISTENERS
 document.getElementById('prevBtn').addEventListener('mouseenter', (e) => {
     if (!e.target.disabled) e.target.classList.add('nav-btn-hover');
@@ -2123,6 +2280,44 @@ function jumpToCategory(category) {
         loadLesson(currentLessonIndex);
         hideMenu();
     }
+}
+
+// STATS SYSTEM FUNCTIONALITY
+function showStatsOverlay() {
+    updateStatsDisplay();
+    const overlay = document.getElementById('statsOverlay');
+    overlay.style.display = 'flex';
+    setTimeout(() => {
+        overlay.classList.add('stats-overlay-show');
+    }, 10);
+}
+
+function hideStatsOverlay() {
+    const overlay = document.getElementById('statsOverlay');
+    overlay.classList.remove('stats-overlay-show');
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 500);
+}
+
+function updateStatsDisplay() {
+    const today = new Date().toDateString();
+    const stats = getStatsData();
+    
+    document.getElementById('todayPoints').textContent = stats.todayPoints || 0;
+    document.getElementById('todaySentences').textContent = stats.todaySentences || 0;
+    document.getElementById('weeklyPoints').textContent = stats.weeklyPoints || 0;
+    document.getElementById('activeDays').textContent = stats.activeDays || 0;
+}
+
+function getStatsData() {
+    // Simple stats structure for now
+    return {
+        todayPoints: 0,
+        todaySentences: 0,
+        weeklyPoints: 0,
+        activeDays: 0
+    };
 }
 
 // MENU EVENT LISTENERS
@@ -2237,4 +2432,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>6
+</html>7
