@@ -2259,37 +2259,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
 
 document.getElementById('undoButton').addEventListener('click', performUndo);
 
-document.getElementById('checkButton').addEventListener('click', () => {
-    const dropZone = document.getElementById('dropZone');
-    const droppedWords = Array.from(dropZone.children);
-    const lesson = lessons[currentLessonIndex];
-    
-    if (droppedWords.length !== lesson.correctOrder.length) {
-        alert("Please arrange all the words first!");
-        return;
-    }
-    
-    const userOrder = droppedWords.map(word => word.textContent);
-    const isCorrect = userOrder.every((word, index) => word === lesson.correctOrder[index]);
-    
-    if (isCorrect) {
-        incrementCorrectAnswers();
-         
-        // POINT TRACKING SYSTEM
-        const currentLesson = lessons[currentLessonIndex];
-        const pointsEarned = currentLesson.sentence.length; // Points = word count
-        awardPoints(currentLesson.id, pointsEarned);
-        
-        explodeFireworks();
-        
-        
-        setTimeout(() => {
-            showTranslationOverlay(lesson);
-        }, 1000);
-    } else {
-        showTryAgain();
-    }
-});
+
 
 document.getElementById('translationCloseBtn').addEventListener('click', hideTranslationOverlay);
 
