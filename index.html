@@ -1195,9 +1195,10 @@
 
 <!-- PROGRESS TRACKING AREA -->
 <div class="progress-area">
-    <div class="level-badge">
-        <span class="level-text">Level <span id="currentLevel">1</span></span>
-    </div>
+    <div class="level-badge" style="position: relative;">
+    <img id="levelBadgeImg" src="Image/bronze.png" alt="Level Badge" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;">
+    <span class="level-text" style="position: relative; z-index: 10;">Level <span id="currentLevel">1</span></span>
+</div>
     
     <div class="progress-section">
         <div class="progress-label">
@@ -1826,11 +1827,12 @@ function updateProgress() {
     
     currentLevelEl.textContent = currentLevelData.level;
     // Set badge image based on level
+const levelBadgeImg = document.getElementById('levelBadgeImg');
 if (currentLevelData.level === 1) {
-    levelBadgeEl.style.background = `url('Image/bronze.png') center/contain no-repeat`;
+    levelBadgeImg.src = 'Image/bronze.png';
 } else {
-    // Fallback to gradient for other levels (for now)
-    levelBadgeEl.style.background = `linear-gradient(135deg, ${currentLevelData.color} 0%, ${currentLevelData.color}AA 100%)`;
+    // Fallback to default for other levels (for now)
+    levelBadgeImg.src = 'Image/bronze.png'; // We'll update this when we make other badges
 }
     
     // Calculate progress to next level
