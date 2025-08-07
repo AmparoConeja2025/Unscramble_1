@@ -2480,7 +2480,7 @@ document.getElementById('menuOverlay').addEventListener('click', (e) => {
 });
 
 // RANDOM LEARNING SYSTEM
-let isRandomMode = false;
+let isRandomMode = true;
 let usedLessonsInRandomMode = [];
 
 function getRandomLesson() {
@@ -2570,10 +2570,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     applyMobileClasses();
+    toggleRandomMode(true);
     loadLesson(0);
 });
 
 </script>
 
 </body>
-</html>8
+</html>9
