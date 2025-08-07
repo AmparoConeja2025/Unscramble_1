@@ -1802,30 +1802,44 @@ function applyMobileClasses() {
 
 // PROGRESS UPDATE FUNCTION
 function updateProgress() {
-    const currentLevelData = levelTargets.find(l => l.level === currentLevel);
+    // Get total points from our tracking system
+    const stats = getStatsData();
+    const totalPoints = stats.weeklyPoints || 0;
+    
+    // Define our new level system
+    const levels = [
+        { level: 1, title: "Bronze Beginner", minPoints: 0, maxPoints: 49, color: "#CD7F32" },
+        { level: 2, title: "Silver Speaker", minPoints: 50, maxPoints: 149, color: "#C0C0C0" },
+        { level: 3, title: "Gold Communicator", minPoints: 150, maxPoints: 299, color: "#FFD700" },
+        { level: 4, title: "Diamond Fluent", minPoints: 300, maxPoints: 499, color: "#B9F2FF" },
+        { level: 5, title: "Master Linguist", minPoints: 500, maxPoints: 999999, color: "#FF6B6B" }
+    ];
+    
+    // Find current level
+    const currentLevelData = levels.find(l => totalPoints >= l.minPoints && totalPoints <= l.maxPoints);
+    
+    // Update level display
     const currentLevelEl = document.getElementById('currentLevel');
     const progressTextEl = document.getElementById('progressText');
     const progressBarEl = document.getElementById('progressBar');
+    const levelBadgeEl = document.querySelector('.level-badge');
     
-    currentLevelEl.textContent = currentLevel;
+    currentLevelEl.textContent = currentLevelData.level;
+    levelBadgeEl.style.background = `linear-gradient(135deg, ${currentLevelData.color} 0%, ${currentLevelData.color}AA 100%)`;
     
-    if (currentLevelData.next === "MAX") {
-        progressTextEl.textContent = "MAX LEVEL REACHED! 🏆";
+    // Calculate progress to next level
+    if (currentLevelData.level === 5) {
+        progressTextEl.textContent = `${currentLevelData.title} - MASTERED! 🏆`;
         progressBarEl.style.width = "100%";
-        return;
-    }
-    
-    const previousLevelTarget = levelTargets.find(l => l.level === currentLevel - 1)?.target || 0;
-    const progressInCurrentLevel = correctAnswers - previousLevelTarget;
-    const currentLevelRange = currentLevelData.target - previousLevelTarget;
-    
-    progressTextEl.textContent = `${progressInCurrentLevel}/${currentLevelRange} to Level ${currentLevelData.next}`;
-    
-    const progressPercent = (progressInCurrentLevel / currentLevelRange) * 100;
-    progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
-    
-    if (correctAnswers >= currentLevelData.target && currentLevelData.next !== "MAX") {
-        levelUp();
+    } else {
+        const nextLevel = levels[currentLevelData.level];
+        const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
+        const pointsNeededForLevel = nextLevel.minPoints - currentLevelData.minPoints;
+        
+        progressTextEl.textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to ${nextLevel.title}`;
+        
+        const progressPercent = (pointsInCurrentLevel / pointsNeededForLevel) * 100;
+        progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
     }
 }
 
@@ -2585,4 +2599,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>4
+</html>5
