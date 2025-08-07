@@ -1139,8 +1139,6 @@
     </div>
 </div>
 
-<!-- CHECK ANSWER BUTTON -->
-<button class="check-btn" id="checkButton">Check Answer</button>
 
 <!-- UNDO BUTTON -->
 <button class="undo-btn" id="undoButton" disabled>↶</button>
@@ -2028,6 +2026,15 @@ function animateWordToDropZone(wordTile, dropZone) {
         lastAddedWord = wordTile;
         canUndo = true;
         updateUndoButton();
+
+        // Auto-check if all words are placed
+        const currentLesson = lessons[currentLessonIndex];
+        if (dropZone.children.length === currentLesson.correctOrder.length) {
+            // All words placed - auto-check the answer!
+            setTimeout(() => {
+                checkAnswer();
+            }, 500);
+        }
         
         // Check if word is in correct position
 const currentPosition = dropZone.children.length - 1;
@@ -2387,7 +2394,7 @@ function getStatsData() {
     
     // Calculate weekly totals (last 7 days)
     let weeklyPoints = 0;
-    let activeDays = 0;
+    let activeDays = 0;e
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     
@@ -2409,6 +2416,37 @@ function getStatsData() {
         weeklyPoints: weeklyPoints,
         activeDays: activeDays
     };
+}
+
+function checkAnswer() {
+    const dropZone = document.getElementById('dropZone');
+    const droppedWords = Array.from(dropZone.children);
+    const lesson = lessons[currentLessonIndex];
+    
+    if (droppedWords.length !== lesson.correctOrder.length) {
+        alert("Please arrange all the words first!");
+        return;
+    }
+    
+    const userOrder = droppedWords.map(word => word.textContent);
+    const isCorrect = userOrder.every((word, index) => word === lesson.correctOrder[index]);
+    
+    if (isCorrect) {
+        incrementCorrectAnswers();
+        
+        // POINT TRACKING SYSTEM
+        const currentLesson = lessons[currentLessonIndex];
+        const pointsEarned = currentLesson.sentence.length; // Points = word count
+        awardPoints(currentLesson.id, pointsEarned);
+        
+        explodeFireworks();
+        
+        setTimeout(() => {
+            showTranslationOverlay(lesson);
+        }, 1000);
+    } else {
+        showTryAgain();
+    }
 }
 
 function awardPoints(lessonId, points) {
@@ -2577,4 +2615,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>9
+</html>2
