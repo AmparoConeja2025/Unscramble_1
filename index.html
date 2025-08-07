@@ -1825,7 +1825,13 @@ function updateProgress() {
     const levelBadgeEl = document.querySelector('.level-badge');
     
     currentLevelEl.textContent = currentLevelData.level;
+    // Set badge image based on level
+if (currentLevelData.level === 1) {
+    levelBadgeEl.style.background = `url('Image/bronze.png') center/contain no-repeat`;
+} else {
+    // Fallback to gradient for other levels (for now)
     levelBadgeEl.style.background = `linear-gradient(135deg, ${currentLevelData.color} 0%, ${currentLevelData.color}AA 100%)`;
+}
     
     // Calculate progress to next level
     if (currentLevelData.level === 5) {
