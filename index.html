@@ -461,14 +461,6 @@
     height: 80px;       
 }
 
-.center-badge {
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-}
-
 .progress-section {
     margin-bottom: 15px;
 }
@@ -1200,14 +1192,15 @@
   <!-- Words will be inserted here dynamically -->
 </div>
 
-<!-- PROGRESS TRACKING AREA -->    
+<!-- PROGRESS TRACKING AREA -->
+<div class="progress-area">
+   <div class="level-badge">
+    <img id="levelBadgeImg" src="Image/bronze.png" alt="Bronze Beginner Badge" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));">
+</div>
+    
     <div class="progress-section">
         <div class="progress-label">
             <span id="progressText">0/10 to Level 2</span>
-        </div>
-        <div class="level-badge" style="display: none;">
-            <img id="levelBadgeImg" src="Image/bronze.png" alt="Bronze Beginner Badge" 
-                 style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(4px 8px rgba(0, 0, 0, 0.3));">
         </div>
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>  
@@ -2620,4 +2613,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>4
+</html>2
