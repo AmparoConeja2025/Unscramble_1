@@ -1888,9 +1888,11 @@ if (currentLevelData.level === 1) {
     if (currentLevelData.level === 5) {
         progressTextEl.textContent = `${currentLevelData.title} - MASTERED! 🏆`;
         progressBarEl.style.width = "100%";
+        document.getElementById('progressText').textContent = `${currentLevelData.title} - MASTERED! 🏆`;
     } else {
         const nextLevel = levels[currentLevelData.level];
         const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
+        document.getElementById('progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForNextLevel} to Level ${currentLevelData.level + 1}`;
         const pointsNeededForLevel = nextLevel.minPoints - currentLevelData.minPoints;
         
         progressTextEl.textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to ${nextLevel.title}`;
@@ -2656,4 +2658,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>8
+</html>9
