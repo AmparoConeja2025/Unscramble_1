@@ -2687,26 +2687,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadLesson(0);
 });
 
-// AGGRESSIVE LANDSCAPE LOCK
-document.addEventListener("DOMContentLoaded", () => {
-    // Try modern screen orientation API first
-    if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape-primary').catch(() => {
-            console.log('Screen orientation lock not supported');
-        });
-    }
-    
-    // Backup: Listen for orientation changes and force landscape
-    window.addEventListener('orientationchange', () => {
-        setTimeout(() => {
-            if (Math.abs(window.orientation) !== 90) {
-                document.body.style.transform = 'rotate(90deg)';
-            }
-        }, 100);
-    });
-});
+
 
 </script>
 
 </body>
-</html>2
+</html>3
