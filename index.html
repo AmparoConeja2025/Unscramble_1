@@ -1876,10 +1876,10 @@ function updateProgress() {
     
     
     // Set badge image based on level
-const levelBadgeImg = document.getElementById('levelBadgeImg');
-if (currentLevelData.level === 1) {
+     const levelBadgeImg = document.getElementById('levelBadgeImg');
+     if (currentLevelData.level === 1) {
     levelBadgeImg.src = 'Image/bronze.png';
-} else {
+     } else {
     // Fallback to default for other levels (for now)
     levelBadgeImg.src = 'Image/bronze.png'; // We'll update this when we make other badges
 }
@@ -1888,19 +1888,20 @@ if (currentLevelData.level === 1) {
     if (currentLevelData.level === 5) {
         progressTextEl.textContent = `${currentLevelData.title} - MASTERED! 🏆`;
         progressBarEl.style.width = "100%";
-        document.getElementById('progressText').textContent = `${currentLevelData.title} - MASTERED! 🏆`;
+        document.querySelector('.progress-indicator #progressText').textContent = `${currentLevelData.title} - MASTERED! 🏆`;
     } else {
         const nextLevel = levels[currentLevelData.level];
         const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
         const pointsNeededForLevel = nextLevel.minPoints - currentLevelData.minPoints;
-        document.getElementById('progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
-        const safeProgressElement = document.getElementById('progressText');
+        document.querySelector('.progress-indicator #progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
+
+        const safeProgressElement = document.querySelector('.progress-indicator #progressText');
         console.log('All progress elements:', document.querySelectorAll('[id*="progress"], [class*="progress"]'));
         if (safeProgressElement) {
         safeProgressElement.textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
         safeProgressElement.style.color = safeProgressElement.style.color; // Force repaint
 }
-        const progressElement = document.getElementById('progressText');
+        const progressElement = document.querySelector('.progress-indicator #progressText');
         console.log('Progress element found:', progressElement);
         console.log('Updating to:', `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`);
         console.log('Debug - totalPoints:', totalPoints, 'pointsInCurrentLevel:', pointsInCurrentLevel, 'pointsNeededForLevel:', pointsNeededForLevel);
@@ -2667,4 +2668,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>7
+</html>8
