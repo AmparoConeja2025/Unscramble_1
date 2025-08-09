@@ -2532,6 +2532,7 @@ function checkAnswer() {
         const currentLesson = lessons[currentLessonIndex];
         const pointsEarned = currentLesson.sentence.length; // Points = word count
         awardPoints(currentLesson.id, pointsEarned);
+        updateProgress(); // FORCE IMMEDIATE REFRESH AFTER POINTS AWARDED
         
         explodeFireworks();
         
@@ -2711,4 +2712,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>5
+</html>6
