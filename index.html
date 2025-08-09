@@ -21,6 +21,25 @@
       left: 0;
     }
   }
+
+  /* ELIMINATE ALL TOUCH ZOOM */
+* {
+  touch-action: manipulation;
+}
+
+/* EXTRA PROTECTION FOR AVATARS */
+img {
+  touch-action: manipulation;
+  pointer-events: auto;
+}
+
+/* DISABLE DOUBLE-TAP ZOOM ON INTERACTIVE ELEMENTS */
+button, img, .word-tile {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 </style>
   </head>
 
@@ -2692,4 +2711,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>4
+</html>5
