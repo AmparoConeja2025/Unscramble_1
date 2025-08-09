@@ -1892,7 +1892,7 @@ function updateProgress() {
 } else if (currentLevelData.level === 2) {
     levelBadgeImg.src = 'Image/silver.png';
 } else if (currentLevelData.level === 3) {
-    levelBadgeImg.src = 'Image/gold.png';
+    levelBadgeImg.src = 'Image/gold.png?v=' + Date.now();
     console.log('🥇 GOLD BADGE SET! src =', levelBadgeImg.src);
     levelBadgeImg.removeAttribute('src');
 setTimeout(() => {
@@ -2690,4 +2690,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>8
+</html>9
