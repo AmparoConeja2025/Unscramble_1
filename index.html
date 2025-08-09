@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unscramble Learning Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  /* FORCE LANDSCAPE ORIENTATION */
+  @media screen and (orientation: portrait) {
+    html {
+      transform: rotate(90deg);
+      transform-origin: left top;
+      width: 100vh;
+      height: 100vw;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }
+</style>
   </head>
 
   <body class="bg-gray-600 min-h-screen relative">
@@ -2670,7 +2687,26 @@ document.addEventListener("DOMContentLoaded", () => {
     loadLesson(0);
 });
 
+// AGGRESSIVE LANDSCAPE LOCK
+document.addEventListener("DOMContentLoaded", () => {
+    // Try modern screen orientation API first
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape-primary').catch(() => {
+            console.log('Screen orientation lock not supported');
+        });
+    }
+    
+    // Backup: Listen for orientation changes and force landscape
+    window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+            if (Math.abs(window.orientation) !== 90) {
+                document.body.style.transform = 'rotate(90deg)';
+            }
+        }, 100);
+    });
+});
+
 </script>
 
 </body>
-</html>9
+</html>2
