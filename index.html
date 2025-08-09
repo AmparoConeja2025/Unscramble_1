@@ -1894,9 +1894,6 @@ if (currentLevelData.level === 1) {
         const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
         const pointsNeededForLevel = nextLevel.minPoints - currentLevelData.minPoints;
         document.getElementById('progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
-        document.getElementById('progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
-        progressElement.style.opacity = '0.99';
-        setTimeout(() => progressElement.style.opacity = '1', 10);
         const progressElement = document.getElementById('progressText');
         console.log('Progress element found:', progressElement);
         console.log('Updating to:', `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`);
@@ -2664,4 +2661,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>5
+</html>4
