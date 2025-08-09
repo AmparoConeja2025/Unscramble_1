@@ -1852,8 +1852,6 @@ function applyMobileClasses() {
 
 // PROGRESS UPDATE FUNCTION
 function updateProgress() {
-    console.log('DEBUG: updateProgress() function started');
-    console.log('🎯 DEBUG: updateProgress() function STARTED');
     // Get total points from our tracking system
     const stats = getStatsData();
     const totalPoints = stats.weeklyPoints || 0;
@@ -1869,14 +1867,6 @@ function updateProgress() {
     
     // Find current level
     const currentLevelData = levels.find(l => totalPoints >= l.minPoints && totalPoints <= l.maxPoints);
-    // ADD THIS:
-     console.log('DEBUG: levels array:', levels);
-     console.log('DEBUG: searching for totalPoints:', totalPoints);
-     levels.forEach((level, index) => {
-     console.log(`Level ${index}:`, level, 'Match:', totalPoints >= level.minPoints && totalPoints <= level.maxPoints);
-});
-     console.log('DEBUG: totalPoints:', totalPoints, 'currentLevel:', currentLevelData.level, 'currentLevelData:', currentLevelData);
-
     
     // Update level display
     const currentLevelEl = document.getElementById('currentLevel');
@@ -1884,35 +1874,14 @@ function updateProgress() {
     const progressBarEl = document.getElementById('progressBar');
     const levelBadgeEl = document.querySelector('.level-badge');
     
-    console.log('🚨 CHECKPOINT: About to start badge switching logic');
+    
     // Set badge image based on level
      const levelBadgeImg = document.getElementById('levelBadgeImg');
      if (currentLevelData.level === 1) {
     levelBadgeImg.src = 'Image/bronze.png';
-} else if (currentLevelData.level === 2) {
-    levelBadgeImg.src = 'Image/silver.png';
-} else if (currentLevelData.level === 3) {
-    console.log('🥇 GOLD BADGE SET! src =', levelBadgeImg.src);
-    
-    // NUCLEAR OPTION - COMPLETE ELEMENT REPLACEMENT
-    const parentElement = levelBadgeImg.parentElement;
-    const newImg = document.createElement('img');
-    newImg.id = 'levelBadgeImg';
-    newImg.src = 'Image/gold.png?v=' + Date.now();
-    newImg.alt = 'Gold Communicator Badge';
-    newImg.style.cssText = 'width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(4px 8px rgba(0, 0, 0, 0.3));';
-    
-    // Destroy old badge and insert new one
-    parentElement.removeChild(levelBadgeImg);
-    parentElement.appendChild(newImg);
-    
-    console.log('🔥 BADGE COMPLETELY REPLACED WITH GOLD!');
-} else if (currentLevelData.level === 4) {
-    levelBadgeImg.src = 'Image/diamond.png';
-} else if (currentLevelData.level === 5) {
-    levelBadgeImg.src = 'Image/master.png';
-    console.log('DEBUG: Badge should be set to:', levelBadgeImg.src, 'for level:', currentLevelData.level);
-
+     } else {
+    // Fallback to default for other levels (for now)
+    levelBadgeImg.src = 'Image/bronze.png'; // We'll update this when we make other badges
 }
     
     // Calculate progress to next level
@@ -2699,4 +2668,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>3
+</html>8
