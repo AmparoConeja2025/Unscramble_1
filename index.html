@@ -1895,6 +1895,8 @@ function updateProgress() {
     levelBadgeImg.src = 'Image/diamond.png';
 } else if (currentLevelData.level === 5) {
     levelBadgeImg.src = 'Image/master.png';
+    console.log('DEBUG: Badge should be set to:', levelBadgeImg.src, 'for level:', currentLevelData.level);
+
 }
     
     // Calculate progress to next level
