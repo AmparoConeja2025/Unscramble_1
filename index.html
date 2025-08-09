@@ -1867,6 +1867,8 @@ function updateProgress() {
     
     // Find current level
     const currentLevelData = levels.find(l => totalPoints >= l.minPoints && totalPoints <= l.maxPoints);
+    console.log('DEBUG: totalPoints:', totalPoints, 'currentLevel:', currentLevelData.level, 'currentLevelData:', currentLevelData);
+
     
     // Update level display
     const currentLevelEl = document.getElementById('currentLevel');
@@ -2673,4 +2675,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>9
+</html>1
