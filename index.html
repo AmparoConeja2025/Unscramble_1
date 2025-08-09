@@ -1249,7 +1249,7 @@
 <!-- INDEPENDENT LEVEL BADGE -->
 <div class="center-badge">
     <div class="level-badge">
-        <img id="levelBadgeImg" src="Image/bronze.png" alt="Bronze Beginner Badge" 
+        <img id="centerBadgeImg" src="Image/bronze.png" alt="Bronze Beginner Badge" 
              style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(4px 8px rgba(0, 0, 0, 0.3));">
     </div>
 </div>
@@ -1875,13 +1875,18 @@ function updateProgress() {
     const levelBadgeEl = document.querySelector('.level-badge');
     
     
-    // Set badge image based on level
-     const levelBadgeImg = document.getElementById('levelBadgeImg');
-     if (currentLevelData.level === 1) {
-    levelBadgeImg.src = 'Image/bronze.png';
-     } else {
-    // Fallback to default for other levels (for now)
-    levelBadgeImg.src = 'Image/bronze.png'; // We'll update this when we make other badges
+    // BADGE SYSTEM 2.0 - TARGET THE VISIBLE CENTER BADGE
+const centerBadgeImg = document.getElementById('centerBadgeImg');
+if (currentLevelData.level === 1) {
+    centerBadgeImg.src = 'Image/bronze.png';
+} else if (currentLevelData.level === 2) {
+    centerBadgeImg.src = 'Image/silver.png';
+} else if (currentLevelData.level === 3) {
+    centerBadgeImg.src = 'Image/gold.png';
+} else if (currentLevelData.level === 4) {
+    centerBadgeImg.src = 'Image/diamond.png';
+} else if (currentLevelData.level === 5) {
+    centerBadgeImg.src = 'Image/master.png';
 }
     
     // Calculate progress to next level
@@ -2668,4 +2673,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>8
+</html>9
