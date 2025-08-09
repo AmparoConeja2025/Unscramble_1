@@ -1896,13 +1896,8 @@ function updateProgress() {
     console.log('🥇 GOLD BADGE SET! src =', levelBadgeImg.src);
     levelBadgeImg.removeAttribute('src');
 setTimeout(() => {
-    levelBadgeImg.src = 'Image/gold.png';
+    levelBadgeImg.setAttribute('src', 'Image/gold.png?v=' + Date.now());
 }, 10);
-console.log('🔍 AFTER SETTING SRC:');
-console.log('🔍 levelBadgeImg.src =', levelBadgeImg.src);
-console.log('🔍 levelBadgeImg.getAttribute("src") =', levelBadgeImg.getAttribute('src'));
-console.log('🔍 Element HTML =', levelBadgeImg.outerHTML);
-console.log('🔍 Parent element =', levelBadgeImg.parentElement);
 } else if (currentLevelData.level === 4) {
     levelBadgeImg.src = 'Image/diamond.png';
 } else if (currentLevelData.level === 5) {
@@ -2695,4 +2690,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>1
+</html>2
