@@ -1894,9 +1894,10 @@ function updateProgress() {
 } else if (currentLevelData.level === 3) {
     levelBadgeImg.src = 'Image/gold.png';
     console.log('🥇 GOLD BADGE SET! src =', levelBadgeImg.src);
-    levelBadgeImg.style.display = 'none';
-    levelBadgeImg.offsetHeight;
-    levelBadgeImg.style.display = '';
+    levelBadgeImg.removeAttribute('src');
+setTimeout(() => {
+    levelBadgeImg.src = 'Image/gold.png';
+}, 10);
 } else if (currentLevelData.level === 4) {
     levelBadgeImg.src = 'Image/diamond.png';
 } else if (currentLevelData.level === 5) {
@@ -2689,4 +2690,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>7
+</html>8
