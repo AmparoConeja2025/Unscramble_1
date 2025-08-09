@@ -1892,9 +1892,8 @@ if (currentLevelData.level === 1) {
     } else {
         const nextLevel = levels[currentLevelData.level];
         const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
-        document.getElementById('progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
         const pointsNeededForLevel = nextLevel.minPoints - currentLevelData.minPoints;
-        
+        document.getElementById('progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
         progressTextEl.textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to ${nextLevel.title}`;
         
         const progressPercent = (pointsInCurrentLevel / pointsNeededForLevel) * 100;
@@ -2658,4 +2657,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-</html>1
+</html>2
