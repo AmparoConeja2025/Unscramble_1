@@ -933,6 +933,46 @@ button, img, .word-tile {
     font-size: 14px;
 }
 
+/* MOBILE TWO-COLUMN LAYOUT */
+.mobile-landscape-stats-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.mobile-landscape-stats-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-landscape-stats-column h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 8px;
+}
+
+.mobile-landscape-compact-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 4px 0;
+}
+
+.mobile-landscape-compact-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mobile-landscape-compact-value {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+}
+
 /* MENU SYSTEM - FLAT CLASSES */
 .menu-btn {
     position: absolute;
@@ -1319,40 +1359,50 @@ button, img, .word-tile {
             <button class="stats-close-btn" id="statsCloseBtn">×</button>
         </div>
         
-        <div class="stats-section">
-            <h3>Today's Progress</h3>
-            <div class="stat-item">
-                <span class="stat-label">Points Earned:</span>
-                <span class="stat-value" id="todayPoints">0</span>
+        <!-- Mobile Two-Column Layout -->
+        <div class="mobile-landscape-stats-content">
+            <!-- LEFT COLUMN: Today's Progress -->
+            <div class="mobile-landscape-stats-column">
+                <h3>📅 Today</h3>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">Points:</span>
+                    <span class="mobile-landscape-compact-value" id="todayPoints">0</span>
+                </div>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">Sentences:</span>
+                    <span class="mobile-landscape-compact-value" id="todaySentences">0</span>
+                </div>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">Week Total:</span>
+                    <span class="mobile-landscape-compact-value" id="weeklyPoints">0</span>
+                </div>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">Days Active:</span>
+                    <span class="mobile-landscape-compact-value" id="activeDays">0</span>
+                </div>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">Sentences Completed:</span>
-                <span class="stat-value" id="todaySentences">0</span>
+            
+            <!-- RIGHT COLUMN: Lifetime Achievements -->
+            <div class="mobile-landscape-stats-column">
+                <h3>🏆 Lifetime</h3>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">Total Points:</span>
+                    <span class="mobile-landscape-compact-value" id="lifetimePoints">0</span>
+                </div>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">Mastered:</span>
+                    <span class="mobile-landscape-compact-value" id="lifetimeSentences">0</span>
+                </div>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">🔥 Streak:</span>
+                    <span class="mobile-landscape-compact-value" id="currentStreak">0</span>
+                </div>
+                <div class="mobile-landscape-compact-item">
+                    <span class="mobile-landscape-compact-label">🎯 Best:</span>
+                    <span class="mobile-landscape-compact-value" id="longestStreak">0</span>
+                </div>
             </div>
         </div>
-
-        <div class="stats-section">
-            <h3>🏆 Lifetime Achievements</h3>
-            <div class="stat-item">
-                <span class="stat-label">Total Points Earned:</span>
-                <span class="stat-value" id="lifetimePoints">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Sentences Mastered:</span>
-                <span class="stat-value" id="lifetimeSentences">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Days Learning:</span>
-                <span class="stat-value" id="totalDaysActive">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">🔥 Current Streak:</span>
-                <span class="stat-value" id="currentStreak">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">🎯 Best Streak:</span>
-                <span class="stat-value" id="longestStreak">0</span>
-            </div>
         </div>
         
         <div class="stats-section">
@@ -2818,4 +2868,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>4
+</html>6
