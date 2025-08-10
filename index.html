@@ -2271,6 +2271,7 @@ function updateNavigationButtons() {
 // LOAD LESSON FUNCTION
 function loadLesson(index) {
     const lesson = lessons[index];
+    addToHistory(index);
     const wordBank = document.getElementById('wordBank');
     const dropZone = document.getElementById('dropZone');
     
@@ -2741,4 +2742,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>1
+</html>2
