@@ -1330,6 +1330,30 @@ button, img, .word-tile {
                 <span class="stat-value" id="todaySentences">0</span>
             </div>
         </div>
+
+        <div class="stats-section">
+            <h3>🏆 Lifetime Achievements</h3>
+            <div class="stat-item">
+                <span class="stat-label">Total Points Earned:</span>
+                <span class="stat-value" id="lifetimePoints">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Sentences Mastered:</span>
+                <span class="stat-value" id="lifetimeSentences">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Days Learning:</span>
+                <span class="stat-value" id="totalDaysActive">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">🔥 Current Streak:</span>
+                <span class="stat-value" id="currentStreak">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">🎯 Best Streak:</span>
+                <span class="stat-value" id="longestStreak">0</span>
+            </div>
+        </div>
         
         <div class="stats-section">
             <h3>Weekly Summary</h3>
@@ -2501,6 +2525,13 @@ function updateStatsDisplay() {
     document.getElementById('todaySentences').textContent = stats.todaySentences || 0;
     document.getElementById('weeklyPoints').textContent = stats.weeklyPoints || 0;
     document.getElementById('activeDays').textContent = stats.activeDays || 0;
+
+    // Update lifetime stats (gamification metrics)
+    document.getElementById('lifetimePoints').textContent = stats.lifetimePoints || 0;
+    document.getElementById('lifetimeSentences').textContent = stats.lifetimeSentences || 0;
+    document.getElementById('totalDaysActive').textContent = stats.totalDaysActive || 0;
+    document.getElementById('longestStreak').textContent = stats.longestStreak || 0;
+    document.getElementById('currentStreak').textContent = stats.currentStreak || 0;
 }
 
 function getStatsData() {
@@ -2532,13 +2563,57 @@ function getStatsData() {
             }
         });
     }
+
+    // Calculate lifetime totals (all-time stats)
+    let lifetimePoints = 0;
+    let lifetimeSentences = 0;
+    let totalDaysActive = 0;
+    let longestStreak = 0;
+    let currentStreak = 0;
+    
+    if (progressData.weeklyStats) {
+        const allDates = Object.keys(progressData.weeklyStats).sort();
+        
+        // Calculate lifetime totals
+        allDates.forEach(date => {
+            lifetimePoints += progressData.weeklyStats[date].points || 0;
+            lifetimeSentences += progressData.weeklyStats[date].sentences || 0;
+            if (progressData.weeklyStats[date].sentences > 0) {
+                totalDaysActive++;
+            }
+        });
+        
+        // Calculate streaks
+        let streak = 0;
+        const today = new Date();
+        for (let i = 0; i < 365; i++) { // Check last year
+            const checkDate = new Date(today);
+            checkDate.setDate(today.getDate() - i);
+            const dateStr = checkDate.toDateString();
+            
+            if (progressData.weeklyStats[dateStr] && progressData.weeklyStats[dateStr].sentences > 0) {
+                streak++;
+                if (i === 0) currentStreak = streak; // Current streak from today
+            } else {
+                if (streak > longestStreak) longestStreak = streak;
+                if (i === 0) currentStreak = 0; // Broke streak today
+                streak = 0;
+            }
+        }
+        if (streak > longestStreak) longestStreak = streak;
+    }
     
     return {
-        todayPoints: todayPoints,
-        todaySentences: todaySentences,
-        weeklyPoints: weeklyPoints,
-        activeDays: activeDays
-    };
+    todayPoints: todayPoints,
+    todaySentences: todaySentences,
+    weeklyPoints: weeklyPoints,
+    activeDays: activeDays,
+    lifetimePoints: lifetimePoints,
+    lifetimeSentences: lifetimeSentences,
+    totalDaysActive: totalDaysActive,
+    longestStreak: longestStreak,
+    currentStreak: currentStreak
+};
 }
 
 function checkAnswer() {
@@ -2743,4 +2818,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>3
+</html>4
