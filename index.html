@@ -773,14 +773,13 @@ button, img, .word-tile {
 /* MOBILE RESPONSIVE */
 @media (max-width: 800px) and (orientation: landscape) {
     .stats-three-column-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 20px;
     }
     
-    .stats-column:nth-child(3) {
-        grid-column: 1 / -1;
-        max-width: 300px;
-        margin: 0 auto;
+    .stats-column {
+        padding: 8px;
     }
     
     .stats-column {
