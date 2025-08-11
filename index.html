@@ -2550,7 +2550,11 @@ function hideStatsOverlay() {
 
 function updateStatsDisplay() {
     console.log('DEBUG: lifetimePoints element:', document.getElementById('lifetimePoints'));
-
+    console.log('DEBUG: lifetimeSentences element:', document.getElementById('lifetimeSentences'));
+    console.log('DEBUG: currentStreak element:', document.getElementById('currentStreak'));
+    console.log('DEBUG: longestStreak element:', document.getElementById('longestStreak'));
+    console.log('DEBUG: totalDaysActive element:', document.getElementById('totalDaysActive'));
+    
     const today = new Date().toDateString();
     const stats = getStatsData();
     
@@ -2851,4 +2855,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>9
+</html>1
