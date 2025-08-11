@@ -973,61 +973,6 @@ button, img, .word-tile {
     color: white;
 }
 
-/* THREE COLUMN STATS LAYOUT */
-.three-column-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.stats-column {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-}
-
-.today-column {
-    background: rgba(144, 238, 144, 0.2);
-}
-
-.week-column {
-    background: rgba(255, 218, 185, 0.2);
-}
-
-.lifetime-column {
-    background: rgba(173, 216, 230, 0.2);
-}
-
-.column-header {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 12px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    padding: 4px 0;
-}
-
-.stat-name {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.stat-value {
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-}
-
 /* MENU SYSTEM - FLAT CLASSES */
 .menu-btn {
     position: absolute;
@@ -1409,69 +1354,53 @@ button, img, .word-tile {
 <!-- STATS OVERLAY -->
 <div class="stats-overlay" id="statsOverlay" style="display: none;">
     <div class="stats-content">
-            <!-- Three Column Mobile Layout -->
-            <div class="three-column-stats">
-                <!-- TODAY COLUMN -->
-                <div class="stats-column today-column">
-                    <div class="column-header">📅 Today</div>
-                    <div class="stat-row">
-                        <span class="stat-name">Sentences</span>
-                        <span class="stat-value" id="todaySentences">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Points</span>
-                        <span class="stat-value" id="todayPoints">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Level up</span>
-                        <span class="stat-value" id="todayLevelUps">0</span>
-                    </div>
-                </div>
-                
-                <!-- THIS WEEK COLUMN -->
-                <div class="stats-column week-column">
-                    <div class="column-header">📊 This Week</div>
-                    <div class="stat-row">
-                        <span class="stat-name">Sentences</span>
-                        <span class="stat-value" id="weekSentences">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Points</span>
-                        <span class="stat-value" id="weeklyPoints">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Streak</span>
-                        <span class="stat-value" id="currentStreak">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Level up</span>
-                        <span class="stat-value" id="weekLevelUps">0</span>
-                    </div>
-                </div>
-                
-                <!-- LIFETIME COLUMN -->
-                <div class="stats-column lifetime-column">
-                    <div class="column-header">📈 Lifetime</div>
-                    <div class="stat-row">
-                        <span class="stat-name">Sentences</span>
-                        <span class="stat-value" id="lifetimeSentences">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Points</span>
-                        <span class="stat-value" id="lifetimePoints">0</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">Best Streak</span>
-                        <span class="stat-value" id="longestStreak">0</span>
-                    </div>
-                </div>
+        <div class="stats-header">
+            <h2>📊 Your Progress</h2>
+            <button class="stats-close-btn" id="statsCloseBtn">×</button>
+        </div>
+        
+        
+        
+        <div class="stats-section">
+            <h3>Weekly Summary</h3>
+            <div class="stat-item">
+                <span class="stat-label">Total Points:</span>
+                <span class="stat-value" id="weeklyPoints">0</span>
             </div>
-            
-            <!-- BACK BUTTON -->
-            <div class="stats-section">
-                <button class="stats-action-btn" id="statsBackBtn">Back to Game</button>
+            <div class="stat-item">
+                <span class="stat-label">Days Active:</span>
+                <span class="stat-value" id="activeDays">0</span>
             </div>
         </div>
+
+        <div class="stats-section">
+            <h3>🏆 Lifetime Achievements</h3>
+            <div class="stat-item">
+                <span class="stat-label">Total Points Earned:</span>
+                <span class="stat-value" id="lifetimePoints">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Sentences Mastered:</span>
+                <span class="stat-value" id="lifetimeSentences">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Days Learning:</span>
+                <span class="stat-value" id="totalDaysActive">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">🔥 Current Streak:</span>
+                <span class="stat-value" id="currentStreak">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">🎯 Best Streak:</span>
+                <span class="stat-value" id="longestStreak">0</span>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <button class="stats-action-btn" id="statsBackBtn">Back to Menu</button>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -2920,4 +2849,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>9
+</html>8
