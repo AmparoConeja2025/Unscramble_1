@@ -2549,6 +2549,8 @@ function hideStatsOverlay() {
 }
 
 function updateStatsDisplay() {
+    console.log('DEBUG: lifetimePoints element:', document.getElementById('lifetimePoints'));
+
     const today = new Date().toDateString();
     const stats = getStatsData();
     
@@ -2565,7 +2567,7 @@ function updateStatsDisplay() {
     document.getElementById('currentStreak').textContent = stats.currentStreak || 0;
 }
 
-function getStatsData() {
+function getStatsData() {q
     const today = new Date().toDateString();
     const progressData = JSON.parse(localStorage.getItem('englishLearningProgress') || '{}');
     
