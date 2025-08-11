@@ -2567,7 +2567,7 @@ function updateStatsDisplay() {
     document.getElementById('currentStreak').textContent = stats.currentStreak || 0;
 }
 
-function getStatsData() {q
+function getStatsData() {
     const today = new Date().toDateString();
     const progressData = JSON.parse(localStorage.getItem('englishLearningProgress') || '{}');
     
@@ -2851,4 +2851,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>8
+</html>9
