@@ -2558,17 +2558,16 @@ function updateStatsDisplay() {
     const today = new Date().toDateString();
     const stats = getStatsData();
     
-    document.getElementById('todayPoints').textContent = stats.todayPoints || 0;
-    document.getElementById('todaySentences').textContent = stats.todaySentences || 0;
-    document.getElementById('weeklyPoints').textContent = stats.weeklyPoints || 0;
-    document.getElementById('activeDays').textContent = stats.activeDays || 0;
+    // Only update elements that actually exist in HTML
+document.getElementById('weeklyPoints').textContent = stats.weeklyPoints || 0;
+document.getElementById('activeDays').textContent = stats.activeDays || 0;
 
-    // Update lifetime stats (gamification metrics)
-    document.getElementById('lifetimePoints').textContent = stats.lifetimePoints || 0;
-    document.getElementById('lifetimeSentences').textContent = stats.lifetimeSentences || 0;
-    document.getElementById('totalDaysActive').textContent = stats.totalDaysActive || 0;
-    document.getElementById('longestStreak').textContent = stats.longestStreak || 0;
-    document.getElementById('currentStreak').textContent = stats.currentStreak || 0;
+   // Update lifetime stats (gamification metrics) - TEMPORARILY DISABLED
+// document.getElementById('lifetimePoints').textContent = stats.lifetimePoints || 0;
+// document.getElementById('lifetimeSentences').textContent = stats.lifetimeSentences || 0;
+// document.getElementById('totalDaysActive').textContent = stats.totalDaysActive || 0;
+// document.getElementById('longestStreak').textContent = stats.longestStreak || 0;
+// document.getElementById('currentStreak').textContent = stats.currentStreak || 0;
 }
 
 function getStatsData() {
