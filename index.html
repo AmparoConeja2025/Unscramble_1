@@ -2934,17 +2934,17 @@ function awardPoints(lessonId, points) {
     
     // Check daily cooldown - can only earn points once per day per lesson
     const todayKey = `${lessonId}_${today}`;
-    if (progressData.dailyProgress[todayKey]) {
-        console.log('Already completed this lesson today - no points awarded');
-        return; // No points awarded - already done today
-    }
+    //if (progressData.dailyProgress[todayKey]) {
+        //console.log('Already completed this lesson today - no points awarded');
+        //return; // No points awarded - already done today
+    //}
     
     // Check max completion limit (3 times total per lesson)
-    if (!progressData.lessonHistory[lessonId]) progressData.lessonHistory[lessonId] = 0;
-    if (progressData.lessonHistory[lessonId] >= 3) {
-        console.log('Lesson completed maximum times - no points awarded');
-        return; // No points - reached 3-time limit
-    }
+    //if (!progressData.lessonHistory[lessonId]) progressData.lessonHistory[lessonId] = 0;
+    //if (progressData.lessonHistory[lessonId] >= 3) {
+        //console.log('Lesson completed maximum times - no points awarded');
+        //return; // No points - reached 3-time limit
+    //}
     
     // Award points!
     progressData.dailyProgress[todayKey] = points;
@@ -3093,4 +3093,5 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
+
 </html>2
