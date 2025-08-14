@@ -142,9 +142,8 @@ button, img, .word-tile {
 /* LESSON NAVIGATION */
 .lesson-nav {
     position: absolute;
-    top: 95px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 20px;
+    right:10px;
     display: flex;
     gap: 15px;
     align-items: center;
@@ -1549,7 +1548,7 @@ button, img, .word-tile {
 .progress-indicator {
     position: absolute;
     top: 20px;
-    right: 20px;
+    left: 40%;
     background: rgba(255, 255, 255, 0.1);
     padding: 8px 16px;
     border-radius: 20px;
@@ -2809,8 +2808,22 @@ function hideTranslationOverlay() {
     overlay.classList.add('translation-overlay-hide');
     
     setTimeout(() => {
-        overlay.classList.remove('translation-overlay-hide');
-    }, 500);
+    overlay.classList.remove('translation-overlay-hide');
+    
+    // AUTO-ADVANCE TO NEXT LESSON
+    if (isRandomMode) {
+        // In random mode, go to random lesson
+        const randomIndex = getRandomLesson();
+        currentLessonIndex = randomIndex;
+        loadLesson(currentLessonIndex);
+    } else {
+        // In sequential mode, go to next lesson
+        if (currentLessonIndex < lessons.length - 1) {
+            currentLessonIndex++;
+            loadLesson(currentLessonIndex);
+        }
+    }
+}, 500);
 }
 
 // ANIMATE WORD TO DROP ZONE
@@ -3012,19 +3025,10 @@ function loadLesson(index) {
 
 // EVENT LISTENERS - FLAT STRUCTURE
 document.getElementById('prevBtn').addEventListener('click', () => {
-if (canGoBack()) {
-    const previousIndex = getPreviousLesson();
-    if (previousIndex !== null) {
-        currentLessonIndex = previousIndex;
-        loadLesson(currentLessonIndex);
-    }
-} else {
-    // Fallback to sequential if no history
     if (currentLessonIndex > 0) {
         currentLessonIndex--;
         loadLesson(currentLessonIndex);
     }
-}  
 });
 
 document.getElementById('nextBtn').addEventListener('click', () => {
@@ -3134,6 +3138,9 @@ function hideMenu() {
 }
 
 function jumpToCategory(category) {
+    // AUTOMATICALLY SWITCH TO CATEGORY MODE
+    toggleRandomMode(false);
+    
     // Find first lesson of the specified category
     const categoryIndex = lessons.findIndex(lesson => lesson.category === category);
     if (categoryIndex !== -1) {
@@ -3411,6 +3418,7 @@ function getRandomLesson() {
 
 function toggleRandomMode(enable) {
     isRandomMode = enable;
+    
     const categoryBtn = document.getElementById('categoryModeBtn');
     const randomBtn = document.getElementById('randomModeBtn');
     
