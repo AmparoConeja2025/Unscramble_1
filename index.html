@@ -1043,6 +1043,96 @@ button, img, .word-tile {
     line-height: 1;
 }
 
+/* CARD BACKGROUNDS - COMPLETE TARGETING SYSTEM */
+
+/* POINTS CARDS - Dark Cloud Background */
+.stats-column:nth-child(1) .stat-card:nth-child(1), /* Daily Points */
+.stats-column:nth-child(2) .stat-card:nth-child(1), /* Weekly Points */
+.stats-column:nth-child(3) .stat-card:nth-child(1)  /* Lifetime Points */
+{
+    background-image: url('Image/test-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #2d3748 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* SENTENCES CARDS - Ancient Parchment Background */
+.stats-column:nth-child(1) .stat-card:nth-child(2), /* Daily Sentences */
+.stats-column:nth-child(2) .stat-card:nth-child(2), /* Weekly Sentences */
+.stats-column:nth-child(3) .stat-card:nth-child(2)  /* Lifetime Sentences */
+{
+    background-image: url('Image/sentences-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #92400e !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* CURRENT/BEST STREAK CARDS - Blue Storm Background */
+.stats-column:nth-child(4) .stat-card:nth-child(1), /* Current */
+.stats-column:nth-child(4) .stat-card:nth-child(2)  /* Best */
+{
+    background-image: url('Image/current-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #1e40af !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* DAILY SENTENCES - NUCLEAR OPTION */
+.stats-overlay .stats-three-column-grid .stats-column:first-child .stats-column-content .stat-card:nth-child(2) {
+    background-image: url('Image/sentences-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #92400e !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* DAILY SENTENCES - DIFFERENT STRUCTURE */
+.stats-column:first-child > div:last-child {
+    background-image: url('Image/sentences-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #92400e !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
 .stats-action-btn {
     background: rgba(255, 255, 255, 0.2);
     color: white;
@@ -1181,6 +1271,57 @@ button, img, .word-tile {
     padding: 6px 12px;
     font-size: 14px;
 }
+
+/* TARGET THE PARENT OF todaySentences */
+.stat-card:has(#todaySentences) {
+    background-image: url('Image/sentences-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #92400e !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* DAYS ACTIVE/LEARNING CARDS - Calendar/Time Background */
+.stats-column:nth-child(2) .stat-card:nth-child(3), /* Weekly Days Active */
+.stats-column:nth-child(3) .stat-card:nth-child(3)  /* Lifetime Days Learning */
+{
+    background-image: url('Image/days-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #059669 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* CURRENT LEVEL BADGE - NUCLEAR TARGET */
+.badge-showcase {
+    background-image: url('Image/level-bg-1.png') !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-clip: padding-box !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: #7c2d12 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
 
 .mobile-landscape-jessica-btn {
     top: 250px;
@@ -1836,7 +1977,7 @@ button, img, .word-tile {
                     <div class="stat-card">
                         <div class="stat-icon">📆</div>
                         <div class="stat-info">
-                            <div class="stat-label">Days Learning</div>
+                            <div class="stat-label">Days Active</div>
                             <div class="stat-value" id="totalDaysActive">0</div>
                         </div>
                     </div>
