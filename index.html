@@ -609,6 +609,8 @@ button, img, .word-tile {
     display: none;
 }
 
+
+
 .stats-overlay-show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -668,8 +670,9 @@ button, img, .word-tile {
 /* THREE-COLUMN STATS LAYOUT */
 .stats-three-column-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 50px;
     margin-bottom: 25px;
 }
 
@@ -777,18 +780,48 @@ button, img, .word-tile {
 /* MOBILE RESPONSIVE */
 @media (max-width: 800px) and (orientation: landscape) {
     .stats-three-column-grid {
-        grid-template-rows: auto auto auto auto;
-        gap: 8px;
-        margin-bottom: 20px;
-    }
-    
-    .stats-column {
-        padding: 8px;
-    }
-    
-    .stats-column {
-        padding: 12px;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stats-three-column-grid {
+    width: 100% !important;
+    grid-template-columns: 1fr !important;
+}
+
+.stats-column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 15px;
+}
+
+.stats-column-content {
+    display: flex;
+    flex-direction: row !important;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* TEST BACKGROUND IMAGE CARD */
+.stat-card:first-child {
+    background-image: url('Image/test-bg-1.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    color: white !important;
+    font-family: 'Arial', sans-serif !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    background-color: transparent !important;
+}
+
+
     
     .stats-column-header h3 {
         font-size: 14px;
@@ -804,18 +837,126 @@ button, img, .word-tile {
         width: 32px;
         height: 32px;
     }
+
+    /* REMOVE EMOJIS FROM MOBILE STATS */
+@media (max-width: 800px) and (orientation: landscape) {
+    .stat-icon {
+        display: none !important;
+    }
+}
+
+/* SINGLE LINE LAYOUT FOR MOBILE STATS */
+@media (max-width: 800px) and (orientation: landscape) {
+    .stat-info {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        white-space: nowrap !important;
+    }
     
+    .stat-label {
+        margin-bottom: 0 !important;
+        font-size: 11px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .stat-value {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* REMOVE CATEGORY HEADER LINES */
+@media (max-width: 800px) and (orientation: landscape) {
+    .stats-column-header {
+        border-bottom: none !important;
+        padding-bottom: 5px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .stats-column-header h3 {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 5px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* COMPRESS CATEGORY HEADERS TO MATCH CARD HEIGHT */
+@media (max-width: 800px) and (orientation: landscape) {
+    .stats-column-header {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+    }
+    
+    .stats-column-header h3 {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        margin: 0 !important;
+        font-size: 13px !important;
+        line-height: 1 !important;
+    }
+
+    /* COMPRESS CATEGORY HEADERS - SINGLE CHANGE */
+@media (max-width: 800px) and (orientation: landscape) {
+    .stats-column-header {
+        margin-bottom: 5px !important;
+        padding-bottom: 0 !important;
+    }
+}
+    
+    /* Remove emojis from category headers */
+    .stats-column-header h3:before {
+        content: none !important;
+    }
+}
+      /* KEEP VERTICAL STACKING, REDUCE GAPS */
+      @media (max-width: 800px) and (orientation: landscape) {
+      .stats-three-column-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+} 
+
+}    
+
     .stat-card .stat-label {
         font-size: 12px;
     }
-
-    .stats-column-content {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    flex-wrap: wrap;
-}
     
+    /* FIX TALL BADGE ROW */
+@media (max-width: 800px) and (orientation: landscape) {
+    .badge-showcase {
+        height: 40px !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .current-badge {
+        flex-direction: row !important;
+        gap: 8px !important;
+        align-items: center !important;
+    }
+    
+    .badge-image {
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
     .stat-card .stat-value {
         font-size: 16px;
     }
@@ -824,12 +965,79 @@ button, img, .word-tile {
         width: 40px;
         height: 40px;
     }
+
+    /* FURTHER REDUCE PADDING FOR EVEN TIGHTER LAYOUT */
+@media (max-width: 800px) and (orientation: landscape) {
+    .stats-column {
+        padding: 5px !important;
+        margin-bottom: 2px !important;
+    }
+    
+    .stats-column-content {
+        gap: 4px !important;
+    }
+    
+    .stat-card {
+        padding: 4px 8px !important;
+        margin-bottom: 0 !important;
+    }
 }
 
 .stat-value {
     color: white;
     font-weight: bold;
     font-size: 18px;
+}
+
+/* HEADER CARDS */
+.header-card {
+    background-size: cover;
+    background-position: center;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 80px;
+    margin-bottom: 8px;
+}
+
+.weekly-header {
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.daily-header,
+.lifetime-header, 
+.streaks-header {
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
 }
 
 .stats-action-btn {
@@ -1098,19 +1306,6 @@ button, img, .word-tile {
     font-size: 16px;
 }
 
-.mobile-landscape-stats-action-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-}
-
-/* MOBILE TWO-COLUMN LAYOUT */
-.mobile-landscape-stats-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    width: 100%;
-}
-
 .mobile-landscape-stats-column {
     display: flex;
     flex-direction: column;
@@ -1180,6 +1375,30 @@ button, img, .word-tile {
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
+}
+
+/* TINY X CLOSE BUTTON */
+.stats-close-x {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.stats-close-x:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 /* PROGRESS INDICATOR */
@@ -1524,6 +1743,7 @@ button, img, .word-tile {
 <!-- STATS OVERLAY -->
 <div class="stats-overlay" id="statsOverlay" style="display: none;">
     <div class="stats-content">
+        <button class="stats-close-x" onclick="hideStatsOverlay()">×</button>
         <div class="stats-header">
             <h2>📊 Your Progress</h2>
             <button class="stats-close-btn" id="statsCloseBtn">×</button>
@@ -1533,24 +1753,32 @@ button, img, .word-tile {
         <div class="stats-three-column-grid">
             <!-- COLUMN 0: DAILY SUMMARY (NEW) -->
             <div class="stats-column">
-                <div class="stats-column-header">
-                    <h3>📅 Daily Summary</h3>
-                </div>
+            <div class="header-card daily-header">Daily</div>   
+                
                 <div class="stats-column-content">
                     <div class="stat-card">
                         <div class="stat-icon">🎯</div>
                         <div class="stat-info">
                             <div class="stat-label">Points</div>
                             <div class="stat-value" id="todayPoints">0</div>
+                            
                         </div>
                     </div>
                 </div>
+                
+                <!-- In Daily Summary section -->
+<div class="stat-card">
+    <div class="stat-icon">📖</div>
+    <div class="stat-info">
+        <div class="stat-label">Sentences</div>
+        <div class="stat-value" id="todaySentences">0</div>
+    </div>
+</div>
             </div>
+            
             <!-- COLUMN 1: WEEKLY SUMMARY -->
             <div class="stats-column">
-                <div class="stats-column-header">
-                    <h3>📅 Weekly Summary</h3>
-                </div>
+             <div class="header-card weekly-header">Weekly</div>  
                 <div class="stats-column-content">
                     <div class="stat-card">
                         <div class="stat-icon">🎯</div>
@@ -1559,6 +1787,15 @@ button, img, .word-tile {
                             <div class="stat-value" id="weeklyPoints">0</div>
                         </div>
                     </div>
+                    <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Sentences</div>
+                        <div class="stat-value" id="weeklySentences">0</div>
+                    </div>
+                </div>
+                
+                    
                     
                     <div class="stat-card">
                         <div class="stat-icon">📚</div>
@@ -1574,9 +1811,8 @@ button, img, .word-tile {
             
             <!-- COLUMN 2: LIFETIME ACHIEVEMENTS -->
             <div class="stats-column">
-                <div class="stats-column-header">
-                    <h3>🏆 Lifetime Achievements</h3>
-                </div>
+            <div class="header-card lifetime-header">Lifetime</div>   
+                
                 <div class="stats-column-content">
                     <div class="stat-card">
                         <div class="stat-icon">💎</div>
@@ -1589,7 +1825,7 @@ button, img, .word-tile {
                     <div class="stat-card">
                         <div class="stat-icon">📖</div>
                         <div class="stat-info">
-                            <div class="stat-label">Sentences Mastered</div>
+                            <div class="stat-label">Sentences</div>
                             <div class="stat-value" id="lifetimeSentences">0</div>
                         </div>
                     </div>
@@ -1606,14 +1842,12 @@ button, img, .word-tile {
             
             <!-- COLUMN 3: STREAKS & BADGES -->
             <div class="stats-column">
-                <div class="stats-column-header">
-                    <h3>🔥 Streaks & Badges</h3>
-                </div>
+                <div class="header-card streaks-header">Streaks</div>
                 <div class="stats-column-content">
                     <div class="stat-card">
                         <div class="stat-icon">🔥</div>
                         <div class="stat-info">
-                            <div class="stat-label">Current Streak</div>
+                            <div class="stat-label">Current</div>
                             <div class="stat-value" id="currentStreak">0</div>
                         </div>
                     </div>
@@ -1621,7 +1855,7 @@ button, img, .word-tile {
                     <div class="stat-card">
                         <div class="stat-icon">🎯</div>
                         <div class="stat-info">
-                            <div class="stat-label">Best Streak</div>
+                            <div class="stat-label">Best</div>
                             <div class="stat-value" id="longestStreak">0</div>
                         </div>
                     </div>
@@ -2800,6 +3034,11 @@ function updateStatsDisplay() {
     // Only update elements that actually exist in HTML
 document.getElementById('weeklyPoints').textContent = stats.weeklyPoints || 0;
 document.getElementById('activeDays').textContent = stats.activeDays || 0;
+// Update weekly sentences (MISSING!)
+document.getElementById('weeklySentences').textContent = stats.weeklySentences || 0;
+// Update daily stats (MISSING!)
+document.getElementById('todayPoints').textContent = stats.todayPoints || 0;
+document.getElementById('todaySentences').textContent = stats.todaySentences || 0;
 
    // Update lifetime stats (gamification metrics) - TEMPORARILY DISABLED
  document.getElementById('lifetimePoints').textContent = stats.lifetimePoints || 0;
@@ -2824,6 +3063,7 @@ function getStatsData() {
     // Calculate weekly totals (last 7 days)
     let weeklyPoints = 0;
     let activeDays = 0;
+    let weeklySentences = 0;
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     
@@ -2831,6 +3071,7 @@ function getStatsData() {
         Object.keys(progressData.weeklyStats).forEach(date => {
             const statDate = new Date(date);
             if (statDate >= oneWeekAgo) {
+                weeklySentences += progressData.weeklyStats[date].sentences || 0;
                 weeklyPoints += progressData.weeklyStats[date].points;
                 if (progressData.weeklyStats[date].sentences > 0) {
                     activeDays++;
@@ -2882,6 +3123,7 @@ function getStatsData() {
     todayPoints: todayPoints,
     todaySentences: todaySentences,
     weeklyPoints: weeklyPoints,
+    weeklySentences: weeklySentences,
     activeDays: activeDays,
     lifetimePoints: lifetimePoints,
     lifetimeSentences: lifetimeSentences,
@@ -2937,12 +3179,12 @@ function awardPoints(lessonId, points) {
     //if (progressData.dailyProgress[todayKey]) {
         //console.log('Already completed this lesson today - no points awarded');
         //return; // No points awarded - already done today
-    //}
+   // }
     
     // Check max completion limit (3 times total per lesson)
     //if (!progressData.lessonHistory[lessonId]) progressData.lessonHistory[lessonId] = 0;
     //if (progressData.lessonHistory[lessonId] >= 3) {
-        //console.log('Lesson completed maximum times - no points awarded');
+       // console.log('Lesson completed maximum times - no points awarded');
         //return; // No points - reached 3-time limit
     //}
     
@@ -3093,5 +3335,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-
-</html>2
+</html>7
