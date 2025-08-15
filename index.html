@@ -1576,6 +1576,97 @@ button, img, .word-tile {
     justify-content: center;
 }
 
+/* MOBILE MENU - KILL THE TEXT BLOAT */
+@media (max-width: 800px) and (orientation: landscape) {
+    .menu-content {
+        padding: 8px 12px !important;
+        max-height: 90vh !important;
+    }
+    
+    /* HIDE OR SHRINK REDUNDANT TEXT */
+    .menu-header h2 {
+        font-size: 16px !important;
+        margin: 0 0 4px 0 !important;
+    }
+    
+    .menu-section h3 {
+        font-size: 14px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    /* HIDE THE REDUNDANT "Learning Mode:" LABEL */
+    .mode-toggle-label {
+        display: none !important;
+    }
+    
+    /* TIGHTER SPACING EVERYWHERE */
+    .menu-header {
+        margin-bottom: 6px !important;
+        padding-bottom: 4px !important;
+    }
+    
+    .menu-section {
+        margin-bottom: 6px !important;
+    }
+    
+    .category-buttons {
+        gap: 4px !important;
+    }
+    
+    .mode-toggle-container {
+        margin-top: 2px !important;
+    }
+}
+
+/* HIDE TITLE, KEEP X BUTTON */
+@media (max-width: 800px) and (orientation: landscape) {
+    .menu-header h2 {
+        display: none !important;
+    }
+    
+    .menu-header {
+        display: flex !important;
+        justify-content: flex-end !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 0 !important;
+        min-height: 20px !important;
+    }
+    
+    .menu-close-btn {
+        position: static !important;
+    }
+}
+
+/* FLOAT X BUTTON OVER CONTENT - RECLAIM SPACE */
+@media (max-width: 800px) and (orientation: landscape) {
+    /* HIDE THE ENTIRE HEADER CONTAINER */
+    .menu-header {
+        display: none !important;
+    }
+    
+    
+    
+    /* MOVE "Choose Category" TO THE TOP */
+    .menu-content {
+        padding-top: 8px !important;
+    }
+    
+    .menu-section:first-of-type {
+        margin-top: 0 !important;
+    }
+}
+
+/* HIDE REDUNDANT BACK TO GAME BUTTON */
+@media (max-width: 800px) and (orientation: landscape) {
+    .menu-action-btn {
+        display: none !important;
+    }
+    
+    .menu-section:last-child {
+        display: none !important;
+    }
+}
+
 .menu-content {
     background: white;
     border-radius: 20px;
