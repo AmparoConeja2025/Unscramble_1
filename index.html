@@ -586,6 +586,322 @@ button, img, .word-tile {
     max-width: 90vw;
 }
 
+/* SPEEDRUN OVERLAY - GAMING INTERFACE */
+.speedrun-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    z-index: 2000;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.speedrun-overlay-show {
+    opacity: 1;
+}
+
+.speedrun-content {
+    background: rgba(15, 23, 42, 0.95);
+    border: 2px solid #3b82f6;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    min-width: 400px;
+    max-width: 90vw;
+    overflow-y: auto;
+    max-height: 90vh;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+.speedrun-close-x {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #94a3b8;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.speedrun-close-x:hover {
+    background: rgba(248, 113, 113, 0.2);
+    color: #f87171;
+}
+
+.speedrun-header h2 {
+    color: #3b82f6;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.daily-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.daily-progress span {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.multiplier-badge {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+    animation: pulse-glow 2s infinite;
+}
+
+.timer-display {
+    margin: 30px 0;
+}
+
+.timer-circle {
+    width: 200px;
+    height: 200px;
+    border: 6px solid #3b82f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), inset 0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+.timer-circle span {
+    font-size: 48px;
+    font-weight: 800;
+    color: #3b82f6;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+}
+
+.timer-label {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.speedrun-score {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.score-label {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.score-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: #10b981;
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.speedrun-actions {
+    margin-top: 30px;
+}
+
+.speedrun-start-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.speedrun-start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
+}
+
+.speedrun-quit-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+    margin-left: 15px;
+}
+
+.speedrun-quit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.6);
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+        transform: scale(1.05);
+    }
+}
+
+/* SPEEDRUN GAME MODE - BLUE OVERLAY SYSTEM */
+.speedrun-game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1500;
+    pointer-events: none;
+    display: none;
+}
+
+/*.speedrun-blue-tint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(59, 130, 246, 0.15);
+    backdrop-filter: blur(1px);
+    animation: blue-pulse 3s infinite ease-in-out;
+}
+*/
+.speedrun-floating-timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 2px solid #3b82f6;
+    border-radius: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.4);
+    pointer-events: auto;
+}
+
+.floating-timer-display {
+    font-size: 28px;
+    font-weight: 800;
+    color: #3b82f6;
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+    margin-bottom: 5px;
+}
+
+.floating-timer-label {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.speedrun-floating-score {
+    position: absolute;
+    top: 120px;
+    right: 20px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 2px solid #10b981;
+    border-radius: 15px;
+    padding: 12px 18px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.4);
+    pointer-events: auto;
+}
+
+.floating-score-label {
+    font-size: 10px;
+    color: #94a3b8;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.floating-score-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #10b981;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.7);
+}
+
+@keyframes blue-pulse {
+    0%, 100% { 
+        background: rgba(59, 130, 246, 0.12);
+    }
+    50% { 
+        background: rgba(59, 130, 246, 0.18);
+    }
+}
+
+/* MOBILE LANDSCAPE OPTIMIZATION */
+@media (max-width: 800px) and (orientation: landscape) {
+    .speedrun-floating-timer {
+        top: 15px;
+        right: 15px;
+        padding: 10px 15px;
+    }
+    
+    .floating-timer-display {
+        font-size: 22px;
+    }
+    
+    .speedrun-floating-score {
+        top: 90px;
+        right: 15px;
+        padding: 8px 12px;
+    }
+    
+    .floating-score-value {
+        font-size: 16px;
+    }
+}
+
 /* STATS OVERLAY */
 .stats-overlay {
     position: fixed;
@@ -1753,13 +2069,77 @@ button, img, .word-tile {
     margin-bottom: 20px;
 }
 
+/* SPEEDRUN BUTTON - ELECTRIC ENERGY */
+.speedrun-btn {
+    background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;/* SPEEDRUN BUTTON - ELECTRIC ENERGY */
+.speedrun-btn {
+    background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.speedrun-section {
+    margin-bottom: 5px !important;
+}
+
+.speedrun-btn:hover {
+    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+    transform: translateY(-2px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+}
+
+.speedrun-btn:active {
+    transform: translateY(0px);
+}
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.speedrun-btn:hover {
+    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+    transform: translateY(-2px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+}
+
+.speedrun-btn:active {
+    transform: translateY(0px);
+}
+
 .random-btn-hover {
     transform: translateY(-2px);
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
 }
 
 .mode-toggle-section {
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .mode-toggle-label {
@@ -1858,16 +2238,15 @@ button, img, .word-tile {
             </div>
         </div>
 
-        <div class="menu-section">
-            <h3>Learning Mode</h3> 
-            <div class="mode-toggle-section">
-                <div class="mode-toggle-label">Learning Mode:</div>
+       <div class="menu-section speedrun-section">
+            <button class="speedrun-btn" id="speedrunBtn">⚡ SPEEDRUN CHALLENGE</button>
+        </div>                
                 <div class="mode-toggle-container">
                     <button class="mode-toggle-btn mode-active" id="categoryModeBtn">Category</button>
                     <button class="mode-toggle-btn" id="randomModeBtn">Random</button>
                 </div>
-            </div>
-        </div>
+            
+       
         
         <div class="menu-section">
             <button class="menu-action-btn" id="backToGameBtn">Back to Game</button>
@@ -1972,6 +2351,63 @@ button, img, .word-tile {
         <div class="translation-spanish" id="translationSpanish"></div>
     </div>
     <button class="translation-close-btn" id="translationCloseBtn">Continue Learning</button>
+</div>
+
+<!-- SPEEDRUN OVERLAY -->
+<div class="speedrun-overlay" id="speedrunOverlay" style="display: none;">
+    <div class="speedrun-content">
+        <!-- Close Button -->
+        <button class="speedrun-close-x" onclick="hideSpeedrunOverlay()">×</button>
+        
+        <!-- Header with Daily Progress -->
+        <div class="speedrun-header">
+            <h2>⚡ SPEEDRUN CHALLENGE</h2>
+            <div class="daily-progress">
+                <span id="speedrunProgress">Daily Runs: 0/8</span>
+                <div class="multiplier-badge" id="currentMultiplier">1x POINTS</div>
+            </div>
+        </div>
+        
+        <!-- Main Timer Display -->
+        <div class="timer-display">
+            <div class="timer-circle">
+                <span id="speedrunTimer">2:00</span>
+            </div>
+            <div class="timer-label">TIME REMAINING</div>
+        </div>
+        
+        <!-- Current Score -->
+        <div class="speedrun-score">
+            <div class="score-label">CURRENT SCORE</div>
+            <div class="score-value" id="speedrunScore">0</div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="speedrun-actions">
+            <button class="speedrun-start-btn" id="speedrunStartBtn">START CHALLENGE</button>
+            <button class="speedrun-quit-btn" id="speedrunQuitBtn" style="display: none;">QUIT CHALLENGE</button>
+        </div>
+    </div>
+</div>
+
+<!-- SPEEDRUN GAME MODE OVERLAY (Blue Tint + Floating Timer) -->
+<div class="speedrun-game-overlay" id="speedrunGameOverlay" style="display: none;">
+    <!-- Blue Tint Background -->
+    <div class="speedrun-blue-tint"></div>
+    
+    <!-- Floating Timer -->
+    <div class="speedrun-floating-timer">
+        <div class="floating-timer-display">
+            <span id="floatingTimer">2:00</span>
+        </div>
+        <div class="floating-timer-label">SPEEDRUN</div>
+    </div>
+    
+    <!-- Floating Score (Optional) -->
+    <div class="speedrun-floating-score">
+        <div class="floating-score-label">SCORE</div>
+        <div class="floating-score-value" id="floatingScore">0</div>
+    </div>
 </div>
 
 <!-- STATS OVERLAY -->
@@ -2699,10 +3135,12 @@ if (currentLevelData.level === 1) {
         const nextLevel = levels[currentLevelData.level];
         const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
         const pointsNeededForLevel = nextLevel.minPoints - currentLevelData.minPoints;
-        document.querySelector('.progress-indicator #progressText').textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
+        const displayLevel = Math.floor(totalPoints / 15) + 1;
+        const displayPointsInLevel = totalPoints % 15;
+        document.querySelector('.progress-indicator #progressText').textContent = `${displayPointsInLevel}/15 to Level ${displayLevel + 1}`;
 
         const safeProgressElement = document.querySelector('.progress-indicator #progressText');
-        console.log('All progress elements:', document.querySelectorAll('[id*="progress"], [class*="progress"]'));
+        safeProgressElement.textContent = `${displayPointsInLevel}/15 to Level ${displayLevel + 1}`;
         if (safeProgressElement) {
         safeProgressElement.textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`;
         safeProgressElement.style.color = safeProgressElement.style.color; // Force repaint
@@ -2711,7 +3149,7 @@ if (currentLevelData.level === 1) {
         console.log('Progress element found:', progressElement);
         console.log('Updating to:', `${pointsInCurrentLevel}/${pointsNeededForLevel} to Level ${currentLevelData.level + 1}`);
         console.log('Debug - totalPoints:', totalPoints, 'pointsInCurrentLevel:', pointsInCurrentLevel, 'pointsNeededForLevel:', pointsNeededForLevel);
-        progressTextEl.textContent = `${pointsInCurrentLevel}/${pointsNeededForLevel} to ${nextLevel.title}`;
+       progressTextEl.textContent = `${displayPointsInLevel}/15 to Level ${displayLevel + 1}`;
         
         const progressPercent = (pointsInCurrentLevel / pointsNeededForLevel) * 100;
         progressBarEl.style.width = Math.min(progressPercent, 100) + "%";
@@ -3395,6 +3833,12 @@ function checkAnswer() {
         const currentLesson = lessons[currentLessonIndex];
         const pointsEarned = currentLesson.sentence.length; // Points = word count
         awardPoints(currentLesson.id, pointsEarned);
+
+        // SPEEDRUN SCORING SYSTEM
+        if (speedrunActive) {
+            speedrunScore += pointsEarned;
+            updateSpeedrunDisplay();
+        }
         updateProgress(); // FORCE IMMEDIATE REFRESH AFTER POINTS AWARDED
         
         explodeFireworks();
@@ -3474,6 +3918,144 @@ document.getElementById('menuOverlay').addEventListener('click', (e) => {
         hideMenu();
     }
 });
+
+
+// SPEEDRUN OVERLAY FUNCTIONS
+function showSpeedrunOverlay() {
+    const overlay = document.getElementById('speedrunOverlay');
+    overlay.style.display = 'flex';
+    overlay.offsetHeight; // Force reflow
+    overlay.classList.add('speedrun-overlay-show');
+}
+
+function hideSpeedrunOverlay() {
+    const overlay = document.getElementById('speedrunOverlay');
+    overlay.classList.remove('speedrun-overlay-show');
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 500);
+}
+
+// SPEEDRUN EVENT LISTENERS
+document.getElementById('speedrunBtn').addEventListener('click', () => {
+    hideMenu();
+    showSpeedrunOverlay();
+});
+
+// Click outside speedrun overlay to close
+document.getElementById('speedrunOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'speedrunOverlay') {
+        hideSpeedrunOverlay();
+    }
+});
+
+// SPEEDRUN GAME MODE FUNCTIONS
+let speedrunActive = false;
+let speedrunTimer = 120; // 2 minutes in seconds
+let speedrunTimerInterval = null;
+let speedrunScore = 0;
+
+function startSpeedrunGameMode() {
+    // Hide speedrun overlay
+    hideSpeedrunOverlay();
+    
+    // Initialize speedrun state
+    speedrunActive = true;
+    speedrunTimer = 120;
+    speedrunScore = 0;
+    
+    // Show blue overlay with timer
+    setTimeout(() => {
+        const gameOverlay = document.getElementById('speedrunGameOverlay');
+        gameOverlay.style.display = 'block';
+        updateSpeedrunDisplay();
+        startSpeedrunCountdown();
+    }, 500);
+}
+
+function updateSpeedrunDisplay() {
+    const minutes = Math.floor(speedrunTimer / 60);
+    const seconds = speedrunTimer % 60;
+    const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    document.getElementById('floatingTimer').textContent = timeString;
+    document.getElementById('floatingScore').textContent = speedrunScore;
+}
+
+function startSpeedrunCountdown() {
+    speedrunTimerInterval = setInterval(() => {
+        speedrunTimer--;
+        updateSpeedrunDisplay();
+        
+        if (speedrunTimer <= 0) {
+            endSpeedrunGameMode();
+        }
+    }, 1000);
+}
+
+function endSpeedrunGameMode() {
+    // Stop timer
+    if (speedrunTimerInterval) {
+        clearInterval(speedrunTimerInterval);
+        speedrunTimerInterval = null;
+    }
+    
+    // Hide blue overlay
+    document.getElementById('speedrunGameOverlay').style.display = 'none';
+    
+    // Reset state
+    speedrunActive = false;
+    
+    // Show speedrun results overlay
+    setTimeout(() => {
+        showSpeedrunOverlay();
+       // Update speedrun overlay with final results
+document.getElementById('speedrunScore').textContent = speedrunScore;
+// UPDATE DAILY RUN TRACKING
+        updateDailyRunProgress();
+        updateSpeedrunMultiplier();
+    }, 500);
+}
+
+// DAILY RUN TRACKING SYSTEM
+function updateDailyRunProgress() {
+    const today = new Date().toDateString();
+    let speedrunData = JSON.parse(localStorage.getItem('speedrunProgress') || '{}');
+    
+    // Initialize today's data if needed
+    if (!speedrunData[today]) {
+        speedrunData[today] = { runs: 0, totalScore: 0 };
+    }
+    
+    // Increment runs and add score
+    speedrunData[today].runs++;
+    speedrunData[today].totalScore += speedrunScore;
+    
+    // Save progress
+    localStorage.setItem('speedrunProgress', JSON.stringify(speedrunData));
+    
+    // Update display
+    const runsToday = speedrunData[today].runs;
+    document.getElementById('speedrunProgress').textContent = `Daily Runs: ${runsToday}/8`;
+}
+
+function updateSpeedrunMultiplier() {
+    const today = new Date().toDateString();
+    let speedrunData = JSON.parse(localStorage.getItem('speedrunProgress') || '{}');
+    const runsToday = speedrunData[today]?.runs || 0;
+    
+    let multiplier = "1x POINTS";
+    if (runsToday >= 6) {
+        multiplier = "2x POINTS";
+    } else if (runsToday >= 3) {
+        multiplier = "1.5x POINTS";
+    }
+    
+    document.getElementById('currentMultiplier').textContent = multiplier;
+}
+
+// START CHALLENGE BUTTON EVENT LISTENER
+document.getElementById('speedrunStartBtn').addEventListener('click', startSpeedrunGameMode);
 
 // RANDOM LEARNING SYSTEM
 let isRandomMode = true;
@@ -3578,4 +4160,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>7
+</html>5
