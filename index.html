@@ -18,7 +18,8 @@
       overflow-x: hidden;
       position: absolute;
       top: 100%;
-      left: 0;
+      left: -10px;
+      right: -10px;
     }
   }
 
@@ -97,8 +98,8 @@ button, img, .word-tile {
 /* UNDO BUTTON */
 .undo-btn {
     position: absolute;
-    top: 85px;
-    right: 12px;
+    top: 170px;
+    right: 0px;
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     font-size: 16px;
@@ -940,8 +941,8 @@ button, img, .word-tile {
 */
 .speedrun-floating-timer {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 70px;
+    left: 10px;
     background: rgba(15, 23, 42, 0.95);
     border: 2px solid #3b82f6;
     border-radius: 15px;
@@ -950,10 +951,14 @@ button, img, .word-tile {
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.4);
     pointer-events: auto;
+    width: auto;
+    max-width: 150px;
+    padding: 8px 12px !important;
+    font-size: 16px !important;
 }
 
 .floating-timer-display {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 800;
     color: #3b82f6;
     text-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
@@ -970,8 +975,8 @@ button, img, .word-tile {
 
 .speedrun-floating-score {
     position: absolute;
-    top: 120px;
-    right: 20px;
+    top: 70px !important;
+    right: 0px !important;
     background: rgba(15, 23, 42, 0.95);
     border: 2px solid #10b981;
     border-radius: 15px;
@@ -980,6 +985,7 @@ button, img, .word-tile {
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.4);
     pointer-events: auto;
+    
 }
 
 .floating-score-label {
@@ -1010,9 +1016,10 @@ button, img, .word-tile {
 /* MOBILE LANDSCAPE OPTIMIZATION */
 @media (max-width: 800px) and (orientation: landscape) {
     .speedrun-floating-timer {
-        top: 15px;
-        right: 15px;
-        padding: 10px 15px;
+        top: 70px !important;
+        left: 0px !important;
+        padding: 8px 12px !important;
+        font-size: 16px !important;
     }
     
     .floating-timer-display {
@@ -2532,7 +2539,6 @@ button, img, .word-tile {
         <div class="floating-timer-display">
             <span id="floatingTimer">2:00</span>
         </div>
-        <div class="floating-timer-label">SPEEDRUN</div>
     </div>
     
     <!-- Floating Score (Optional) -->
@@ -3260,9 +3266,9 @@ if (currentLevelData.level === 1) {
     
     // Calculate progress to next level
     if (currentLevelData.level === 5) {
-        progressTextEl.textContent = `${currentLevelData.title} - MASTERED! 🏆`;
+        progressTextEl.textContent = `${currentLevelData.title} 🏆`;
         progressBarEl.style.width = "100%";
-        document.querySelector('.progress-indicator #progressText').textContent = `${currentLevelData.title} - MASTERED! 🏆`;
+        document.querySelector('.progress-indicator #progressText').textContent = `${currentLevelData.title} 🏆`;
     } else {
         const nextLevel = levels[currentLevelData.level];
         const pointsInCurrentLevel = totalPoints - currentLevelData.minPoints;
@@ -3464,6 +3470,7 @@ function showTranslationOverlay(lesson) {
 }
 
 function hideTranslationOverlay() {
+    console.log('hideTranslationOverlay called!');
     const overlay = document.getElementById('translationOverlay');
     overlay.classList.remove('translation-overlay-show');
     overlay.classList.add('translation-overlay-hide');
@@ -3482,9 +3489,59 @@ function hideTranslationOverlay() {
         if (currentLessonIndex < lessons.length - 1) {
             currentLessonIndex++;
             loadLesson(currentLessonIndex);
+
+            // SPEEDRUN AUTO-PLAY FEATURE
+            if (speedrunActive) {
+                setTimeout(() => {
+                    autoPlaySpeedrunAudio();
+                console.log('Calling autoPlaySpeedrunAudio from hideTranslationOverlay'); 
+                console.log('Calling autoPlaySpeedrunAudio from hideTranslationOverlay');
+                    autoPlaySpeedrunAudio();   
+                }, 800);
+            }
         }
     }
 }, 500);
+}
+
+// SPEEDRUN AUTO-PLAY AUDIO FUNCTION
+function autoPlaySpeedrunAudio() {
+    const currentLesson = lessons[currentLessonIndex];
+    console.log('Auto-play function called! Speedrun active:', speedrunActive);
+    console.log('Current lesson category:', currentLesson.category);
+    if (currentLesson.category === 'practice') {
+        // Randomly choose between Adam or Jessica
+        const randomChoice = Math.random() < 0.5 ? 'adam' : 'jessica';
+        if (randomChoice === 'adam') {
+            document.getElementById('adamAudio').play();
+        } else {
+            document.getElementById('jessicaAudio').play();
+        }
+    } else if (currentLesson.category === 'panic') {
+        // Randomly choose between John or Becky  
+        const randomChoice = Math.random() < 0.5 ? 'john' : 'becky';
+        if (randomChoice === 'john') {
+            document.getElementById('johnAudio').play();
+        } else {
+            document.getElementById('beckyAudio').play();
+        }
+    } else if (currentLesson.category === 'finishers') {
+        // Randomly choose between Mark or Laura
+        const randomChoice = Math.random() < 0.5 ? 'mark' : 'laura';
+        if (randomChoice === 'mark') {
+            document.getElementById('markAudio').play();
+        } else {
+            document.getElementById('lauraAudio').play();
+        }
+    } else if (currentLesson.category === 'greetings') {
+        // Randomly choose between Harry or Dianne
+        const randomChoice = Math.random() < 0.5 ? 'harry' : 'dianne';
+        if (randomChoice === 'harry') {
+            document.getElementById('harryAudio').play();
+        } else {
+            document.getElementById('dianneAudio').play();
+        }
+    }
 }
 
 // ANIMATE WORD TO DROP ZONE
