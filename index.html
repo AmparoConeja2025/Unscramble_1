@@ -651,6 +651,134 @@ button, img, .word-tile {
     text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
+/* MOBILE LANDSCAPE SPEEDRUN OPTIMIZATION - NO SCROLLING */
+@media (max-width: 800px) and (orientation: landscape) {
+    .speedrun-content {
+        padding: 15px !important;
+        min-width: 90vw !important;
+        max-width: 95vw !important;
+        max-height: 85vh !important;
+        overflow: hidden !important;
+    }
+    
+    .speedrun-header h2 {
+        font-size: 20px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .daily-progress {
+        margin-bottom: 15px !important;
+        padding: 8px !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+    }
+    
+    .daily-progress span {
+        font-size: 14px !important;
+    }
+    
+    .multiplier-badge {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+    
+    .timer-display {
+        margin: 15px 0 !important;
+    }
+
+    .speedrun-mobile-row {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 30px !important;
+        margin: 15px 0 !important;
+    }
+    
+    .speedrun-score {
+        order: 1 !important;
+        flex: 0 0 auto !important;
+        min-width: 100px !important;
+        margin: 10px 0 0 0 !important;
+        padding: 8px !important;
+    }
+    
+    .timer-display {
+        order: 2 !important;
+        flex: 0 0 auto !important;
+        margin: 10px 0 0 0 !important;
+    }
+    
+    .speedrun-actions {
+        order: 3 !important;
+        flex: 0 0 auto !important;
+        margin: -10px 0 0 0 !important;
+    }
+    
+    .speedrun-start-btn {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        min-width: 100px !important;
+    }
+    
+    /* HORIZONTAL LAYOUT FOR MOBILE */
+    .speedrun-mobile-row {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 20px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .speedrun-score {
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+        min-width: 120px !important;
+    }
+    
+    .speedrun-actions {
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+    }
+
+    .timer-circle {
+        width: 120px !important;
+        height: 120px !important;
+        margin: 0 auto 10px !important;
+    }
+    
+    .timer-circle span {
+        font-size: 32px !important;
+    }
+    
+    .timer-label {
+        font-size: 12px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .speedrun-score {
+        margin: 15px 0 !important;
+        padding: 12px !important;
+    }
+    
+    .score-label {
+        font-size: 12px !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .score-value {
+        font-size: 24px !important;
+    }
+    
+    .speedrun-actions {
+        margin-top: 15px !important;
+    }
+    
+    .speedrun-start-btn {
+        padding: 12px 30px !important;
+        font-size: 16px !important;
+    }
+}
+
 .daily-progress {
     display: flex;
     justify-content: space-between;
@@ -2367,13 +2495,15 @@ button, img, .word-tile {
                 <div class="multiplier-badge" id="currentMultiplier">1x POINTS</div>
             </div>
         </div>
+
+        <!-- MOBILE HORIZONTAL LAYOUT WRAPPER -->
+        <div class="speedrun-mobile-row">
         
         <!-- Main Timer Display -->
         <div class="timer-display">
             <div class="timer-circle">
                 <span id="speedrunTimer">2:00</span>
             </div>
-            <div class="timer-label">TIME REMAINING</div>
         </div>
         
         <!-- Current Score -->
@@ -2385,6 +2515,8 @@ button, img, .word-tile {
         <!-- Action Buttons -->
         <div class="speedrun-actions">
             <button class="speedrun-start-btn" id="speedrunStartBtn">START CHALLENGE</button>
+            </div>
+        <!-- END MOBILE HORIZONTAL LAYOUT -->
             <button class="speedrun-quit-btn" id="speedrunQuitBtn" style="display: none;">QUIT CHALLENGE</button>
         </div>
     </div>
@@ -3836,8 +3968,10 @@ function checkAnswer() {
 
         // SPEEDRUN SCORING SYSTEM
         if (speedrunActive) {
-            speedrunScore += pointsEarned;
-            updateSpeedrunDisplay();
+        const multiplier = getCurrentSpeedrunMultiplier();
+        const bonusPoints = Math.floor(pointsEarned * multiplier);
+        speedrunScore += bonusPoints;
+        updateSpeedrunDisplay();
         }
         updateProgress(); // FORCE IMMEDIATE REFRESH AFTER POINTS AWARDED
         
@@ -4054,6 +4188,16 @@ function updateSpeedrunMultiplier() {
     document.getElementById('currentMultiplier').textContent = multiplier;
 }
 
+function getCurrentSpeedrunMultiplier() {
+    const today = new Date().toDateString();
+    let speedrunData = JSON.parse(localStorage.getItem('speedrunProgress') || '{}');
+    const runsToday = speedrunData[today]?.runs || 0;
+    
+    if (runsToday >= 5) return 2.0;      // 6th+ run = 2x points
+    if (runsToday >= 2) return 1.5;     // 3rd-5th run = 1.5x points  
+    return 1.0;                         // 1st-2nd run = 1x points
+}
+
 // START CHALLENGE BUTTON EVENT LISTENER
 document.getElementById('speedrunStartBtn').addEventListener('click', startSpeedrunGameMode);
 
@@ -4160,4 +4304,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>5
+</html>9
