@@ -572,7 +572,7 @@ button, img, .word-tile {
 .translation-overlay {
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 47%;
     transform: translate(-50%, -50%) scale(0);
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
@@ -986,6 +986,48 @@ button, img, .word-tile {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.4);
     pointer-events: auto;
     
+}
+
+/* SPEEDRUN MULTIPLIER DISPLAY - LEFT SIDE */
+.speedrun-multiplier-display {
+    position: fixed;
+    top: 65%;
+    left: 15%;
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 1500;
+}
+
+.speedrun-multiplier-text {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    line-height: 1;
+}
+
+/* SPEEDRUN POINTS ANIMATION - RIGHT SIDE */
+.speedrun-points-display {
+    position: fixed;
+    top: 65%;
+    right: 15%;
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 1500;
+}
+
+.speedrun-points-text {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    line-height: 1;
 }
 
 .floating-score-label {
@@ -2548,6 +2590,15 @@ button, img, .word-tile {
     </div>
 </div>
 
+<!-- SPEEDRUN UI OVERLAYS -->
+<div class="speedrun-multiplier-display" id="speedrunMultiplierDisplay" style="display: none;">
+    <div class="speedrun-multiplier-text" id="speedrunMultiplierText">1x POINTS</div>
+</div>
+
+<div class="speedrun-points-display" id="speedrunPointsDisplay" style="display: none;">
+    <div class="speedrun-points-text" id="speedrunPointsText">+0 POINTS!</div>
+</div>
+
 <!-- STATS OVERLAY -->
 <div class="stats-overlay" id="statsOverlay" style="display: none;">
     <div class="stats-content">
@@ -4022,6 +4073,7 @@ function checkAnswer() {
         const currentLesson = lessons[currentLessonIndex];
         const pointsEarned = currentLesson.sentence.length; // Points = word count
         awardPoints(currentLesson.id, pointsEarned);
+        showPointsAnimation(pointsEarned);
 
         // SPEEDRUN SCORING SYSTEM
         if (speedrunActive) {
@@ -4154,6 +4206,7 @@ function startSpeedrunGameMode() {
     speedrunActive = true;
     speedrunTimer = 120;
     speedrunScore = 0;
+    showSpeedrunUI();
     
     // Show blue overlay with timer
     setTimeout(() => {
@@ -4196,6 +4249,7 @@ function endSpeedrunGameMode() {
     
     // Reset state
     speedrunActive = false;
+    hideSpeedrunUI();
     
     // Show speedrun results overlay
     setTimeout(() => {
@@ -4206,6 +4260,46 @@ document.getElementById('speedrunScore').textContent = speedrunScore;
         updateDailyRunProgress();
         updateSpeedrunMultiplier();
     }, 500);
+}
+
+// SPEEDRUN UI DISPLAY FUNCTIONS
+function showSpeedrunUI() {
+    document.getElementById('speedrunMultiplierDisplay').style.display = 'block';
+    updateSpeedrunMultiplier();
+}
+
+function hideSpeedrunUI() {
+    document.getElementById('speedrunMultiplierDisplay').style.display = 'none';
+    document.getElementById('speedrunPointsDisplay').style.display = 'none';
+}
+
+function updateSpeedrunMultiplier() {
+    const today = new Date().toDateString();
+    let speedrunData = JSON.parse(localStorage.getItem('speedrunProgress') || '{}');
+    const runsToday = speedrunData[today]?.runs || 0;
+    
+    let multiplierText = "1x POINTS";
+    if (runsToday >= 5) {
+        multiplierText = "2x POINTS";
+    } else if (runsToday >= 2) {
+        multiplierText = "1.5x POINTS";
+    }
+    
+    document.getElementById('speedrunMultiplierText').textContent = multiplierText;
+}
+
+function showPointsAnimation(points) {
+    const pointsDisplay = document.getElementById('speedrunPointsDisplay');
+    const pointsText = document.getElementById('speedrunPointsText');
+    
+    // Update text and show
+    pointsText.textContent = `+${points} POINTS!`;
+    pointsDisplay.style.display = 'block';
+    
+    // Hide after 2 seconds
+    setTimeout(() => {
+        pointsDisplay.style.display = 'none';
+    }, 2000);
 }
 
 // DAILY RUN TRACKING SYSTEM
@@ -4361,4 +4455,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 </script>
 
 </body>
-</html>9
+</html>4
