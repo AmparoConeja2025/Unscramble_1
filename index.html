@@ -587,6 +587,18 @@ button, img, .word-tile {
     max-width: 90vw;
 }
 
+/* Translation Overlay - Mobile Override */
+@media (max-width: 800px) and (orientation: landscape) {
+    .translation-overlay {
+        top: 50%;
+        left: 47%;
+        transform: translate(-50%, -50%) scale(0);
+        min-width: 280px;
+        max-width: 85vw;
+        padding: 25px 30px;
+    }
+}
+
 /* SPEEDRUN OVERLAY - GAMING INTERFACE */
 .speedrun-overlay {
     position: fixed;
