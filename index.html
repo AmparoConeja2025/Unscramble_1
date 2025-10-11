@@ -45,6 +45,9 @@ button, img, .word-tile {
   </head>
 
   <body class="bg-gray-600 min-h-screen relative">
+    <a href="https://amparoconeja.com" class="home-button" aria-label="Return to Homepage">
+  <img src="Image/my-home-icon.svg" alt="Home">
+</a>
 
 <style>
 
@@ -2354,6 +2357,30 @@ button, img, .word-tile {
     70% { transform: translate(-50%, -50%) scale(1.01) rotate(1deg); }
     80% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
     100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+/* --- Home Button Styles --- */
+.home-button {
+  position: absolute;
+  top: 80px;
+  right: calc(env(safe-area-inset-right) - 25px);
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+}
+
+.home-button:hover,
+.home-button:active {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.home-button img {
+  width: 21px;
+  height: 21px;
+  display: block;
 }
 
 </style>
