@@ -1735,10 +1735,4 @@ document.addEventListener("DOMContentLoaded", () => {
 updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 });
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js');
-  });
-}
-
 
