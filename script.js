@@ -1,4 +1,4 @@
-
+enterFullscreen() 
 
     // MOBILE-ONLY ENFORCEMENT
 function isMobileDevice() {
@@ -1735,4 +1735,4 @@ document.addEventListener("DOMContentLoaded", () => {
 updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 });
 
-
+navigator.serviceWorker.register('sw.js'); 
