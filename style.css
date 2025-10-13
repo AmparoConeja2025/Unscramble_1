@@ -2349,7 +2349,7 @@ button, img, .word-tile {
 .home-button {
   position: fixed;
   /* Positions in the upper-right, safely away from system bars */
-  top: 20px;
+  top: 60px;
   right: calc(5px + env(safe-area-inset-right));
 
   z-index: 100;
