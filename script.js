@@ -1,4 +1,13 @@
-enterFullscreen() 
+// --- TRUE FULLSCREEN MODE FOR ANDROID ---
+function enterFullscreen() {
+  if (document.body.requestFullscreen && !document.fullscreenElement) {
+    document.body.requestFullscreen({ navigationUI: "hide" }).catch(err => {
+      console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+    });
+  }
+}
+document.addEventListener('click', enterFullscreen, { once: true });
+document.addEventListener('touchstart', enterFullscreen, { once: true });
 
     // MOBILE-ONLY ENFORCEMENT
 function isMobileDevice() {
