@@ -2347,9 +2347,11 @@ button, img, .word-tile {
 }
 /* --- Home Button Styles --- */
 .home-button {
-  position: absolute;
-  top: 80px;
-  right: 5px;
+  position: fixed;
+  /* Positions in the upper-right, safely away from system bars */
+  top: 20px;
+  right: calc(5px + env(safe-area-inset-right));
+
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 6px;
